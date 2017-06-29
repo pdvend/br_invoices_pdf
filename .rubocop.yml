@@ -19,8 +19,6 @@ Layout/IndentHash:
 AllCops:
   Exclude:
     - 'spec/factories/*.rb'
-  Include:
-    - rubocop-rspec
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
