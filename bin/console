@@ -1,4 +1,4 @@
 require "bundler/setup"
-require "ruby_cfe_pdf"
+require "br_invoices_pdf"
 require "irb"
 IRB.start
