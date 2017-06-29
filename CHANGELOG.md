@@ -3,7 +3,7 @@
 ## CHANGELOG
 
 ### Unreleased
-- [Modificado] Versões das dependências
+- [Modificado] Atualizando versões das dependências
 
 ### 0.1.5 [2017-05-29]
 - [Adicionado] Docs
