@@ -32,5 +32,5 @@ bundle
 
 ## Contribuindo
 
-Bugs reports e pull requests são bem vindos no GitHub em https://github.com/pdvend/br_invoices_pdf. Este projeto pretende ser um espaço seguro e acolhedor para a colaboração, e os contribuintes devem aderir ao código de conduta [Covenant Covenant] (http://contributor-covenant.org).
+Bugs reports e pull requests são bem vindos no GitHub em https://github.com/pdvend/br_invoices_pdf. Este projeto pretende ser um espaço seguro e acolhedor para a colaboração, e os contribuintes devem aderir ao código de conduta [Covenant Covenant](http://contributor-covenant.org).
 
