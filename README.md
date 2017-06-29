@@ -1,41 +1,36 @@
-# BrInvoicesPdf
+# BR Invoices PDF
+[![Coverage Status](https://coveralls.io/repos/github/pdvend/br_invoices_pdf/badge.svg?branch=master&t=A4nK57)](https://coveralls.io/github/pdvend/br_invoices_pdf?branch=master)
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/br_invoices_pdf`. To experiment with that code, run `bin/console` for an interactive prompt.
+Este projeto gera arquivos PDF para documentos fiscais no Brasil a partir de seus XMLs, suportando atualmente:
+- NFC-e
+- CF-e/SAT
 
-TODO: Delete this and the text above, and describe your gem
+## Instalação
 
-## Installation
-
-Add this line to your application's Gemfile:
+Adicione esta linha ao `Gemfile` da sua aplicação:
 
 ```ruby
 gem 'br_invoices_pdf'
 ```
 
-And then execute:
+Então execute:
+```bash
+bundle
+```
 
-    $ bundle
+## Utilização
 
-Or install it yourself as:
+\# TODO
 
-    $ gem install br_invoices_pdf
+## Desenvolvendo
 
-## Usage
+- Faça checkout neste repositório
+- Rode `bin/setup` para instalar as dependências
+- Você também pode rodar `bin/console` para um console interativo que te permitirá realizar testes
+- Para instalar esta gem na sua máquina local, rode `bundle exec rake install`.
+- Para realizar a release de uma nova versão, atualize o número no arquivo `lib/version.rb`, atualize o [CHANGELOG.md](/CHANGELOG.md)
 
-TODO: Write usage instructions here
+## Contribuindo
 
-## Development
-
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
-
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
-
-## Contributing
-
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/br_invoices_pdf. This project is intended to be a safe, welcoming space for collaboration, and contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
+Bugs reports e pull requests são bem vindos no GitHub em https://github.com/pdvend/br_invoices_pdf. Este projeto pretende ser um espaço seguro e acolhedor para a colaboração, e os contribuintes devem aderir ao código de conduta [Covenant Covenant] (http://contributor-covenant.org).
 
