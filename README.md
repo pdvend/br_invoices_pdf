@@ -1,6 +1,9 @@
 # BR Invoices PDF
 [![Build Status](https://semaphoreci.com/api/v1/pdvend/br_invoices_pdf/branches/master/shields_badge.svg)](https://semaphoreci.com/pdvend/br_invoices_pdf)
 [![Coverage Status](https://coveralls.io/repos/github/pdvend/br_invoices_pdf/badge.svg?branch=master)](https://coveralls.io/github/pdvend/br_invoices_pdf?branch=master)
+[![Gem Version](https://badge.fury.io/rb/br_invoices_pdf.svg)](https://badge.fury.io/rb/br_invoices_pdf)
+[![Dependency Status](https://gemnasium.com/badges/github.com/pdvend/br_invoices_pdf.svg)](https://gemnasium.com/github.com/pdvend/br_invoices_pdf)
+[![Code Climate](https://codeclimate.com/github/pdvend/br_invoices_pdf/badges/gpa.svg)](https://codeclimate.com/github/pdvend/br_invoices_pdf)
 
 Este projeto gera arquivos PDF para documentos fiscais no Brasil a partir de seus XMLs, suportando atualmente:
 - NFC-e
