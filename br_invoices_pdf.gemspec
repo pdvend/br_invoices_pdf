@@ -8,7 +8,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'br_invoices_pdf'
   spec.version       = BrInvoicesPdf::VERSION
   if ENV['SEMAPHORE'] && ENV['PRE_RELEASE']
-    spec.version       = "#{BrInvoicesPdf::VERSION}-pre-#{ENV['SEMAPHORE_DEPLOY_NUMBER']}"
+    spec.version       = "#{BrInvoicesPdf::VERSION}.alpha.#{ENV['SEMAPHORE_DEPLOY_NUMBER']}"
   else
     spec.version       = BrInvoicesPdf::VERSION
   end
