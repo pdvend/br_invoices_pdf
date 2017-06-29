@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'ruby_cfe/version'
+require 'ruby_cfe_pdf/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'ruby_cfe'
-  spec.version       = RubyCfe::VERSION
+  spec.name          = 'ruby_cfe_pdf'
+  spec.version       = RubyCfePdf::VERSION
   spec.authors       = ['Thiago Ribeiro', 'Gabriel Teles']
   spec.email         = ['thiago@pdvend.com.br', 'gabriel@pdvend.com.br']
 
   spec.summary       = %q{CFe pdf generator}
-  spec.homepage      = "https://github.com/pdvend/ruby_cfe"
+  spec.homepage      = "https://github.com/pdvend/ruby_cfe_pdf"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject do |f|
