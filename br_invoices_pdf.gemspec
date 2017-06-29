@@ -15,7 +15,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Thiago Ribeiro', 'Gabriel Teles']
   spec.email         = ['thiago@pdvend.com.br', 'gabriel@pdvend.com.br']
 
-  spec.summary       = 'CFe pdf generator'
+  spec.summary       = 'Brazilian Fiscal Documents PDF generator'
   spec.homepage      = 'https://github.com/pdvend/br_invoices_pdf'
   spec.license       = 'MIT'
 
