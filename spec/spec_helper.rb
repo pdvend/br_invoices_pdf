@@ -1,2 +1,2 @@
 $LOAD_PATH.unshift File.expand_path("../../lib", __FILE__)
-require "ruby_cfe_pdf"
+require "br_invoices_pdf"

@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    ruby_cfe_pdf (0.1.0)
+    br_invoices_pdf (0.1.0)
       prawn
 
 GEM
@@ -32,10 +32,10 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  br_invoices_pdf!
   bundler (~> 1.13)
   rake (~> 10.0)
   rspec (~> 3.0)
-  ruby_cfe_pdf!
 
 BUNDLED WITH
    1.13.6

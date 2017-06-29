@@ -1,3 +1,3 @@
-module RubyCfePdf
+module BrInvoicesPdf
   VERSION = "0.1.0"
 end
