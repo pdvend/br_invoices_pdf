@@ -6,10 +6,8 @@ require 'br_invoices_pdf/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'br_invoices_pdf'
-  spec.version       = BrInvoicesPdf::VERSION
-  if ENV['SEMAPHORE'] && ENV['PRE_RELEASE']
-    spec.version << ".alpha.#{ENV['SEMAPHORE_DEPLOY_NUMBER']}"
-  end
+  pre_release = ENV['SEMAPHORE'] && ENV['PRE_RELEASE']
+  spec.version       = BrInvoicesPdf::VERSION + (pre_release ? ".alpha.#{ENV['SEMAPHORE_DEPLOY_NUMBER']}" : '')
   spec.authors       = ['Thiago Ribeiro', 'Gabriel Teles']
   spec.email         = ['thiago@pdvend.com.br', 'gabriel@pdvend.com.br']
 
