@@ -4,6 +4,7 @@
 
 ### Unreleased
 - [Modificado] Atualizando versões das dependências
+- [Adicionado] Estrutura de Generator/Parser/Renderer
 
 ### 0.1.5 [2017-05-29]
 - [Adicionado] Docs
