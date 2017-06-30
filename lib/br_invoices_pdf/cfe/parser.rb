@@ -1,7 +1,7 @@
 module BrInvoicesPdf
   module Cfe
     class Parser
-      #atributos
+      # atributos
       # company_name -> emit,xNome
       # trading_name -> emit,xFant
       # company_address -> emit,enderEmit
@@ -14,7 +14,7 @@ module BrInvoicesPdf
       # cpf -> ide,NFCE
 
       def parse(xml)
-      # Retornar uma hash com todos os atributos necessários
+        # Retornar uma hash com todos os atributos necessarios
       end
     end
   end

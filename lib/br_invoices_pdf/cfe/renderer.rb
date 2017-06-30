@@ -10,7 +10,7 @@ module BrInvoicesPdf
       def pdf(data, options)
         Prawn::Document.new(options) do |pdf|
           ## constroi o pdf
-          # pdf.text data[:text]
+          pdf.text data.to_s
         end
       end
     end
