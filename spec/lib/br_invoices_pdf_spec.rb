@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe BrInvoicesPdf do
   before do
     # Clean registered generators

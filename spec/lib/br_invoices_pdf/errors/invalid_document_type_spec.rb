@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe BrInvoicesPdf::Errors::InvalidDocumentType do
   describe '#initialize' do
     subject { described_class.new(type) }

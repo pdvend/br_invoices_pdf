@@ -1,5 +1,3 @@
-require 'spec_helper'
-
 describe BrInvoicesPdf::Generator do
   let(:renderer) { double('renderer') }
   let(:parser) { double('parser') }
