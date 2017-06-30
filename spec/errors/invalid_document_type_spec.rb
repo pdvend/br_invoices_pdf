@@ -12,6 +12,6 @@ describe BrInvoicesPdf::Errors::InvalidDocumentType do
     let(:type) { :foo }
 
     it { expect { subject }.to_not raise_error }
-    it { expect(subject.message).to eq("`:foo` is not supported. Must be one of [:test]") }
+    it { expect(subject.message).to eq('`:foo` is not supported. Must be one of [:test]') }
   end
 end
