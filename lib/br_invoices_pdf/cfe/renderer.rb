@@ -1,11 +1,7 @@
 module BrInvoicesPdf
   module Cfe
-    class Renderer
-      def render(data, options)
-        pdf(data, options).render
-      end
-
-      private
+    module Renderer
+      module_function
 
       def pdf(data, options)
         Prawn::Document.new(options) do |pdf|

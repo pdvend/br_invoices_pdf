@@ -1,4 +1,6 @@
-require "bundler/setup"
-require "br_invoices_pdf"
-require "irb"
+#!/usr/bin/env ruby
+
+require 'bundler/setup'
+require 'br_invoices_pdf'
+require 'irb'
 IRB.start
