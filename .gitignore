@@ -1,3 +1,4 @@
 *.gem
+*.pdf
 Gemfile.lock
 coverage
