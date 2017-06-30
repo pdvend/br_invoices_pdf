@@ -10,6 +10,32 @@ describe BrInvoicesPdf do
     BrInvoicesPdf.instance_variable_set(:@generators, {})
   end
 
+  describe '.generate' do
+    subject { BrInvoicesPdf.generate(type, xml, options) }
+
+    let(:generator) { double('generator') }
+    let(:type) { :test }
+    let(:xml) { Ox.dump(foo: :bar) }
+    let(:options) { {} }
+
+    before do
+      # Fill generators with some fake generator
+      BrInvoicesPdf.instance_variable_set(:@generators, test: generator)
+    end
+
+    it 'passes xml and options to generator' do
+      expect(generator).to receive(:generate).with(xml, options)
+      subject
+    end
+
+    context 'when type is unknown' do
+      let(:type) { :foo }
+      let(:expected_message) { '`:foo` is not supported. Must be one of [:test]' }
+
+      it { expect { subject }.to raise_error(BrInvoicesPdf::Errors::InvalidDocumentType, expected_message) }
+    end
+  end
+
   describe '.register' do
     subject { BrInvoicesPdf.register(type, renderer, parser) }
 
