@@ -1,10 +1,24 @@
+require 'ox'
+require 'prawn'
+
 require 'br_invoices_pdf/version'
+require 'br_invoices_pdf/generator'
 
 module BrInvoicesPdf
-  def self.generate(xml_path, pdf_path, options)
-    case options[:document_type].to_sym
-    when :cfe
-      Cfe.new(xml_path, pdf_path).save
-    end
+  Generators = {}
+  private_constant :Generators
+
+  module_function
+
+  def generate(type, xml, options)
+    generator = Generators[type]
+    raise Errors::InvalidDocumentType.new(type) unless generator
+    generator.generate(xml, options)
+  end
+
+  def register(type, renderer, parser)
+    Generators[type] = Generator.new(renderer, parser)
   end
 end
+
+require 'br_invoices_pdf/cfe'

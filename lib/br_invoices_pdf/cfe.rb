@@ -1,15 +1,8 @@
-module BrInvoicesPdf
-  class Cfe < BasePdf
-    def build_pdf
-      xml_params = CfeXmlParser.parser(xml)
-      Prawn::Document.new(PDF_OPTIONS) do |pdf|
-        ## constroi o pdf
-        pdf.text xml_params[:text]
-      end
-    end
+require 'br_invoices_pdf/cfe/parser'
+require 'br_invoices_pdf/cfe/renderer'
 
-    def save_pdf
-      pdf.render_file(path)
-    end
+module BrInvoicesPdf
+  module Cfe
+    BrInvoicesPdf.register(:cfe, Cfe::Renderer, Cfe::Parser)
   end
 end
