@@ -9,7 +9,8 @@ module BrInvoicesPdf
       def parse(xml)
         {
           sat_params: sat_params(xml),
-          payment_params: payment_params(xml),
+          document_number: locate_element(xml, 'infCFe/ide/nCFe'),
+          payment: payment_params(xml),
           products: products_params(xml)[:products],
           company_attributes: company_attributes(xml),
           fisco_obs: fisco_obs(xml),
@@ -25,7 +26,7 @@ module BrInvoicesPdf
           uf: AVAILABLE_UF[locate_element(xml, 'infCFe/ide/cUF')],
           sat_number: locate_element(xml, 'infCFe/ide/nserieSAT'),
           emission_date: locate_element(xml, 'infCFe/ide/dEmi'),
-          emission_type: locate_element(xml, 'infCFe/ide/hEmi'),
+          emission_hour: locate_element(xml, 'infCFe/ide/hEmi'),
           document_qr_code_signature: locate_element(xml, 'infCFe/ide/assinaturaQRCODE')
         }
       end
@@ -35,6 +36,7 @@ module BrInvoicesPdf
           approximate_value_of_taxex: locate_element(xml, 'infCFe/total/vCFeLei12741'),
           total: locate_element(xml, 'infCFe/total/vCFe'),
           discount: locate_element(xml, 'infCFe/total/ICMSTot/vDesc'),
+          total_price: locate_element(xml, 'infCFe/total/ICMSTot/vProd'),
           cash_back: locate_element(xml, 'infCFe/pgto/vTroco'),
           payd: locate_element(xml, 'infCFe/pgto/MP/vMP')
         }
@@ -49,8 +51,8 @@ module BrInvoicesPdf
 
       def product_params(node_products)
         products = []
-        product = {}
         node_products.each do |element|
+          product = {}
           product[:code] = node_locate(element, 'cProd')
           product[:description] = node_locate(element, 'xProd')
           product[:cfop] = node_locate(element, 'CFOP')
@@ -67,10 +69,10 @@ module BrInvoicesPdf
       def company_attributes(xml)
         {
           company_name: locate_element(xml, 'infCFe/emit/xNome'),
-          company_address: company_address_params(xml),
+          address: company_address_params(xml),
           trading_name: locate_element(xml, 'infCFe/emit/xFant'),
           zipcode: locate_element(xml, 'infCFe/emit/enderEmit/CEP'),
-          cpnj: locate_element(xml, 'infCFe/ide/CNPJ'),
+          cnpj: locate_element(xml, 'infCFe/ide/CNPJ'),
           ie: locate_element(xml, 'infCFe/emit/IE'),
           im: locate_element(xml, 'infCFe/emit/IM')
         }
@@ -88,10 +90,14 @@ module BrInvoicesPdf
       end
 
       def fisco_obs(xml)
-        {
-          text: xml.locate('infCFe/infAdic/obsFisco').first.nodes.first.text,
-          field: xml.locate('infCFe/infAdic/obsFisco').first.attributes
-        }
+        fisco_obs = []
+        xml.locate('infCFe/infAdic/obsFisco').each do |element|
+          obs = {}
+          obs[:text] = element.nodes.first.text
+          obs[:field] = element.attributes[:xCampo]
+          fisco_obs << obs
+        end
+        fisco_obs
       end
 
       def locate_element(xml, path)
