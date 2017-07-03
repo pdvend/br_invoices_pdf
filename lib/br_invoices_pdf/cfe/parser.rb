@@ -3,13 +3,14 @@ module BrInvoicesPdf
     module Parser
       module_function
 
-      AVAIuABLE_UF = { '35' => 'São Paulo' }.freeze
+      AVAILABLE_UF = { '35' => 'São Paulo' }.freeze
       SAT_QRCODE_SEPARATOR = '|'.freeze
+
       def parse(xml)
         {
           sat_params: sat_params(xml),
           payment_params: payment_params(xml),
-          product_params: product_params(xml),
+          products: products_params(xml)[:products],
           company_attributes: company_attributes(xml),
           fisco_obs: fisco_obs(xml),
           access_key: xml.locate('Signature/SignedInfo').first.nodes.last.attributes[:URI],
@@ -20,22 +21,22 @@ module BrInvoicesPdf
       def sat_params(xml)
         {
           pdv_number: locate_element(xml, 'infCFe/ide/numeroCaixa'),
-          ncfe_number: locate_element(xml, 'infCFe/ide/enderEmit/nCFe'),
+          ncfe_number: locate_element(xml, 'infCFe/ide/nCFe'),
           uf: AVAILABLE_UF[locate_element(xml, 'infCFe/ide/cUF')],
           sat_number: locate_element(xml, 'infCFe/ide/nserieSAT'),
           emission_date: locate_element(xml, 'infCFe/ide/dEmi'),
           emission_type: locate_element(xml, 'infCFe/ide/hEmi'),
-          document_qr_code_signature: locate_element(xmli, 'infCFe/ide/assinaturaQRCODE')
+          document_qr_code_signature: locate_element(xml, 'infCFe/ide/assinaturaQRCODE')
         }
       end
 
       def payment_params(xml)
         {
-          approximate_value_of_taxex: xml.locate('infCFe/total/vCFeLei12741'),
+          approximate_value_of_taxex: locate_element(xml, 'infCFe/total/vCFeLei12741'),
           total: locate_element(xml, 'infCFe/total/vCFe'),
           discount: locate_element(xml, 'infCFe/total/ICMSTot/vDesc'),
-          cash_back: locate_element(xml, 'infCFe/pgto/troco/vTroco'),
-          payd: locate_element(xml, 'infCFe/pgto/troco/vMP')
+          cash_back: locate_element(xml, 'infCFe/pgto/vTroco'),
+          payd: locate_element(xml, 'infCFe/pgto/MP/vMP')
         }
       end
 
@@ -49,14 +50,15 @@ module BrInvoicesPdf
       def product_params(node_products)
         products = []
         product = {}
-        node_products.each do |node_product|
-          product[:code] = node_locate(node_product, 'cProd')
-          product[:description] = node_locate(node_product, 'xProd')
-          product[:quantity] = node_locate(node_product, 'qCom')
-          product[:unit_label] = node_locate(node_product, 'qCom')
-          product[:total_value] = node_locate(node_product, 'vProd')
-          product[:unit_value] = node_locate(node_product, 'vUnCom')
-          product[:discount] = node_locate(node_product, 'vDesc')
+        node_products.each do |element|
+          product[:code] = node_locate(element, 'cProd')
+          product[:description] = node_locate(element, 'xProd')
+          product[:cfop] = node_locate(element, 'CFOP')
+          product[:quantity] = node_locate(element, 'qCom')
+          product[:unit_label] = node_locate(element, 'uCom')
+          product[:total_value] = node_locate(element, 'vProd')
+          product[:unit_value] = node_locate(element, 'vUnCom')
+          product[:item_value] = node_locate(element, 'vItem')
           products << product
         end
         products
@@ -65,7 +67,7 @@ module BrInvoicesPdf
       def company_attributes(xml)
         {
           company_name: locate_element(xml, 'infCFe/emit/xNome'),
-          company_address: company_address_params,
+          company_address: company_address_params(xml),
           trading_name: locate_element(xml, 'infCFe/emit/xFant'),
           zipcode: locate_element(xml, 'infCFe/emit/enderEmit/CEP'),
           cpnj: locate_element(xml, 'infCFe/ide/CNPJ'),
@@ -76,12 +78,12 @@ module BrInvoicesPdf
 
       def company_address_params(xml)
         {
-          public_place: locate_value(xml, 'infCFe/emit/enderEmit/xLgr'),
-          number: locate_value(xml, 'infCFe/emit/enderEmit/nro'),
-          complement: locate_value(xml, 'infCFe/emit/enderEmit/xCpl'),
-          city: locate_value(xml, 'infCFe/emit/enderEmit/xMun'),
-          neighborhood: locate_value(xml, 'infCFe/emit/enderEmit/xBairro'),
-          cep: locate_value(xml, 'infCFe/emit/enderEmit/CEP')
+          public_place: locate_element(xml, 'infCFe/emit/enderEmit/xLgr'),
+          number: locate_element(xml, 'infCFe/emit/enderEmit/nro'),
+          complement: locate_element(xml, 'infCFe/emit/enderEmit/xCpl'),
+          city: locate_element(xml, 'infCFe/emit/enderEmit/xMun'),
+          neighborhood: locate_element(xml, 'infCFe/emit/enderEmit/xBairro'),
+          cep: locate_element(xml, 'infCFe/emit/enderEmit/CEP')
         }
       end
 
@@ -93,15 +95,12 @@ module BrInvoicesPdf
       end
 
       def locate_element(xml, path)
-        xml.locate(path).first.text
+        element = xml.locate(path).first
+        element.nil? ? nil : element.text
       end
 
-      def locate_value(xml, path)
-        xml.locate(path).first.value
-      end
-
-      def node_locate(node, path)
-        node.first.locate(path)
+      def node_locate(element, path)
+        element.nodes.first.locate(path).first.text
       end
     end
   end
