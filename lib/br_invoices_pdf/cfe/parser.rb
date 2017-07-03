@@ -3,56 +3,46 @@ module BrInvoicesPdf
     module Parser
       module_function
 
-      AVAILABLE_UF = { '35' => 'São Paulo' }.freeze
-      SAT_QRCODE_SEPARATOR   = '|'.freeze
+      AVAIuABLE_UF = { '35' => 'São Paulo' }.freeze
+      SAT_QRCODE_SEPARATOR = '|'.freeze
       def parse(xml)
-        # Retornar uma hash com todos os atributos necessarios
         {
-          uf: AVAILABLE_UF[xml.locate('infCFe/ide/cUF').first_text],
-          access_key: xml.locate('Signature/SignedInfo').first.nodes.last.attributes[:URI]
-          sat_number: xml.locate('infCFe/ide/nserieSAT').first.text,
-          emission_date: xml.locate('infCFe/ide/dEmi').first.text,
-          emission_type: xml.locate('infCFe/ide/hEmi').first.text,
-          document_qr_code_signature: xml.locate('infCFe/ide/assinaturaQRCODE').first.text,
-          fisco_obs: xml.locate('infCFe/infAdic').first.nodes.map(&:attributes),
-          pdv_number: xml.locate('infCFe/ide/numeroCaixa').first.text,
-          company_name: xml.locate('infCFe/emit/xNome').first.text,
-          company_address: company_address_params,
-          trading_name: xml.locate('infCFe/emit/xFant').first.text,
-          zipcode: xml.locate('infCFe/emit/enderEmit/CEP').first.text,
-          cpnj: xml.locate('infCFe/ide/CNPJ').first.text,
-          ie: xml.locate('infCFe/emit/enderEmit/IE').first.text,
-          im: xml.locate('infCFe/emit/enderEmit/IM').first.text,
-          ncfe_number: xml.locate('infCFe/ide/enderEmit/nCFe').first.text,
+          sat_params: sat_params(xml),
+          payment_params: payment_params(xml),
+          product_params: product_params(xml),
+          company_attributes: company_attributes(xml),
+          fisco_obs: fisco_obs(xml),
+          access_key: xml.locate('Signature/SignedInfo').first.nodes.last.attributes[:URI],
+          cpf: locate_element(xml, 'infCFe/dest/CPF')
+        }
+      end
+
+      def sat_params(xml)
+        {
+          pdv_number: locate_element(xml, 'infCFe/ide/numeroCaixa'),
+          ncfe_number: locate_element(xml, 'infCFe/ide/enderEmit/nCFe'),
+          uf: AVAILABLE_UF[locate_element(xml, 'infCFe/ide/cUF')],
+          sat_number: locate_element(xml, 'infCFe/ide/nserieSAT'),
+          emission_date: locate_element(xml, 'infCFe/ide/dEmi'),
+          emission_type: locate_element(xml, 'infCFe/ide/hEmi'),
+          document_qr_code_signature: locate_element(xmli, 'infCFe/ide/assinaturaQRCODE')
+        }
+      end
+
+      def payment_params(xml)
+        {
+          approximate_value_of_taxex: xml.locate('infCFe/total/vCFeLei12741'),
+          total: locate_element(xml, 'infCFe/total/vCFe'),
+          discount: locate_element(xml, 'infCFe/total/ICMSTot/vDesc'),
+          cash_back: locate_element(xml, 'infCFe/pgto/troco/vTroco'),
+          payd: locate_element(xml, 'infCFe/pgto/troco/vMP')
+        }
+      end
+
+      def products_params(xml)
+        {
           products: product_params(xml.locate('infCFe/det')),
-          total: xml.locate('infCFe/total/vCFe').first.text,
-          total_items: xml.locate('infCFe/det').last.attributes[:nItem],
-          discount: xml.locate('infCFe/total/ICMSTot/vDesc').first.text,
-          cpf: xml.locate('infCFe/dest/CPF').first.text,
-          tributes_value: xml.locate('infCFe/dest/CPF').first.text,
-          payment: {
-            cash_back: xml.locate('infCFe/pgto/troco/vTroco').first.text,
-            payd: xml.locate('infCFe/pgto/troco/vMP').first.text
-          },
-          approximate_value_of_taxex: xml.locate('infCFe/total/vCFeLei12741').first.text
-        }
-      end
-
-      def fisco_obs
-        {
-          text: xml.locate('infCFe/infAdic/obsFisco').first.nodes.first.text,
-          field: xml.locate('infCFe/infAdic/obsFisco').first.attributes
-        }
-      end
-
-      def company_address_params
-        {
-          public_place: xml.locate('infCFe/emit/enderEmit/xLgr').first.value,
-          number: xml.locate('infCFe/emit/enderEmit/nro').first.value,
-          complement: xml.locate('infCFe/emit/enderEmit/xCpl').first.value,
-          city: xml.locate('infCFe/emit/enderEmit/xMun').first.value,
-          neighborhood: xml.locate('infCFe/emit/enderEmit/xBairro').first.value,
-          cep: xml.locate('infCFe/emit/enderEmit/CEP').first.value
+          total_items: xml.locate('infCFe/det').last.attributes[:nItem]
         }
       end
 
@@ -60,16 +50,58 @@ module BrInvoicesPdf
         products = []
         product = {}
         node_products.each do |node_product|
-          product[:code] = node_product.first.locate('cProd')
-          product[:description] = node_product.first.locate('xProd')
-          product[:quantity] = node_product.first.locate('qCom')
-          product[:unit_label] = node_product.first.locate('qCom')
-          product[:total_value] = node_product.first.locate('vProd')
-          product[:unit_value] = node_product.first.locate('vUnCom')
-          product[:discount] = node_product.first.locate('vDesc')
+          product[:code] = node_locate(node_product, 'cProd')
+          product[:description] = node_locate(node_product, 'xProd')
+          product[:quantity] = node_locate(node_product, 'qCom')
+          product[:unit_label] = node_locate(node_product, 'qCom')
+          product[:total_value] = node_locate(node_product, 'vProd')
+          product[:unit_value] = node_locate(node_product, 'vUnCom')
+          product[:discount] = node_locate(node_product, 'vDesc')
           products << product
         end
         products
+      end
+
+      def company_attributes(xml)
+        {
+          company_name: locate_element(xml, 'infCFe/emit/xNome'),
+          company_address: company_address_params,
+          trading_name: locate_element(xml, 'infCFe/emit/xFant'),
+          zipcode: locate_element(xml, 'infCFe/emit/enderEmit/CEP'),
+          cpnj: locate_element(xml, 'infCFe/ide/CNPJ'),
+          ie: locate_element(xml, 'infCFe/emit/IE'),
+          im: locate_element(xml, 'infCFe/emit/IM')
+        }
+      end
+
+      def company_address_params(xml)
+        {
+          public_place: locate_value(xml, 'infCFe/emit/enderEmit/xLgr'),
+          number: locate_value(xml, 'infCFe/emit/enderEmit/nro'),
+          complement: locate_value(xml, 'infCFe/emit/enderEmit/xCpl'),
+          city: locate_value(xml, 'infCFe/emit/enderEmit/xMun'),
+          neighborhood: locate_value(xml, 'infCFe/emit/enderEmit/xBairro'),
+          cep: locate_value(xml, 'infCFe/emit/enderEmit/CEP')
+        }
+      end
+
+      def fisco_obs(xml)
+        {
+          text: xml.locate('infCFe/infAdic/obsFisco').first.nodes.first.text,
+          field: xml.locate('infCFe/infAdic/obsFisco').first.attributes
+        }
+      end
+
+      def locate_element(xml, path)
+        xml.locate(path).first.text
+      end
+
+      def locate_value(xml, path)
+        xml.locate(path).first.value
+      end
+
+      def node_locate(node, path)
+        node.first.locate(path)
       end
     end
   end
