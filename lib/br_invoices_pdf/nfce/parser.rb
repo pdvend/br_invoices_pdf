@@ -36,7 +36,8 @@ module BrInvoicesPdf
             }
           ],
           payments: [
-            { type: 'Dinheiro', amount: BigDecimal('9.38') }
+            { type: 'Dinheiro', amount: BigDecimal('9.38') },
+            { type: 'Outros', amount: BigDecimal('29.90') }
           ],
           customer: {
             identification_type: 'CPF',
@@ -50,24 +51,26 @@ module BrInvoicesPdf
             }
           },
           totals: {
-            items: BigDecimal('1'),
-            value: BigDecimal('9.38'),
+            items: BigDecimal('2'),
+            subtotal: BigDecimal('9.38'),
             discounts: BigDecimal('0.00'),
+            total: BigDecimal('39.28'),
+            cashback: BigDecimal('0.00')
           },
           taxes: {
             amount: BigDecimal('2.88'),
-            percent: '30,69%',
-            source: 'IBPT'
+            percent: '7,33%'
           },
           emission_details: {
             type: 'EMISSÃO NORMAL',
             number: 244,
             serie: 1,
-            timestamp: Time.now,
+            emission_timestamp: Time.now,
+            receival_timestamp: Time.now,
             check_url: 'http://www.sefaz.mt.gov.br/nfce/consultanfce',
             access_key: '43219205556511011250530010000040772070548065',
-            qrcode_url: 'http://www.sefaz.mt.gov.br/nfce/consultanfce',
-            authorization_protocol: '14121300000006502 10',
+            qrcode_url: 'http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx?chNFe=53170607682493000136650000000036491761250045&nVersao=100&tpAmb=1&dhEmi=323031372d30362d32375431343a31303a30382d30333a3030&vNF=158.00&vICMS=0.00&digVal=48692f583862704b6134476d2f683836724471675543752b4645303d&cIdToken=000001&cHashQRCode=58B20E22B292B10DED3995DD4F299EEAD0BE6F92',
+            authorization_protocol: '1412130000000650210',
           }
         }
       end

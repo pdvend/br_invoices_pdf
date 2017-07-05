@@ -1,4 +1,9 @@
+require 'stringio'
+
 require 'ox'
+require 'barby'
+require 'barby/barcode/qr_code'
+require 'barby/outputter/prawn_outputter'
 require 'prawn'
 require 'prawn/table'
 
