@@ -49,9 +49,15 @@ module BrInvoicesPdf
           pdf.text 'SAT Número ' + data[:sat_params][:sat_number]
           time = data[:sat_params][:emission_date] + data[:sat_params][:emission_hour]
           pdf.text DateTime.parse(time).strftime('%d/%m/%Y %H:%M:%S')
-          pdf.text data[:access_key][3..48]
-          pdf.text 'codigo de barras 1'
-          pdf.text 'codigo de barras 2'
+          access_key = data[:access_key][4..48]
+          barcode_1 = access_key[0..21]
+          barcode_2 = access_key[22..44]
+          blob = Barby::PngOutputter.new(Barby::Code39.new(barcode_1)).to_png
+          File.open('barcode1.png', 'wb'){|f| f.write blob }
+          blob = Barby::PngOutputter.new(Barby::Code39.new(barcode_2)).to_png
+          File.open('barcode2.png', 'wb'){|f| f.write blob }
+          pdf.image 'barcode1.png'
+          pdf.image 'barcode2.png'
           pdf.text 'qrcode'
         end
       end
