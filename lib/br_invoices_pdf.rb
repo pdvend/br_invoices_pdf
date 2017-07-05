@@ -1,5 +1,11 @@
 require 'ox'
 require 'prawn'
+require 'chunky_png'
+require 'barby'
+require 'barby/barcode/code_39'
+require 'barby/outputter/png_outputter'
+require 'barby/outputter/prawn_outputter'
+
 
 require 'br_invoices_pdf/version'
 require 'br_invoices_pdf/generator'
