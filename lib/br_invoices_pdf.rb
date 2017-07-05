@@ -1,6 +1,8 @@
 require 'ox'
 require 'prawn'
+require 'prawn/table'
 require 'chunky_png'
+require 'rqrcode'
 require 'barby'
 require 'barby/barcode/code_39'
 require 'barby/outputter/png_outputter'
