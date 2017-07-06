@@ -22,8 +22,11 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'prawn', '~> 2.2.2'
+  spec.add_dependency 'prawn', '~> 2.2'
+  spec.add_dependency 'prawn-table', '~> 0.2'
   spec.add_dependency 'ox', '~> 2.5.0'
+  spec.add_dependency 'barby', '~> 0.6'
+  spec.add_dependency 'rqrcode', '~> 0.10'
 
   spec.add_development_dependency 'bundler', '~> 1.13'
   spec.add_development_dependency 'rake', '~> 12.0'

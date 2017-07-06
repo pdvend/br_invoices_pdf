@@ -1,5 +1,11 @@
+require 'stringio'
+
 require 'ox'
+require 'barby'
+require 'barby/barcode/qr_code'
+require 'barby/outputter/prawn_outputter'
 require 'prawn'
+require 'prawn/table'
 
 require 'br_invoices_pdf/version'
 require 'br_invoices_pdf/generator'
@@ -31,3 +37,4 @@ module BrInvoicesPdf
 end
 
 require 'br_invoices_pdf/cfe'
+require 'br_invoices_pdf/nfce'
