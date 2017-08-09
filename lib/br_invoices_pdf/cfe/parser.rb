@@ -5,12 +5,34 @@ module BrInvoicesPdf
 
       AVAILABLE_UF = { '35' => 'São Paulo' }.freeze
       SAT_QRCODE_SEPARATOR = '|'.freeze
+      PAYMENT_TYPES = {
+        '01' => 'Dinheiro',
+        '02' => 'Cheque',
+        '03' => 'Cartão de Crédito',
+        '04' => 'Cartão de Débito',
+        '05' => 'Crédito Loja',
+        '10' => 'Vale Alimentação',
+        '11' => 'Vale Refeição',
+        '12' => 'Vale Presente',
+        '13' => 'Vale Combustível',
+        '99' => 'Outros'
+      }
+
+      SEFAZ_STATE_CODES = {
+         '11' => 'RO',  '12' => 'AC',  '13' => 'AM',  '14' => 'RR',  '15' => 'PA',
+         '16' => 'AP',  '17' => 'TO',  '21' => 'MA',  '22' => 'PI',  '23' => 'CE',
+         '24' => 'RN',  '25' => 'PB',  '26' => 'PE',  '27' => 'AL',  '28' => 'SE',
+         '29' => 'BA',  '31' => 'MG',  '32' => 'ES',  '33' => 'RJ',  '35' => 'SP',
+         '41' => 'PR',  '42' => 'SC',  '43' => 'RS',  '50' => 'MS',  '51' => 'MT',
+         '52' => 'GO',  '53' => 'DF'
+      }
 
       def parse(xml)
         {
           sat_params: sat_params(xml),
           document_number: locate_element(xml, 'infCFe/ide/nCFe'),
           payment: payment_params(xml),
+          payments: payments_params(xml),
           products: products_params(xml)[:products],
           company_attributes: company_attributes(xml),
           fisco_obs: fisco_obs(xml),
@@ -29,6 +51,22 @@ module BrInvoicesPdf
           emission_hour: locate_element(xml, 'infCFe/ide/hEmi'),
           document_qr_code_signature: locate_element(xml, 'infCFe/ide/assinaturaQRCODE')
         }
+      end
+
+      def payments_params(xml)
+        payments = []
+        node_payments = xml.locate('infCFe/pgto')
+
+        node_payments[0].nodes.each do |element|
+          next unless element.value == 'MP'
+          payment = {}
+          payment[:type] = PAYMENT_TYPES[locate_element(element, 'cMP')]
+          payment[:amount] = locate_element(element, 'vMP')
+
+          payments << payment
+        end
+
+        payments
       end
 
       def payment_params(xml)
@@ -85,7 +123,8 @@ module BrInvoicesPdf
           complement: locate_element(xml, 'infCFe/emit/enderEmit/xCpl'),
           city: locate_element(xml, 'infCFe/emit/enderEmit/xMun'),
           neighborhood: locate_element(xml, 'infCFe/emit/enderEmit/xBairro'),
-          cep: locate_element(xml, 'infCFe/emit/enderEmit/CEP')
+          cep: locate_element(xml, 'infCFe/emit/enderEmit/CEP'),
+          state: SEFAZ_STATE_CODES[locate_element(xml, 'infCFe/ide/cUF')]
         }
       end
 
