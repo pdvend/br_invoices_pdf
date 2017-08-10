@@ -25,11 +25,16 @@ module BrInvoicesPdf
   end
 
   def register(type, renderer, parser)
+    raise(ArgumentError, "Expected Symbol or String to type. Received #{type.class}") unless valid_type?(type)
     @generators[type.to_sym] = Generator.new(renderer, parser)
   end
 
   def supported_document_types
     @generators.keys
+  end
+
+  def valid_type?(type)
+    type.is_a?(String) || type.is_a?(Symbol)
   end
 end
 
