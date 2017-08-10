@@ -27,10 +27,11 @@ module BrInvoicesPdf
 
       def add_qrcode(pdf, data)
         box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-          pdf.text("QR Code\n\n", style: :italic)
+          pdf.text("Códigos de barra e QR Code\n\n", style: :italic)
 
           page_width = page_paper_width(pdf.page.size)
           qrcode_size = page_width * 0.65
+          barcode_height = 50
 
           access_key = data[:access_key][4..48]
           barcode_1 = access_key[0..21]
@@ -40,8 +41,16 @@ module BrInvoicesPdf
           blob = Barby::PngOutputter.new(Barby::Code39.new(barcode_2)).to_png
           barcode2 = StringIO.new(blob)
 
-          pdf.image barcode1, position: :center
-          pdf.image barcode2, position: :center
+          barcode_options = {
+            at: [(page_width - qrcode_size) / 2, pdf.cursor],
+            width: qrcode_size,
+            height: barcode_height
+          }
+
+          pdf.image(barcode1, barcode_options)
+          pdf.move_down(55)
+          pdf.image(barcode2, barcode_options)
+          pdf.move_down(55)
 
           qr_code_string  = access_key +  SAT_QRCODE_SEPARATOR + data[:sat_params][:emission_date] +
                             SAT_QRCODE_SEPARATOR + data[:sat_params][:emission_hour] +
@@ -49,16 +58,14 @@ module BrInvoicesPdf
                             data[:company_attributes][:cnpj] + SAT_QRCODE_SEPARATOR +
                             data[:sat_params][:document_qr_code_signature]
           qrcode = RQRCode::QRCode.new(qr_code_string)
-          blob = qrcode.as_png(size: 220, border_modules: 0).to_blob
+          blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob
           data = StringIO.new(blob)
 
-          options = {
-            at: [(page_width - qrcode_size) / 2, pdf.cursor],
-            width: qrcode_size,
-            height: qrcode_size
-          }
+          pdf.indent((page_width - qrcode_size) / 2, 10) do
+            pdf.image(data)
+          end
 
-          pdf.image(data, options)
+          pdf.move_down(10)
         end
       end
 
