@@ -16,7 +16,7 @@ module BrInvoicesPdf
         '12' => 'Vale Presente',
         '13' => 'Vale Combustível',
         '99' => 'Outros'
-      }
+      }.freeze
 
       SEFAZ_STATE_CODES = {
          '11' => 'RO',  '12' => 'AC',  '13' => 'AM',  '14' => 'RR',  '15' => 'PA',
@@ -25,7 +25,7 @@ module BrInvoicesPdf
          '29' => 'BA',  '31' => 'MG',  '32' => 'ES',  '33' => 'RJ',  '35' => 'SP',
          '41' => 'PR',  '42' => 'SC',  '43' => 'RS',  '50' => 'MS',  '51' => 'MT',
          '52' => 'GO',  '53' => 'DF'
-      }
+      }.freeze
 
       def parse(xml)
         {
@@ -129,14 +129,12 @@ module BrInvoicesPdf
       end
 
       def fisco_obs(xml)
-        fisco_obs = []
-        xml.locate('infCFe/infAdic/obsFisco').each do |element|
-          obs = {}
-          obs[:text] = element.nodes.first.text
-          obs[:field] = element.attributes[:xCampo]
-          fisco_obs << obs
+        xml.locate('infCFe/infAdic/obsFisco').map do |element|
+          {
+            text: element.nodes.first.text,
+            field: element.attributes[:xCampo]
+          }
         end
-        fisco_obs
       end
 
       def locate_element(xml, path)
