@@ -8,7 +8,6 @@ require 'barby/barcode/code_39'
 require 'barby/outputter/png_outputter'
 require 'barby/outputter/prawn_outputter'
 
-
 require 'br_invoices_pdf/version'
 require 'br_invoices_pdf/generator'
 require 'br_invoices_pdf/errors/invalid_document_type'
