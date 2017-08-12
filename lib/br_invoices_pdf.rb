@@ -37,4 +37,17 @@ module BrInvoicesPdf
   end
 end
 
+require 'br_invoices_pdf/cfe/renderer/base_renderer'
+require 'br_invoices_pdf/cfe/parser/base_parser'
+
+Dir['lib/br_invoices_pdf/cfe/renderer/*.rb'].each do |f|
+  f.slice! 'lib/'
+  require f
+end
+
+Dir['lib/br_invoices_pdf/cfe/parser/*.rb'].each do |f|
+  f.slice! 'lib/'
+  require f
+end
+
 require 'br_invoices_pdf/cfe'
