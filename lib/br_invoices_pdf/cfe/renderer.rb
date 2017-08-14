@@ -20,13 +20,17 @@ module BrInvoicesPdf
         page_width = page_paper_width(options[:page_size])
 
         Prawn::Document.new(options.merge(page_size: [page_width, AUTO_HEIGHT_MOCK])) do |pdf|
-          pdf.font_size(7) do
-            RENDERERS.each do |renderer|
-              renderer.new.execute(pdf, data)
-            end
+          pdf_content(pdf, data, page_width)
+        end
+      end
 
-            pdf.page.dictionary.data[:MediaBox] = [0, pdf.y - pdf.page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
+      def pdf_content(pdf, data, page_width)
+        pdf.font_size(7) do
+          RENDERERS.each do |renderer|
+            renderer.new.execute(pdf, data)
           end
+
+          pdf.page.dictionary.data[:MediaBox] = [0, pdf.y - pdf.page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
         end
       end
 

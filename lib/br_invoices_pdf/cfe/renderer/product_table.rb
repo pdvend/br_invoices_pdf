@@ -17,11 +17,7 @@ module BrInvoicesPdf
               table.columns([2, 4, 5]).align = :right
               table.column(3).align = :center
 
-              table.column(0).width = table.width * 0.16
-              table.column(2).width = table.width * 0.13
-              table.column(3).width = table.width * 0.13
-              table.column(4).width = table.width * 0.135
-              table.column(5).width = table.width * 0.135
+              table_widths(table)
             end
           end
 
@@ -29,6 +25,15 @@ module BrInvoicesPdf
         end
 
         private
+
+        def table_widths(table)
+          width = table.width
+          table.column(0).width = width * 0.16
+          table.column(2).width = width * 0.13
+          table.column(3).width = width * 0.13
+          table.column(4).width = width * 0.135
+          table.column(5).width = width * 0.135
+        end
 
         PRODUCT_TABLE_BASE_DATA = [['CÓD.', 'DESCRIÇÃO', 'QTD.', 'UND.', 'V.UNIT', 'V.TOT']].freeze
         def product_table_data(data)

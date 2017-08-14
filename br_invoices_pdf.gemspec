@@ -4,6 +4,7 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'br_invoices_pdf/version'
 
+# rubocop:disable Metrics/BlockLength
 Gem::Specification.new do |spec|
   spec.name          = 'br_invoices_pdf'
   pre_release        = ENV['SEMAPHORE'] && ENV['PRE_RELEASE']

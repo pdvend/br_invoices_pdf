@@ -6,7 +6,7 @@ module BrInvoicesPdf
 
         def execute(pdf, data)
           width = page_content_width(pdf)
-          table_data = payments_table_data(data, width)
+          table_data = payments_table_data(data)
 
           pdf.font_size(6) do
             pdf.table(table_data, width: width) do |table|
@@ -23,15 +23,17 @@ module BrInvoicesPdf
         private
 
         PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
-        def payments_table_data(data, _width)
+        def payments_table_data(data)
           payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
             result + [[cur[:type], format_currency(BigDecimal(cur[:amount]))]]
           end
 
+          add_default_values(payments_data, data)
+        end
+
+        def add_default_values(payments_data, data)
           payments_data.push(['TROCO', format_currency(BigDecimal(data[:payment][:cash_back]))])
           payments_data.push(['TOTAL', format_currency(BigDecimal(data[:payment][:payd]))])
-
-          payments_data
         end
       end
     end

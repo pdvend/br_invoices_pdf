@@ -10,11 +10,7 @@ module BrInvoicesPdf
           pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |_box|
             pdf.pad(10) do
               pdf.indent(10, 10) do
-                pdf.font('Helvetica', style: :bold)
-                pdf.text("Extrato: #{data[:document_number]}", align: :center)
-                pdf.text(cpf, align: :center)
-                pdf.text('CUPOM FISCAL ELETRONICO - SAT', align: :center)
-                pdf.font('Helvetica', style: :normal, align: :center)
+                add_header_config(pdf, data, cpf)
               end
             end
 
@@ -22,6 +18,16 @@ module BrInvoicesPdf
           end
 
           pdf.move_down(5)
+        end
+
+        private
+
+        def add_header_config(pdf, data, cpf)
+          pdf.font('Helvetica', style: :bold)
+          pdf.text("Extrato: #{data[:document_number]}", align: :center)
+          pdf.text(cpf, align: :center)
+          pdf.text('CUPOM FISCAL ELETRONICO - SAT', align: :center)
+          pdf.font('Helvetica', style: :normal, align: :center)
         end
       end
     end
