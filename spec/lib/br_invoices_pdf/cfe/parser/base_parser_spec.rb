@@ -8,8 +8,8 @@ describe BrInvoicesPdf::Cfe::Parser::BaseParser do
   describe '.locate_element' do
     subject { described_class.locate_element(xml, 'middle/bottom') }
 
-    let(:xml_string) { "<top name='sample'><middle name='second'>#{bottom}</middle></top>" }
-    let(:bottom) { "<bottom name='third'>#{value}</bottom>" }
+    let(:xml_string) { "<top><middle>#{bottom}</middle></top>" }
+    let(:bottom) { "<bottom>#{value}</bottom>" }
     let(:value) { 'some_value' }
 
     context 'when present' do
@@ -17,7 +17,7 @@ describe BrInvoicesPdf::Cfe::Parser::BaseParser do
     end
 
     context 'when nil' do
-      let(:bottom) { nil } 
+      let(:bottom) { nil }
       it { expect(subject).to be_nil }
     end
   end
@@ -31,7 +31,7 @@ describe BrInvoicesPdf::Cfe::Parser::BaseParser do
     end
 
     context 'when nil' do
-      let(:bottom) { nil } 
+      let(:bottom) { nil }
       it { expect(subject).to be_nil }
     end
   end
