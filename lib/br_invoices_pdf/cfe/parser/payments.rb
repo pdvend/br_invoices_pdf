@@ -3,7 +3,6 @@ module BrInvoicesPdf
     module Parser
       module Payments
         extend BaseParser
-
         module_function
 
         PAYMENT_TYPES = {
@@ -20,15 +19,20 @@ module BrInvoicesPdf
         }.freeze
 
         def execute(xml)
-          payments = []
           node_payments = xml.locate('infCFe/pgto')
 
-          node_payments[0].nodes.each do |element|
+          payments_by_nodes(node_payments) unless node_payments.blank?
+        end
+
+        def payments_by_nodes(node_payments)
+          payments = []
+          node_payments.first.nodes.each do |element|
             payments << payment_by(element) if element.value == 'MP'
           end
 
           payments
         end
+        private_class_method :payments_by_nodes
 
         def payment_by(element)
           {
@@ -36,6 +40,7 @@ module BrInvoicesPdf
             amount: locate_element(element, 'vMP')
           }
         end
+        private_class_method :payments_by
       end
     end
   end
