@@ -3,6 +3,7 @@ module BrInvoicesPdf
     module Parser
       module Sat
         extend BaseParser
+
         module_function
 
         AVAILABLE_UF = { '35' => 'São Paulo' }.freeze

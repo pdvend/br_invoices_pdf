@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class ProductsData
-        include BaseParser
+      module ProductsData
+        extend BaseParser
+
+        module_function
 
         def execute(xml)
           {
@@ -10,8 +12,6 @@ module BrInvoicesPdf
             total_items: xml.locate('infCFe/det').last.attributes[:nItem]
           }[:products]
         end
-
-        private
 
         def product_params(node_products)
           products = []
@@ -29,6 +29,7 @@ module BrInvoicesPdf
           end
           products
         end
+        private_class_method :product_params
       end
     end
   end

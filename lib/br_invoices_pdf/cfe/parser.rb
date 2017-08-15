@@ -18,7 +18,7 @@ module BrInvoicesPdf
       def parse(xml)
         {}.tap do |response|
           PARSERERS.each do |param, parser|
-            response[param] = parser.new.execute(xml)
+            response[param] = parser.execute(xml)
           end
         end
       end

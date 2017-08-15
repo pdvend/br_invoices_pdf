@@ -3,6 +3,7 @@ module BrInvoicesPdf
     module Parser
       module AccessKey
         extend BaseParser
+
         module_function
 
         def execute(xml)

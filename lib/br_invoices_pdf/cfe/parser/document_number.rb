@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class DocumentNumber
-        include BaseParser
+      module DocumentNumber
+        extend BaseParser
+
+        module_function
 
         def execute(xml)
           locate_element(xml, 'infCFe/ide/nCFe')

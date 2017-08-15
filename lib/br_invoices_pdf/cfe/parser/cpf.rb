@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class Cpf
-        include BaseParser
+      module Cpf
+        extend BaseParser
+
+        module_function
 
         def execute(xml)
           locate_element(xml, 'infCFe/dest/CPF')

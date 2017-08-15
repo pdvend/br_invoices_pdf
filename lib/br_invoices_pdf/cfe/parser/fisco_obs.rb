@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class FiscoObs
-        include BaseParser
+      module FiscoObs
+        extend BaseParser
+
+        module_function
 
         def execute(xml)
           xml.locate('infCFe/infAdic/obsFisco').map do |element|

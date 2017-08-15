@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class Payment
-        include BaseParser
+      module Payment
+        extend BaseParser
+
+        module_function
 
         def execute(xml)
           {

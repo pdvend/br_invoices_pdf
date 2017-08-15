@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class Payments
-        include BaseParser
+      module Payments
+        extend BaseParser
+
+        module_function
 
         PAYMENT_TYPES = {
           '01' => 'Dinheiro',
@@ -22,15 +24,17 @@ module BrInvoicesPdf
           node_payments = xml.locate('infCFe/pgto')
 
           node_payments[0].nodes.each do |element|
-            next unless element.value == 'MP'
-            payment = {}
-            payment[:type] = PAYMENT_TYPES[locate_element(element, 'cMP')]
-            payment[:amount] = locate_element(element, 'vMP')
-
-            payments << payment
+            payments << payment_by(element) if element.value == 'MP'
           end
 
           payments
+        end
+
+        def payment_by(element)
+          {
+            type: PAYMENT_TYPES[locate_element(element, 'cMP')],
+            amount: locate_element(element, 'vMP')
+          }
         end
       end
     end
