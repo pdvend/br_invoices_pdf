@@ -1,11 +1,12 @@
 describe BrInvoicesPdf::Cfe::Parser::Sat do
   describe '.execute' do
-    subject { described_class.new.execute(xml) }
+    subject { described_class.execute(xml) }
 
     let(:xml) { Ox.dump(foo: 'bar') }
 
     def locate_element_mock(path, value)
-      allow_any_instance_of(described_class).to receive(:locate_element)
+      base_parser_module = BrInvoicesPdf::Cfe::Parser::BaseParser
+      allow_any_instance_of(base_parser_module).to receive(:locate_element)
         .with(xml, path).and_return(value)
     end
 
