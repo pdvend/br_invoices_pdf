@@ -40,7 +40,7 @@ module BrInvoicesPdf
             amount: locate_element(element, 'vMP')
           }
         end
-        private_class_method :payments_by
+        private_class_method :payment_by
       end
     end
   end
