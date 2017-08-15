@@ -24,7 +24,7 @@ describe BrInvoicesPdf::Cfe::Parser::Payments do
     end
 
     context 'correct values' do
-      it { expect(subject.first[:type]).to eq("Cartão de Crédito") }
+      it { expect(subject.first[:type]).to eq('Cartão de Crédito') }
       it { expect(subject.first[:amount]).to eq(amount) }
     end
 
