@@ -28,7 +28,7 @@ describe BrInvoicesPdf::Cfe::Parser::Sat do
     let(:emission_hour) { '13:00:22' }
     let(:document_qr_code_signature) { 'saqw1w212' }
 
-    context '' do
+    context 'correct values' do
       it { expect(subject[:pdv_number]).to eq(pdv_number) }
       it { expect(subject[:ncfe_number]).to eq(ncfe_number) }
       it { expect(subject[:uf]).to eq('São Paulo') }
