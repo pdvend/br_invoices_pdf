@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class CompanyAttributes
-        include BaseParser
+      module CompanyAttributes
+        extend BaseParser
+
+        module_function
 
         SEFAZ_STATE_CODES = {
            '11' => 'RO',  '12' => 'AC',  '13' => 'AM',  '14' => 'RR',  '15' => 'PA',
@@ -25,20 +27,6 @@ module BrInvoicesPdf
           }
         end
 
-        private
-
-        def company_attributes(xml)
-          {
-            company_name: locate_element(xml, 'infCFe/emit/xNome'),
-            address: company_address_params(xml),
-            trading_name: locate_element(xml, 'infCFe/emit/xFant'),
-            zipcode: locate_element(xml, 'infCFe/emit/enderEmit/CEP'),
-            cnpj: locate_element(xml, 'infCFe/ide/CNPJ'),
-            ie: locate_element(xml, 'infCFe/emit/IE'),
-            im: locate_element(xml, 'infCFe/emit/IM')
-          }
-        end
-
         def company_address_params(xml)
           {
             public_place: locate_element(xml, 'infCFe/emit/enderEmit/xLgr'),
@@ -50,6 +38,7 @@ module BrInvoicesPdf
             state: SEFAZ_STATE_CODES[locate_element(xml, 'infCFe/ide/cUF')]
           }
         end
+        private_class_method :company_address_params
       end
     end
   end
