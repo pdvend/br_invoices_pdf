@@ -1,11 +1,16 @@
 module BrInvoicesPdf
   module Cfe
     module Parser
-      class AccessKey
-        include BaseParser
+      module AccessKey
+        extend BaseParser
+        module_function
 
         def execute(xml)
-          xml.locate('Signature/SignedInfo').first.nodes.last.attributes[:URI]
+          element = xml.locate('Signature/SignedInfo').first
+          return unless element
+          element = element.nodes.last
+          return unless element
+          element.attributes[:URI]
         end
       end
     end
