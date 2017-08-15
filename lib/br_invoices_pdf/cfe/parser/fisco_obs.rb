@@ -8,9 +8,12 @@ module BrInvoicesPdf
 
         def execute(xml)
           xml.locate('infCFe/infAdic/obsFisco').map do |element|
+            node = element.nodes.first
+            field = element.attributes[:xCampo]
+            next unless node && field
             {
-              text: element.nodes.first.text,
-              field: element.attributes[:xCampo]
+              text: node.text,
+              field: field
             }
           end
         end
