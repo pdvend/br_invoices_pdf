@@ -3,6 +3,7 @@ module BrInvoicesPdf
     module Parser
       module Payments
         extend BaseParser
+
         module_function
 
         PAYMENT_TYPES = {
@@ -21,7 +22,7 @@ module BrInvoicesPdf
         def execute(xml)
           node_payments = xml.locate('infCFe/pgto')
 
-          payments_by_nodes(node_payments) unless node_payments.blank?
+          payments_by_nodes(node_payments) if node_payments && node_payments.any?
         end
 
         def payments_by_nodes(node_payments)

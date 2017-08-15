@@ -6,30 +6,37 @@ module BrInvoicesPdf
 
         module_function
 
+        FIELDS = { code: 'cProd',
+                   description: 'xProd',
+                   cfop: 'CFOP',
+                   quantity: 'qCom',
+                   unit_label: 'uCom',
+                   total_value: 'vProd',
+                   unit_value: 'vUnCom',
+                   item_value: 'vItem' }.freeze
+
         def execute(xml)
-          {
-            products: product_params(xml.locate('infCFe/det')),
-            total_items: xml.locate('infCFe/det').last.attributes[:nItem]
-          }[:products]
+          node_products = xml.locate('infCFe/det')
+          products_params(node_products) if node_products
         end
 
-        def product_params(node_products)
+        def products_params(node_products)
           products = []
           node_products.each do |element|
-            product = {}
-            product[:code] = node_locate(element, 'cProd')
-            product[:description] = node_locate(element, 'xProd')
-            product[:cfop] = node_locate(element, 'CFOP')
-            product[:quantity] = node_locate(element, 'qCom')
-            product[:unit_label] = node_locate(element, 'uCom')
-            product[:total_value] = node_locate(element, 'vProd')
-            product[:unit_value] = node_locate(element, 'vUnCom')
-            product[:item_value] = node_locate(element, 'vItem')
-            products << product
+            products << product_by(element)
           end
           products
         end
-        private_class_method :product_params
+        private_class_method :products_params
+
+        def product_by(element)
+          {}.tap do |product|
+            FIELDS.each do |key, field|
+              product[key] = node_locate(element, field)
+            end
+          end
+        end
+        private_class_method :product_by
       end
     end
   end
