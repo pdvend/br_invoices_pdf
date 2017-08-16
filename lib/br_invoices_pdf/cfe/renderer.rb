@@ -30,7 +30,8 @@ module BrInvoicesPdf
             renderer.execute(pdf, data)
           end
 
-          pdf.page.dictionary.data[:MediaBox] = [0, pdf.y - pdf.page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
+          page = pdf.page
+          page.dictionary.data[:MediaBox] = [0, pdf.y - page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
         end
       end
 
