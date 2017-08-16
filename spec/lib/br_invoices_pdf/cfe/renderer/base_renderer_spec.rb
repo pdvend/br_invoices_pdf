@@ -33,9 +33,27 @@ describe BrInvoicesPdf::Cfe::Renderer::BaseRenderer do
     it do
       expect(pdf).to receive(:bounding_box).with(position, width: width).and_yield
       expect(pdf).to receive(:pad).and_yield
-      expect(pdf).to receive(:indent)
+      expect(pdf).to receive(:indent).and_return(pdf)
       expect(pdf).to receive(:stroke_bounds)
 
+      subject
+    end
+  end
+
+  context '.pdf_setup' do
+    subject { described_class.pdf_setup(pdf) }
+    let(:pdf) { double('pdf', cursor: cursor, page: page) }
+    let(:cursor) { 10 }
+    let(:page) { double('page', margins: { left: left, right: right }, size: size) }
+    let(:left) { 2 }
+    let(:right) { 2 }
+    let(:size) { 'A1' }
+
+    it do
+      expect(pdf).to receive(:bounding_box).with([0, cursor], width: 1679.78).and_yield
+      expect(pdf).to receive(:pad).with(10).and_yield
+      expect(pdf).to receive(:indent).with(10, 10).and_return(pdf)
+      expect(pdf).to receive(:stroke_bounds)
       subject
     end
   end

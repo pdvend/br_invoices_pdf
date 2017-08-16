@@ -21,6 +21,17 @@ module BrInvoicesPdf
           end
         end
 
+        def pdf_setup(pdf)
+          pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do
+            pdf.pad(10) do
+              pdf.indent(10, 10) do
+                yield
+              end
+            end
+            pdf.stroke_bounds
+          end
+        end
+
         CNPJ_FORMAT = '%d.%d.%d/%d-%d'.freeze
         # :reek:FeatureEnvy
         def format_cnpj(cnpj)
