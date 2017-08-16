@@ -1,20 +1,21 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class CompanyIdentification
-        include BaseRenderer
+      module CompanyIdentification
+        extend BaseRenderer
+
+        module_function
 
         def execute(pdf, data)
+          attributes = data[:company_attributes]
           pdf_setup(pdf) do
-            company_names(pdf, data)
-            company_infos(pdf, data)
-
-            pdf.text(format_address(data[:company_attributes][:address]), align: :center)
+            company_params(pdf, attributes)
+            address_params = attributes[:address]
+            pdf.text(format_address(address_params), align: :center)
           end
         end
 
-        private
-
+        # :reek:FeatureEnvy
         def pdf_setup(pdf)
           pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do
             pdf.pad(10) do
@@ -25,16 +26,16 @@ module BrInvoicesPdf
             pdf.stroke_bounds
           end
         end
+        private_class_method :pdf_setup
 
-        def company_names(pdf, data)
-          pdf.text(data[:company_attributes][:company_name], align: :center)
-          pdf.text(data[:company_attributes][:trading_name], align: :center)
+        # :reek:FeatureEnvy
+        def company_params(pdf, data)
+          pdf.text(data[:company_name], align: :center)
+          pdf.text(data[:trading_name], align: :center)
+          pdf.text('CNPJ: ' + format_cnpj(data[:cnpj]), align: :center)
+          pdf.text('Inscrição Estadual: ' + data[:ie], align: :center)
         end
-
-        def company_infos(pdf, data)
-          pdf.text('CNPJ: ' + format_cnpj(data[:company_attributes][:cnpj]), align: :center)
-          pdf.text('Inscrição Estadual: ' + data[:company_attributes][:ie], align: :center)
-        end
+        private_class_method :company_params
       end
     end
   end
