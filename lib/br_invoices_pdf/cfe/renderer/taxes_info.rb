@@ -15,12 +15,11 @@ module BrInvoicesPdf
           end
         end
 
-        private
-
         def date_values(pdf, data)
           time = data[:sat_params][:emission_date] + data[:sat_params][:emission_hour]
           pdf.text(DateTime.parse(time).strftime('%d/%m/%Y %H:%M:%S'), align: :center)
         end
+        private_class_method :date_values
 
         def tribute_values(pdf, data)
           value = format_currency(BigDecimal(data[:payment][:approximate_value_of_taxex]))
@@ -28,6 +27,7 @@ module BrInvoicesPdf
           pdf.text(text, align: :center)
           pdf.text('SAT Número ' + data[:sat_params][:sat_number], align: :center)
         end
+        private_class_method :tribute_values
       end
     end
   end

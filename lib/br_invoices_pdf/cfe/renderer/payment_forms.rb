@@ -10,8 +10,9 @@ module BrInvoicesPdf
           width = page_content_width(pdf)
 
           pdf.font_size(6) do
-            pdf.table(payments_table_data(data), width: width) do |table|
-              format_table(table)
+            table_data = payments_table_data(data)
+            pdf.table(table_data, width: width) do |table|
+              format_table(table, table_data)
             end
           end
 
@@ -19,7 +20,7 @@ module BrInvoicesPdf
         end
 
         # :reek:FeatureEnvy
-        def format_table(table)
+        def format_table(table, table_data)
           table.columns([0, 1]).valign = :center
           table.columns(1).align = :right
           table_size = table_data.size

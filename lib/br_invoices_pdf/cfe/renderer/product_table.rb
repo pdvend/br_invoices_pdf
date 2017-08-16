@@ -6,10 +6,6 @@ module BrInvoicesPdf
 
         module_function
 
-        MD_WIDITH = 0.16.freeze
-        SM_WIDTH = 0.13.freeze
-        LG_WIDTH = 0.135.freeze
-
         def execute(pdf, data)
           table_data = product_table_data(data)
 
@@ -46,9 +42,9 @@ module BrInvoicesPdf
 
         # :reek:FeatureEnvy
         def table_widths(table, width)
-          table.column(0).width = width * MD_WIDITH 
-          table.columns([2,3]).width = width * SM_WIDTH
-          table.column([4,5]).width = width * LG_WIDTH
+          table.column(0).width = width * 0.16
+          table.columns([2, 3]).width = width * 0.13
+          table.column([4, 5]).width = width * 0.135
         end
         private_class_method :table_widths
 

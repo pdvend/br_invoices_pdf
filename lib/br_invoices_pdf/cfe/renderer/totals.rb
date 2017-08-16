@@ -22,8 +22,6 @@ module BrInvoicesPdf
           pdf.move_down(5)
         end
 
-        private
-
         def box_info(data)
           [
             ['Total bruto dos itens', format_currency(BigDecimal(data[:payment][:total_price]))],
@@ -31,6 +29,7 @@ module BrInvoicesPdf
             ['Total', format_currency(BigDecimal(data[:payment][:total]))]
           ]
         end
+        private_class_method :box_info
       end
     end
   end
