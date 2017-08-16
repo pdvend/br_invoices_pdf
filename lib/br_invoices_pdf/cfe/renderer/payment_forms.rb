@@ -7,17 +7,16 @@ module BrInvoicesPdf
         module_function
 
         def execute(pdf, data)
-          width = page_content_width(pdf)
-
           pdf.font_size(6) do
+            width = page_content_width(pdf)
             table_data = payments_table_data(data)
-            render_table(table_data)
+            render_table(pdf, table_data, width)
           end
 
           pdf.move_down(5)
         end
 
-        def render_table(table_data)
+        def render_table(pdf, table_data, width)
           pdf.table(table_data, width: width) do |table|
             format_table(table, table_data)
           end

@@ -39,6 +39,12 @@ module BrInvoicesPdf
           format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
         end
 
+        CPF_FORMAT = '%d.%d.%d-%d'.freeze
+        # :reek:FeatureEnvy
+        def format_cpf(cpf)
+          format(CPF_FORMAT, cpf[0, 3], cpf[3, 3], cpf[6, 3], cpf[9, 2])
+        end
+
         # :reek:FeatureEnvy
         def format_currency(num)
           num.truncate.to_s.reverse.split(/.../).join('.').reverse + format(',%02d', (num.frac * 100).truncate)

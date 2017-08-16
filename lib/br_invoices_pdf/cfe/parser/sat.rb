@@ -10,7 +10,7 @@ module BrInvoicesPdf
 
         def execute(xml)
           {
-            pdv_number: locate_element(xml, 'infCFe/ide/numeroCaixa'),
+            pos_number: locate_element(xml, 'infCFe/ide/numeroCaixa'),
             ncfe_number: locate_element(xml, 'infCFe/ide/nCFe'),
             uf: AVAILABLE_UF[locate_element(xml, 'infCFe/ide/cUF')],
             sat_number: locate_element(xml, 'infCFe/ide/nserieSAT'),

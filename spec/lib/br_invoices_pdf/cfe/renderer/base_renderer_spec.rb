@@ -66,6 +66,14 @@ describe BrInvoicesPdf::Cfe::Renderer::BaseRenderer do
     it { expect(subject).to eq(formated_cnpj) }
   end
 
+  describe '.format_cpf' do
+    subject { described_class.format_cpf(cpf) }
+    let(:cpf) { '999999999999' }
+    let(:formated_cpf) { '999.999.999-99' }
+
+    it { expect(subject).to eq(formated_cpf) }
+  end
+
   describe '.format_currency' do
     subject { described_class.format_currency(num) }
     let(:num) { BigDecimal.new(99.99, 4) }

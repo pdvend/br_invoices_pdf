@@ -3,7 +3,9 @@ describe BrInvoicesPdf::Cfe::Renderer::Header do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', cursor: cursor) }
     let(:cursor) { 10 }
-    let(:data) { { cpf: '99999999999', document_number: '999' } }
+    let(:data) { { cpf: cpf, document_number: '999' } }
+    let(:cpf) { '99999999999' }
+    let(:formated_cpf) { '999.999.999-99' }
     let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     before do
       allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(10)
@@ -20,7 +22,7 @@ describe BrInvoicesPdf::Cfe::Renderer::Header do
 
       context 'when cpf is present' do
         it do
-          expect(pdf).to receive(:text).with('CONSUMIDOR:' + data[:cpf], align: :center)
+          expect(pdf).to receive(:text).with('CONSUMIDOR: ' + formated_cpf, align: :center)
 
           subject
         end
