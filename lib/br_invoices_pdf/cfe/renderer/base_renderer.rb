@@ -22,25 +22,31 @@ module BrInvoicesPdf
         end
 
         CNPJ_FORMAT = '%d.%d.%d/%d-%d'.freeze
+        # :reek:FeatureEnvy
         def format_cnpj(cnpj)
           format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
         end
 
+        # :reek:FeatureEnvy
         def format_currency(num)
           num.truncate.to_s.reverse.split(/.../).join('.').reverse + format(',%02d', (num.frac * 100).truncate)
         end
 
+        # :reek:FeatureEnvy
         def format_number(num, prec: 4)
           num.truncate.to_s + (prec > 0 ? format(",%0#{prec}d", (num.frac * 10**prec).truncate) : '')
         end
 
+        # :reek:FeatureEnvy
         def page_paper_width(name)
           (name.is_a?(Array) ? name : PDF::Core::PageGeometry::SIZES[name]).first
         end
 
+        # :reek:FeatureEnvy
         def page_content_width(pdf)
-          margins = pdf.page.margins
-          page_paper_width(pdf.page.size) - margins[:left] - margins[:right]
+          page = pdf.page
+          margins = page.margins
+          page_paper_width(page.size) - margins[:left] - margins[:right]
         end
       end
     end
