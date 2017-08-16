@@ -23,7 +23,7 @@ module BrInvoicesPdf
 
         def tribute_values(pdf, payment)
           pdf.text("Tributos\n\n", style: :italic)
-          value = format_currency(BigDecimal(payment[:approximate_value_of_taxex]))
+          value = format_currency(BigDecimal(payment[:approximate_value_of_taxes]))
           text = "Informação dos tributos totais incidentes (Lei Federal 12.741/2012):\n R$ #{value}\n\n"
           pdf.text(text, align: :center)
         end

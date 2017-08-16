@@ -2,7 +2,7 @@ describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf') }
-    let(:data) { { payments: [{ type: 'SOME', amount: 12 }], payment: { cash_back: 1, payd: 13 } } }
+    let(:data) { { payments: [{ type: 'SOME', amount: 12 }], payment: { cashback: 1, paid: 13 } } }
     let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     let(:width) { 100 }
     before do

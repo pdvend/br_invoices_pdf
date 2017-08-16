@@ -44,8 +44,8 @@ module BrInvoicesPdf
         private_class_method :payments_table_data
 
         def add_default_values(payments_data, data)
-          payments_data.push(['TROCO', format_currency(BigDecimal(data[:cash_back]))])
-          payments_data.push(['TOTAL', format_currency(BigDecimal(data[:payd]))])
+          payments_data.push(['TROCO', format_currency(BigDecimal(data[:cashback]))])
+          payments_data.push(['TOTAL', format_currency(BigDecimal(data[:paid]))])
         end
         private_class_method :add_default_values
       end
