@@ -21,6 +21,7 @@ module BrInvoicesPdf
           end
         end
 
+        # :reek:FeatureEnvy
         def pdf_setup(pdf)
           pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do
             pdf.pad(10) do

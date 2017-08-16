@@ -11,13 +11,18 @@ module BrInvoicesPdf
 
           pdf.font_size(6) do
             table_data = payments_table_data(data)
-            pdf.table(table_data, width: width) do |table|
-              format_table(table, table_data)
-            end
+            render_table(table_data)
           end
 
           pdf.move_down(5)
         end
+
+        def render_table(table_data)
+          pdf.table(table_data, width: width) do |table|
+            format_table(table, table_data)
+          end
+        end
+        private_class_method :render_table
 
         # :reek:FeatureEnvy
         def format_table(table, table_data)
@@ -27,6 +32,7 @@ module BrInvoicesPdf
           table.row([0, table_size - 1]).font_style = :bold
           table.row([0, table_size - 2]).font_style = :bold
         end
+        private_class_method :format_table
 
         PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
         def payments_table_data(data)
