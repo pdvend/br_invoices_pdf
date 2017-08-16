@@ -1,26 +1,26 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class Header
-        include BaseRenderer
+      module Header
+        extend BaseRenderer
 
+        module_function
+
+        # :reek:FeatureEnvy
         def execute(pdf, data)
-          cpf = data[:cpf] ? 'CONSUMIDOR:' + data[:cpf] : 'CONSUMIDOR NAO IDENTIFICADO'
+          cpf = cpf_vlue(data[:cpf])
 
-          pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |_box|
-            pdf.pad(10) do
-              pdf.indent(10, 10) do
-                add_header_config(pdf, data, cpf)
-              end
-            end
-
-            pdf.stroke_bounds
+          pdf_setup(pdf) do
+            add_header_config(pdf, data, cpf)
           end
 
           pdf.move_down(5)
         end
 
-        private
+        def cpf_vlue(cpf)
+          cpf ? 'CONSUMIDOR:' + cpf : 'CONSUMIDOR NAO IDENTIFICADO'
+        end
+        private_class_method :cpf_vlue
 
         def add_header_config(pdf, data, cpf)
           pdf.font('Helvetica', style: :bold)
@@ -29,6 +29,7 @@ module BrInvoicesPdf
           pdf.text('CUPOM FISCAL ELETRONICO - SAT', align: :center)
           pdf.font('Helvetica', style: :normal, align: :center)
         end
+        private_class_method :add_header_config
       end
     end
   end
