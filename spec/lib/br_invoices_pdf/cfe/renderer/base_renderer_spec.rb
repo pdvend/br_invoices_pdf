@@ -35,6 +35,7 @@ describe BrInvoicesPdf::Cfe::Renderer::BaseRenderer do
       expect(pdf).to receive(:pad).and_yield
       expect(pdf).to receive(:indent)
       expect(pdf).to receive(:stroke_bounds)
+
       subject
     end
   end
