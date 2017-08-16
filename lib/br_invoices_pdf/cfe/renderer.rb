@@ -27,7 +27,7 @@ module BrInvoicesPdf
       def pdf_content(pdf, data, page_width)
         pdf.font_size(7) do
           RENDERERS.each do |renderer|
-            renderer.new.execute(pdf, data)
+            renderer.execute(pdf, data)
           end
 
           pdf.page.dictionary.data[:MediaBox] = [0, pdf.y - pdf.page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
