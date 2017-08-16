@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class QrCode
-        include BaseRenderer
+      module QrCode
+        extend BaseRenderer
+
+        module_function
 
         SAT_QRCODE_SEPARATOR = '|'.freeze
         BARCODE_HEIGHT = 50
