@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class ProductTable
-        include BaseRenderer
+      module ProductTable
+        extend BaseRenderer
+
+        module_function
 
         def execute(pdf, data)
           width = page_content_width(pdf)
@@ -24,8 +26,6 @@ module BrInvoicesPdf
           pdf.move_down(5)
         end
 
-        private
-
         def table_widths(table)
           width = table.width
           table.column(0).width = width * 0.16
@@ -34,6 +34,7 @@ module BrInvoicesPdf
           table.column(4).width = width * 0.135
           table.column(5).width = width * 0.135
         end
+        private_class_method :table_widths
 
         PRODUCT_TABLE_BASE_DATA = [['CÓD.', 'DESCRIÇÃO', 'QTD.', 'UND.', 'V.UNIT', 'V.TOT']].freeze
         def product_table_data(data)
@@ -48,6 +49,7 @@ module BrInvoicesPdf
             ]]
           end
         end
+        private_class_method :product_table_data
       end
     end
   end
