@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class TaxesInfo
-        include BaseRenderer
+      module TaxesInfo
+        extend BaseRenderer
+
+        module_function
 
         def execute(pdf, data)
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do

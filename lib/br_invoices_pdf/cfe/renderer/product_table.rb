@@ -6,33 +6,49 @@ module BrInvoicesPdf
 
         module_function
 
+        MD_WIDITH = 0.16.freeze
+        SM_WIDTH = 0.13.freeze
+        LG_WIDTH = 0.135.freeze
+
         def execute(pdf, data)
-          width = page_content_width(pdf)
           table_data = product_table_data(data)
 
           pdf.font_size(6) do
-            pdf.table(table_data, width: width) do |table|
-              table.row(0).font_style = :bold
-              table.row(0).align = :center
-
-              table.columns(0..5).valign = :center
-              table.columns([2, 4, 5]).align = :right
-              table.column(3).align = :center
-
-              table_widths(table)
-            end
+            format_table(pdf, table_data)
           end
 
           pdf.move_down(5)
         end
 
-        def table_widths(table)
-          width = table.width
-          table.column(0).width = width * 0.16
-          table.column(2).width = width * 0.13
-          table.column(3).width = width * 0.13
-          table.column(4).width = width * 0.135
-          table.column(5).width = width * 0.135
+        def format_table(pdf, table_data)
+          width = page_content_width(pdf)
+          pdf.table(table_data, width: width) do |table|
+            format_row(table.row(0))
+            format_columns(table)
+          end
+        end
+        private_class_method :format_table
+
+        def format_row(row)
+          row.font_style = :bold
+          row.align = :center
+        end
+        private_class_method :format_row
+
+        # :reek:FeatureEnvy
+        def format_columns(table)
+          table.columns(0..5).valign = :center
+          table.columns([2, 4, 5]).align = :right
+          table.column(3).align = :center
+          table_widths(table, table.width)
+        end
+        private_class_method :format_columns
+
+        # :reek:FeatureEnvy
+        def table_widths(table, width)
+          table.column(0).width = width * MD_WIDITH 
+          table.columns([2,3]).width = width * SM_WIDTH
+          table.column([4,5]).width = width * LG_WIDTH
         end
         private_class_method :table_widths
 

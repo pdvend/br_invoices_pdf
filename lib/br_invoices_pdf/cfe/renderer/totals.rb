@@ -1,8 +1,10 @@
 module BrInvoicesPdf
   module Cfe
     module Renderer
-      class Totals
-        include BaseRenderer
+      module Totals
+        extend BaseRenderer
+
+        module_function
 
         def execute(pdf, data)
           xpos = 0
