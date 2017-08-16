@@ -16,19 +16,6 @@ module BrInvoicesPdf
         end
 
         # :reek:FeatureEnvy
-        def pdf_setup(pdf)
-          pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do
-            pdf.pad(10) do
-              pdf.indent(10, 10) do
-                yield
-              end
-            end
-            pdf.stroke_bounds
-          end
-        end
-        private_class_method :pdf_setup
-
-        # :reek:FeatureEnvy
         def company_params(pdf, data)
           pdf.text(data[:company_name], align: :center)
           pdf.text(data[:trading_name], align: :center)
