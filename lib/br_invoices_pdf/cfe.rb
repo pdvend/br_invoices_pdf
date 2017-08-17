@@ -1,4 +1,6 @@
+require 'br_invoices_pdf/cfe/parser/base_parser'
 require 'br_invoices_pdf/cfe/parser'
+require 'br_invoices_pdf/cfe/renderer/base_renderer'
 require 'br_invoices_pdf/cfe/renderer'
 
 module BrInvoicesPdf

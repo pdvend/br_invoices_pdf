@@ -1,8 +1,11 @@
-require 'br_invoices_pdf/cfe/renderer/base_renderer'
-Dir['lib/br_invoices_pdf/cfe/renderer/*.rb'].each do |f|
-  f.slice! 'lib/'
-  require f
-end
+require 'br_invoices_pdf/cfe/renderer/company_identification'
+require 'br_invoices_pdf/cfe/renderer/fisco_info'
+require 'br_invoices_pdf/cfe/renderer/header'
+require 'br_invoices_pdf/cfe/renderer/payment_forms'
+require 'br_invoices_pdf/cfe/renderer/product_table'
+require 'br_invoices_pdf/cfe/renderer/qr_code'
+require 'br_invoices_pdf/cfe/renderer/taxes_info'
+require 'br_invoices_pdf/cfe/renderer/totals'
 
 module BrInvoicesPdf
   module Cfe

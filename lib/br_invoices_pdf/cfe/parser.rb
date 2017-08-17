@@ -1,9 +1,12 @@
-require 'br_invoices_pdf/cfe/parser/base_parser'
-
-Dir['lib/br_invoices_pdf/cfe/parser/*.rb'].each do |f|
-  f.slice! 'lib/'
-  require f
-end
+require 'br_invoices_pdf/cfe/parser/access_key'
+require 'br_invoices_pdf/cfe/parser/company_attributes'
+require 'br_invoices_pdf/cfe/parser/cpf'
+require 'br_invoices_pdf/cfe/parser/document_number'
+require 'br_invoices_pdf/cfe/parser/fisco_obs'
+require 'br_invoices_pdf/cfe/parser/payment'
+require 'br_invoices_pdf/cfe/parser/payments'
+require 'br_invoices_pdf/cfe/parser/products_data'
+require 'br_invoices_pdf/cfe/parser/sat'
 
 module BrInvoicesPdf
   module Cfe
