@@ -16,10 +16,8 @@ module BrInvoicesPdf
       }.freeze
 
       def parse(xml)
-        {}.tap do |response|
-          PARSERERS.each do |param, parser|
-            response[param] = parser.execute(xml)
-          end
+        PARSERERS.reduce({}) do |response, (param, parser)|
+          { **response, param => parser.execute(xml) }
         end
       end
     end

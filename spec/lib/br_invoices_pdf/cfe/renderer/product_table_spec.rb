@@ -16,10 +16,10 @@ describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
 
     let(:code) { 99 }
     let(:description) { 'Some Description' }
-    let(:quantity) { 10 }
+    let(:quantity) { BigDecimal(10) }
     let(:unit_label) { 'some' }
-    let(:unit_value) { 99 }
-    let(:total_value) { 99 }
+    let(:unit_value) { BigDecimal(99) }
+    let(:total_value) { BigDecimal(99) }
     let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     let(:width) { 100 }
     before do

@@ -3,10 +3,10 @@ describe BrInvoicesPdf::Cfe::Renderer::QrCode do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', cursor: cursor, page: page) }
     let(:cursor) { 10 }
-    let(:page) { double('page', size: page_size, margins: { left: 10, right: 10 }) } 
+    let(:page) { double('page', size: page_size, margins: { left: 10, right: 10 }) }
     let(:page_size) { 'A1' }
     let(:data) { {} }
-    let(:bar_code_one) { double('bar_code') } 
+    let(:bar_code_one) { double('bar_code') }
 
     before do
       allow(Barby::PngOutputter).to receive(:new).and_return(bar_code_one)
