@@ -3,6 +3,9 @@ describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', move_down: nil) }
     let(:data) { { products: [product] } }
+    let(:table) { double('table', row: row, columns: column, width: width) }
+    let(:row) { double('row') }
+    let(:column) { double('column') }
     let(:product) do
       {
         code: code,
@@ -27,17 +30,20 @@ describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
       allow(pdf).to receive(:font_size).and_yield
     end
 
-    context 'correct infos' do
-      context 'when cpf is present' do
-        let(:product_rows) do
-          [['CÓD.', 'DESCRIÇÃO', 'QTD.', 'UND.', 'V.UNIT', 'V.TOT'],
-           [unit_value, description, '10,0000', unit_label, '99,00', '99,00']]
-        end
-        it do
-          expect(pdf).to receive(:table).with(product_rows, width: width)
-          subject
-        end
-      end
+    let(:product_rows) do
+      [['CÓD.', 'DESCRIÇÃO', 'QTD.', 'UND.', 'V.UNIT', 'V.TOT'],
+       [unit_value, description, '10,0000', unit_label, '99,00', '99,00']]
+    end
+    it do
+      expect(pdf).to receive(:table).with(product_rows, width: width).and_yield(table)
+      expect(row).to receive('font_style=').with(:bold)
+      expect(row).to receive('align=').with(:center)
+      expect(column).to receive('valign=').with(:center)
+      expect(column).to receive('align=').with(:right)
+      expect(table).to receive('column').and_return(column).exactly(3).times
+      expect(column).to receive('align=').with(:center)
+      expect(column).to receive('width=').exactly(3).times
+      subject
     end
   end
 end
