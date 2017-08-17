@@ -1,13 +1,17 @@
 describe BrInvoicesPdf::Cfe::Renderer::QrCode do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
-    let(:pdf) { double('pdf', cursor: cursor, page_size: page_size, page: page,
-                              bounding_box: '', box: double()) }
+    let(:pdf) do
+      double('pdf', cursor: cursor, page_size: page_size, page: page,
+                    bounding_box: '', box: double)
+    end
     let(:cursor) { 10 }
     let(:page_size) { 640 }
     let(:page) { double(margins: { left: 1, right: 1 }, size_with: 1, size: 'A4') }
-    let(:data) { { access_key: access_key, sat_params: sat_params, payment: payment,
-                   company_attributes: company_attributes} }
+    let(:data) do
+      { access_key: access_key, sat_params: sat_params, payment: payment,
+        company_attributes: company_attributes }
+    end
     let(:sat_params) do
       {
         emission_date: '2017-07-01',

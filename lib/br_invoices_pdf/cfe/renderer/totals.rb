@@ -7,12 +7,12 @@ module BrInvoicesPdf
         module_function
 
         def execute(pdf, data)
-          insert_box_info(pdf, data) 
+          insert_box_info(pdf, data)
 
           pdf.move_down(5)
         end
 
-        def insert_box_info(pdf, data, xpos= 0)
+        def insert_box_info(pdf, data, xpos = 0)
           third_width = page_content_width(pdf) * 0.333333333
           ypos = pdf.cursor
           box_info(data[:payment]).each do |(title, value)|
