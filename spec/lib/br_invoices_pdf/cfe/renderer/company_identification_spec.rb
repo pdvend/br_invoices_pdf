@@ -35,13 +35,8 @@ describe BrInvoicesPdf::Cfe::Renderer::CompanyIdentification do
     let(:neighborhood) { 'SOME NEIGHBORHOOD' }
     let(:cep) { '999999-999' }
     let(:state) { 'SS' }
-    let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     let(:formated_address) { "#{public_place}, #{number}, #{complement}, #{neighborhood}, #{city}/#{state}" }
     let(:formated_cnpj) { '99.999.999/9999-99' }
-
-    before do
-      allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(10)
-    end
 
     context 'company_names' do
       it do
