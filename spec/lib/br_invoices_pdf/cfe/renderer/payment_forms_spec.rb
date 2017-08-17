@@ -3,14 +3,14 @@ describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', table: table) }
     let(:table) { double('table', columns: columns, row: row) }
-    let(:row) { double('row', 'font_style=': 1) } 
-    let(:columns) { double('column', 'valign=': 1, 'align=': 1) } 
+    let(:row) { double('row', 'font_style=' => 1) }
+    let(:columns) { double('column', 'valign=' => 1, 'align=' => 1) }
     let(:data) { { payments: [{ type: type, amount: amount }], payment: payment } }
-    let(:payment) { { cashback: cashback, paid: paid } } 
+    let(:payment) { { cashback: cashback, paid: paid } }
     let(:type) { 'SOME' }
     let(:amount) { '12,00' }
     let(:cashback) { '1,00' }
-    let(:paid) { '13,00' }   
+    let(:paid) { '13,00' }
     let(:width) { 100 }
     let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     before do

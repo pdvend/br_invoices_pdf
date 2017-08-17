@@ -25,9 +25,9 @@ describe BrInvoicesPdf::Cfe::Renderer::Totals do
         it do
           expect(pdf).to receive(:text).with('Total bruto dos itens', style: :italic)
           expect(pdf).to receive(:text).with(total_price, align: :right)
-          expect(pdf).to receive(:text).with("Desconto", style: :italic)
+          expect(pdf).to receive(:text).with('Desconto', style: :italic)
           expect(pdf).to receive(:text).with(discount, align: :right)
-          expect(pdf).to receive(:text).with("Total", style: :italic)
+          expect(pdf).to receive(:text).with('Total', style: :italic)
           expect(pdf).to receive(:text).with(total, align: :right)
           subject
         end
