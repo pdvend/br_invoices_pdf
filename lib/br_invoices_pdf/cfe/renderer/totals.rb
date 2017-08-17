@@ -20,12 +20,15 @@ module BrInvoicesPdf
             xpos += third_width
           end
         end
+        private_class_method :insert_box_info
 
+        # :reek:FeatureEnvy
         def insert_box(pdf, params)
           box(pdf, [params[:xpos], params[:ypos]], params[:third_width]) do
             insert_texts(pdf, params[:title], params[:value])
           end
         end
+        private_class_method :insert_box
 
         def insert_texts(pdf, title, value)
           pdf.text(title, style: :italic)

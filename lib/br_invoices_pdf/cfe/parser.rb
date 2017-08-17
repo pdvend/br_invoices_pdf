@@ -1,3 +1,10 @@
+require 'br_invoices_pdf/cfe/parser/base_parser'
+
+Dir['lib/br_invoices_pdf/cfe/parser/*.rb'].each do |f|
+  f.slice! 'lib/'
+  require f
+end
+
 module BrInvoicesPdf
   module Cfe
     module Parser

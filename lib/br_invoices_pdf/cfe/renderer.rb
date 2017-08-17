@@ -1,3 +1,9 @@
+require 'br_invoices_pdf/cfe/renderer/base_renderer'
+Dir['lib/br_invoices_pdf/cfe/renderer/*.rb'].each do |f|
+  f.slice! 'lib/'
+  require f
+end
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
