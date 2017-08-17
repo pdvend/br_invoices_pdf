@@ -1,7 +1,10 @@
 describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
-    let(:pdf) { double('pdf') }
+    let(:pdf) { double('pdf', table: table) }
+    let(:table) { double('table', columns: columns, row: row) }
+    let(:row) { double('row', 'font_style=': 1) } 
+    let(:columns) { double('column', 'valign=': 1, 'align=': 1) } 
     let(:data) { { payments: [{ type: type, amount: amount }], payment: payment } }
     let(:payment) { { cashback: cashback, paid: paid } } 
     let(:type) { 'SOME' }
@@ -25,7 +28,7 @@ describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
            ['TOTAL', paid]]
         end
         it do
-          expect(pdf).to receive(:table).with(payments, width: width)
+          expect(pdf).to receive(:table).with(payments, width: width).and_yield(table)
           subject
         end
       end

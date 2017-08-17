@@ -1,7 +1,7 @@
 describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
-    let(:pdf) { double('pdf') }
+    let(:pdf) { double('pdf', move_down: nil) }
     let(:data) { { products: [product] } }
     let(:product) do
       {
@@ -25,7 +25,6 @@ describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
     before do
       allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(width)
       allow(pdf).to receive(:font_size).and_yield
-      allow(pdf).to receive(:move_down)
     end
 
     context 'correct infos' do

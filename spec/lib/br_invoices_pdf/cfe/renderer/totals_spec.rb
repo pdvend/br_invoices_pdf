@@ -1,7 +1,7 @@
 describe BrInvoicesPdf::Cfe::Renderer::Totals do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
-    let(:pdf) { double('pdf', cursor: double('cursor')) }
+    let(:pdf) { double('pdf', cursor: double('cursor'), move_down: nil, bounding_box: nil) }
     let(:data) { { payment: params } }
     let(:params) do
       {
@@ -18,8 +18,6 @@ describe BrInvoicesPdf::Cfe::Renderer::Totals do
     before do
       allow_any_instance_of(base_renderer).to receive(:box).and_yield
       allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(width)
-      allow(pdf).to receive(:move_down)
-      allow(pdf).to receive(:bounding_box)
     end
 
     context 'correct infos' do

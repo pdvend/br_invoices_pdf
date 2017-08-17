@@ -1,7 +1,7 @@
 describe BrInvoicesPdf::Cfe::Renderer::TaxesInfo do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
-    let(:pdf) { double('pdf', cursor: double('cursor')) }
+    let(:pdf) { double('pdf', cursor: double('cursor'), move_down: nil, bounding_box: nil) }
     let(:data) { { payment: { approximate_value_of_taxes: 12 }, sat_params: sat_params } }
     let(:sat_params) do
       {
@@ -21,8 +21,6 @@ describe BrInvoicesPdf::Cfe::Renderer::TaxesInfo do
       allow_any_instance_of(base_renderer).to receive(:box).and_yield
       allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(width)
       allow(pdf).to receive(:font_size).and_yield
-      allow(pdf).to receive(:move_down)
-      allow(pdf).to receive(:bounding_box)
     end
 
     context 'correct infos' do
