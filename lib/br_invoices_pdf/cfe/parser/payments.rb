@@ -26,12 +26,9 @@ module BrInvoicesPdf
         end
 
         def payments_by_nodes(node_payments)
-          payments = []
-          node_payments.first.nodes.each do |element|
-            payments << payment_by(element) if element.value == 'MP'
-          end
-
-          payments
+          node_payments.first.nodes
+                       .select { |element| element.value == 'MP' }
+                       .map { |element| payment_by(element) }
         end
         private_class_method :payments_by_nodes
 

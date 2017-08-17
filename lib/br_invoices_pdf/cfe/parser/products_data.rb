@@ -21,20 +21,14 @@ module BrInvoicesPdf
         end
 
         def products_params(node_products)
-          products = []
-          node_products.each do |element|
-            products << product_by(element)
-          end
-          products
+          node_products.map(&method(:product_by))
         end
         private_class_method :products_params
 
         def product_by(element)
-          {}.tap do |product|
-            FIELDS.each do |key, field|
-              product[key] = node_locate(element, field)
-            end
-          end
+          FIELDS
+            .map { |(key, field)| [key, node_locate(element, field)] }
+            .to_h
         end
         private_class_method :product_by
       end

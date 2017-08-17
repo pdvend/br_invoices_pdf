@@ -11,7 +11,7 @@ describe BrInvoicesPdf::Cfe::Parser::Sat do
     end
 
     before do
-      locate_element_mock('infCFe/ide/numeroCaixa', pdv_number)
+      locate_element_mock('infCFe/ide/numeroCaixa', pos_number)
       locate_element_mock('infCFe/ide/nCFe', ncfe_number)
       locate_element_mock('infCFe/ide/cUF', uf)
       locate_element_mock('infCFe/ide/nserieSAT', sat_number)
@@ -20,7 +20,7 @@ describe BrInvoicesPdf::Cfe::Parser::Sat do
       locate_element_mock('infCFe/ide/assinaturaQRCODE', document_qr_code_signature)
     end
 
-    let(:pdv_number) { '1' }
+    let(:pos_number) { '1' }
     let(:ncfe_number) { '123' }
     let(:uf) { '35' }
     let(:sat_number) { '1231231' }
@@ -29,7 +29,7 @@ describe BrInvoicesPdf::Cfe::Parser::Sat do
     let(:document_qr_code_signature) { 'saqw1w212' }
 
     context 'correct values' do
-      it { expect(subject[:pdv_number]).to eq(pdv_number) }
+      it { expect(subject[:pos_number]).to eq(pos_number) }
       it { expect(subject[:ncfe_number]).to eq(ncfe_number) }
       it { expect(subject[:uf]).to eq('São Paulo') }
       it { expect(subject[:sat_number]).to eq(sat_number) }

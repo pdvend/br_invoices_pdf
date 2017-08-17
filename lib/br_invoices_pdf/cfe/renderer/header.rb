@@ -18,7 +18,7 @@ module BrInvoicesPdf
         end
 
         def cpf_vlue(cpf)
-          cpf ? 'CONSUMIDOR:' + cpf : 'CONSUMIDOR NAO IDENTIFICADO'
+          cpf ? 'CONSUMIDOR: ' + format_cpf(cpf) : 'CONSUMIDOR NAO IDENTIFICADO'
         end
         private_class_method :cpf_vlue
 

@@ -16,8 +16,9 @@ module BrInvoicesPdf
         QrCode
       ].freeze
 
+      # :reek:FeatureEnvy
       def pdf(data, options)
-        page_width = page_paper_width(options[:page_size])
+        page_width = Renderer::BaseRenderer.page_paper_width(options[:page_size])
 
         Prawn::Document.new(options.merge(page_size: [page_width, AUTO_HEIGHT_MOCK])) do |pdf|
           pdf_content(pdf, data, page_width)
@@ -27,15 +28,12 @@ module BrInvoicesPdf
       def pdf_content(pdf, data, page_width)
         pdf.font_size(7) do
           RENDERERS.each do |renderer|
-            renderer.new.execute(pdf, data)
+            renderer.execute(pdf, data)
           end
 
-          pdf.page.dictionary.data[:MediaBox] = [0, pdf.y - pdf.page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
+          page = pdf.page
+          page.dictionary.data[:MediaBox] = [0, pdf.y - page.margins[:bottom], page_width, AUTO_HEIGHT_MOCK]
         end
-      end
-
-      def page_paper_width(name)
-        (name.is_a?(Array) ? name : PDF::Core::PageGeometry::SIZES[name]).first
       end
     end
   end

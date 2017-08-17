@@ -21,6 +21,7 @@ module BrInvoicesPdf
           end
         end
 
+        # :reek:FeatureEnvy
         def pdf_setup(pdf)
           pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do
             pdf.pad(10) do
@@ -36,6 +37,12 @@ module BrInvoicesPdf
         # :reek:FeatureEnvy
         def format_cnpj(cnpj)
           format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
+        end
+
+        CPF_FORMAT = '%d.%d.%d-%d'.freeze
+        # :reek:FeatureEnvy
+        def format_cpf(cpf)
+          format(CPF_FORMAT, cpf[0, 3], cpf[3, 3], cpf[6, 3], cpf[9, 2])
         end
 
         # :reek:FeatureEnvy
