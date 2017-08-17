@@ -3,6 +3,8 @@
 ## CHANGELOG
 
 ### Unreleased
+
+### 0.2.0 [2017-05-29]
 - [Modificado] Atualizando versões das dependências
 - [Adicionado] Estrutura de Generator/Parser/Renderer
 - [Adicionado] Gerador de Cfe
