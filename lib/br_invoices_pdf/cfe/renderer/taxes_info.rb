@@ -30,7 +30,7 @@ module BrInvoicesPdf
         private_class_method :tribute_values
 
         def sat_number(pdf, sat_number)
-          pdf.text('SAT Número ' + sat_number, align: :center)
+          pdf.text('SAT Número ' + sat_number, align: :center, style: :bold)
         end
         private_class_method :sat_number
       end

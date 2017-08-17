@@ -20,9 +20,9 @@ module BrInvoicesPdf
         ProductTable,
         Totals,
         PaymentForms,
-        FiscoInfo,
         TaxesInfo,
-        QrCode
+        QrCode,
+        FiscoInfo
       ].freeze
 
       # :reek:FeatureEnvy

@@ -4,7 +4,7 @@ require 'prawn/table'
 require 'chunky_png'
 require 'rqrcode'
 require 'barby'
-require 'barby/barcode/code_39'
+require 'barby/barcode/code_128'
 require 'barby/outputter/png_outputter'
 require 'barby/outputter/prawn_outputter'
 

@@ -31,9 +31,10 @@ module BrInvoicesPdf
         def pdf_options(pdf, data)
           page_width = page_paper_width(pdf.page.size)
           qrcode_size = page_width * 0.65
+          barcodes_size = page_width * 0.85
           access_key = data[:access_key][4..48]
 
-          { access_key: access_key, qrcode_size: qrcode_size, page_width: page_width }
+          { access_key: access_key, barcodes_size: barcodes_size, qrcode_size: qrcode_size, page_width: page_width }
         end
         private_class_method :pdf_options
 
@@ -41,15 +42,18 @@ module BrInvoicesPdf
         def generate_qr_code(pdf, data, options)
           qrcode_string = generate_qr_code_string(options[:access_key], data)
           qrcode_size = options[:qrcode_size]
-          pdf.indent((options[:page_width] - qrcode_size) / 2, 10) do
-            pdf.image(generate_qr_code_data(qrcode_string, qrcode_size))
-          end
+
+          insert_image(pdf, generate_qr_code_data(qrcode_string, qrcode_size), {
+            at: [(options[:page_width] - qrcode_size) / 2, pdf.cursor],
+            width: qrcode_size,
+            height: qrcode_size
+          })
         end
         private_class_method :generate_qr_code
 
         def generate_qr_code_data(qr_code_string, qrcode_size)
           qrcode = RQRCode::QRCode.new(qr_code_string)
-          blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob
+          blob = qrcode.as_png(size: 220, border_modules: 0).to_blob
           StringIO.new(blob)
         end
         private_class_method :generate_qr_code_data
@@ -66,7 +70,7 @@ module BrInvoicesPdf
         private_class_method :generate_qr_code_string
 
         def generate_barcodes(pdf, pdf_options)
-          options = barcode_options(pdf, pdf_options[:page_width], pdf_options[:qrcode_size])
+          options = barcode_options(pdf, pdf_options[:page_width], pdf_options[:barcodes_size])
           access_key = pdf_options[:access_key]
           insert_image(pdf, generate_barcode_one(access_key), options)
           insert_image(pdf, generate_barcode_two(access_key), options)
@@ -75,20 +79,20 @@ module BrInvoicesPdf
 
         def insert_image(pdf, image, options)
           pdf.image(image, options)
-          pdf.move_down(55)
+          pdf.move_down(options[:height])
         end
         private_class_method :insert_image
 
         def generate_barcode_one(access_key)
           key = access_key[0..21]
-          blob = Barby::PngOutputter.new(Barby::Code39.new(key)).to_png
+          blob = Barby::PngOutputter.new(Barby::Code128A.new(key)).to_png
           StringIO.new(blob)
         end
         private_class_method :generate_barcode_one
 
         def generate_barcode_two(access_key)
           key = access_key[22..44]
-          blob = Barby::PngOutputter.new(Barby::Code39.new(key)).to_png
+          blob = Barby::PngOutputter.new(Barby::Code128A.new(key)).to_png
           StringIO.new(blob)
         end
         private_class_method :generate_barcode_two
