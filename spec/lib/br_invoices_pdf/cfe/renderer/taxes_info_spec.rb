@@ -28,7 +28,7 @@ describe BrInvoicesPdf::Cfe::Renderer::TaxesInfo do
         it do
           expect(pdf).to receive(:text).with("Tributos\n\n", style: :italic)
           expect(pdf).to receive(:text).with(taxes_info, align: :center)
-          expect(pdf).to receive(:text).with("SAT Número #{sat_number}", align: :center)
+          expect(pdf).to receive(:text).with("SAT Número #{sat_number}", align: :center, style: :bold)
           expect(pdf).to receive(:text).with(formated_time, align: :center)
           subject
         end

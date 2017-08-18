@@ -10,7 +10,8 @@ describe BrInvoicesPdf::Cfe::Renderer::CompanyIdentification do
         company_name: company_name,
         trading_name: trading_name,
         cnpj: cnpj,
-        ie: ie
+        ie: ie,
+        im: im
       }
     end
     let(:address) do
@@ -26,6 +27,7 @@ describe BrInvoicesPdf::Cfe::Renderer::CompanyIdentification do
     end
     let(:cnpj) { '99999999999999' }
     let(:ie) { '9999999' }
+    let(:im) { '9999999' }
     let(:company_name) { 'Some Name' }
     let(:trading_name) { 'Trading Name' }
     let(:public_place) { 'SOME PLACE' }
@@ -45,6 +47,7 @@ describe BrInvoicesPdf::Cfe::Renderer::CompanyIdentification do
         expect(pdf).to receive(:text).with(trading_name, align: :center)
         expect(pdf).to receive(:text).with("CNPJ: #{formated_cnpj}", align: :center)
         expect(pdf).to receive(:text).with("Inscrição Estadual: #{ie}", align: :center)
+        expect(pdf).to receive(:text).with("Inscrição Municipal: #{im}", align: :center)
         expect(pdf).to receive(:text).with(formated_address, align: :center)
         subject
       end
