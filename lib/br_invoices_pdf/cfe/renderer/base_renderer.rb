@@ -6,7 +6,7 @@ module BrInvoicesPdf
 
         ADDRESS_FORMAT = '%s, %s, %s, %s, %s/%s'.freeze
         def format_address(address)
-          ADDRESS_FORMAT % %i[public_place number complement neighborhood city state].map(&address.method(:[]))
+          ADDRESS_FORMAT % %i(public_place number complement neighborhood city state).map(&address.method(:[]))
         end
 
         def box(pdf, position, width)
