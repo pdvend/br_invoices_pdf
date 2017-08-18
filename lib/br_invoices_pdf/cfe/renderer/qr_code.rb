@@ -11,7 +11,7 @@ module BrInvoicesPdf
 
         def execute(pdf, data)
           render_box(pdf) do
-            options = pdf_options(pdf, data)
+            options = pdf_options(page_paper_width(pdf.page.size), data)
 
             generate_barcodes(pdf, options)
             generate_qr_code(pdf, data, options)
@@ -28,8 +28,7 @@ module BrInvoicesPdf
         end
         private_class_method :render_box
 
-        def pdf_options(pdf, data)
-          page_width = page_paper_width(pdf.page.size)
+        def pdf_options(page_width, data)
           qrcode_size = page_width * 0.65
           barcodes_size = page_width * 0.85
           access_key = data[:access_key][4..48]
@@ -42,18 +41,18 @@ module BrInvoicesPdf
         def generate_qr_code(pdf, data, options)
           qrcode_string = generate_qr_code_string(options[:access_key], data)
           qrcode_size = options[:qrcode_size]
-
-          insert_image(pdf, generate_qr_code_data(qrcode_string, qrcode_size), {
+          opts = {
             at: [(options[:page_width] - qrcode_size) / 2, pdf.cursor],
             width: qrcode_size,
             height: qrcode_size
-          })
+          }
+          insert_image(pdf, generate_qr_code_data(qrcode_string, qrcode_size), opts)
         end
         private_class_method :generate_qr_code
 
         def generate_qr_code_data(qr_code_string, qrcode_size)
           qrcode = RQRCode::QRCode.new(qr_code_string)
-          blob = qrcode.as_png(size: 220, border_modules: 0).to_blob
+          blob = qrcode.as_png(size: qrcode_size, border_modules: 0).to_blob
           StringIO.new(blob)
         end
         private_class_method :generate_qr_code_data

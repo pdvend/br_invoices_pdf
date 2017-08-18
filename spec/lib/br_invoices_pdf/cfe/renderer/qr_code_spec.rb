@@ -44,7 +44,6 @@ describe BrInvoicesPdf::Cfe::Renderer::QrCode do
         expect(pdf).to receive(:text).with("Códigos de barra e QR Code\n\n", style: :italic)
         expect(pdf).to receive(:image).exactly(3).times
         expect(pdf).to receive(:move_down).exactly(4).times
-        #expect(pdf).to receive(:indent).with(104.17399999999998, 10).and_yield
         expect(RQRCode::QRCode).to receive(:new).with(qr_code_response).and_return(qr_code)
       end
 
