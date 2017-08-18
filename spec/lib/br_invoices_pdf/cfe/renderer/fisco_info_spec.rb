@@ -22,8 +22,8 @@ describe BrInvoicesPdf::Cfe::Renderer::FiscoInfo do
     context 'pdf_setup' do
       it do
         expect(pdf).to receive(:bounding_box).with([0, cursor], width: 10).and_yield
-        expect(pdf).to receive(:pad).with(10).and_yield
-        expect(pdf).to receive(:indent).with(10, 10).and_yield
+        expect(pdf).to receive(:pad).with(2).and_yield
+        expect(pdf).to receive(:indent).with(2, 2).and_yield
         expect(pdf).to receive(:text).with("Observações do fisco\n\n", style: :italic)
         expect(pdf).to receive(:text).with(formated_fisco_obs, align: :center)
         expect(pdf).to receive(:stroke_bounds)
