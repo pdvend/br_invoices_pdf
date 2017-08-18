@@ -10,6 +10,12 @@ Metrics/ClassLength:
 Metrics/MethodLength:
   Max: 15
 
+Layout/IndentArray:
+  Enabled: false
+
+Layout/IndentHash:
+  Enabled: false
+
 AllCops:
   Exclude:
     - 'spec/factories/*.rb'
@@ -17,3 +23,11 @@ AllCops:
 Lint/AmbiguousBlockAssociation:
   Exclude:
     - 'spec/**/*.rb'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
