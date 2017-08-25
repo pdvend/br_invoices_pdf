@@ -3,6 +3,7 @@
 ## CHANGELOG
 
 ### Unreleased
+- [Corrigido] Erro ao gerar QR Code com tamanho decimal
 
 ### 0.2.0 [2017-05-29]
 - [Modificado] Atualizando versões das dependências
