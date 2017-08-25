@@ -7,6 +7,8 @@ describe BrInvoicesPdf::Cfe::Renderer::QrCode do
     end
     let(:cursor) { 10 }
     let(:page_size) { 640 }
+    let(:page_width) { 100.999 }
+    let(:qr_code_size) { (page_width * 0.65).to_i }
     let(:page) { double(margins: { left: 1, right: 1 }, size_with: 1, size: 'A4') }
     let(:data) do
       { access_key: access_key, sat_params: sat_params, payment: payment,
@@ -40,11 +42,13 @@ describe BrInvoicesPdf::Cfe::Renderer::QrCode do
       let(:qr_code) { double(as_png: double(to_blob: 'blop')) }
 
       before do
+        allow_any_instance_of(base_renderer).to receive(:page_paper_width).and_return(page_width)
         allow_any_instance_of(base_renderer).to receive(:box).and_yield
         expect(pdf).to receive(:text).with("Códigos de barra e QR Code\n\n", style: :italic)
         expect(pdf).to receive(:image).exactly(3).times
         expect(pdf).to receive(:move_down).exactly(4).times
         expect(RQRCode::QRCode).to receive(:new).with(qr_code_response).and_return(qr_code)
+        expect(qr_code).to receive(:as_png).with(size: qr_code_size, border_modules: 0)
       end
 
       it 'generate qrcode and bars' do

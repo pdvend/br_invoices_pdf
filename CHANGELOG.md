@@ -4,6 +4,9 @@
 
 ### Unreleased
 
+### 0.2.1 [2017-08-25]
+- [Corrigido] Erro ao gerar QR Code com tamanho decimal
+
 ### 0.2.0 [2017-05-29]
 - [Modificado] Atualizando versões das dependências
 - [Adicionado] Estrutura de Generator/Parser/Renderer
