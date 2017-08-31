@@ -25,9 +25,9 @@ module BrInvoicesPdf
 
         # :reek:FeatureEnvy
         def insert_fiscal_numbers(pdf, data)
-          pdf.text('CNPJ: ' + format_cnpj(data[:cnpj]), align: :center)
-          pdf.text('Inscrição Estadual: ' + data[:ie], align: :center)
-          pdf.text('Inscrição Municipal: ' + data[:im], align: :center)
+          pdf.text("CNPJ: #{format_cnpj(data[:cnpj])}", align: :center)
+          pdf.text("Inscrição Estadual: #{data[:ie]}", align: :center)
+          pdf.text("Inscrição Municipal: #{data[:im]}", align: :center)
         end
         private_class_method :insert_fiscal_numbers
       end
