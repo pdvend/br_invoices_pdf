@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+### 0.2.3 [2017-09-6]
+- [Corrigido] Encoding errado ao gerar xml, alterando para encoding windows-1252.
+
 ### 0.2.2 [2017-08-31]
 - [Corrigido] Erro ao gerar documento CFE com empresa sem inscrição municipal
 
