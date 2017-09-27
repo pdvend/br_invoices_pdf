@@ -22,7 +22,7 @@ module BrInvoicesPdf
         company_attributes: CompanyAttributes,
         fisco_obs: FiscoObs,
         access_key: AccessKey,
-        cpf: Cpf
+        cpf: Cpf,
         cnpj: Cnpj
       }.freeze
 
