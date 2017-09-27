@@ -1,6 +1,7 @@
 require 'br_invoices_pdf/cfe/parser/access_key'
 require 'br_invoices_pdf/cfe/parser/company_attributes'
 require 'br_invoices_pdf/cfe/parser/cpf'
+require 'br_invoices_pdf/cfe/parser/cnpj'
 require 'br_invoices_pdf/cfe/parser/document_number'
 require 'br_invoices_pdf/cfe/parser/fisco_obs'
 require 'br_invoices_pdf/cfe/parser/payment'
