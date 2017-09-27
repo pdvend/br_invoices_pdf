@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+### 0.2.4 [2017-09-27]
+- [Corrigido] Tabela de produtos na CFE.
+
 ### 0.2.3 [2017-09-6]
 - [Corrigido] Encoding errado ao gerar xml, alterando para encoding windows-1252.
 
