@@ -17,6 +17,8 @@ module BrInvoicesPdf
 
   module_function
 
+  Ox.default_options = Ox.default_options.merge(encoding: 'windows-1252')
+
   def generate(type, xml, options = {})
     generator = @generators[type]
     raise(Errors::InvalidDocumentType, type) unless generator
