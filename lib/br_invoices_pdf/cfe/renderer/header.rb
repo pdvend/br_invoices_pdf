@@ -8,17 +8,17 @@ module BrInvoicesPdf
 
         # :reek:FeatureEnvy
         def execute(pdf, data)
-          cpf = cpf_vlue(data[:cpf])
-
           pdf_setup(pdf) do
-            add_header_config(pdf, data, cpf)
+            add_header_config(pdf, data, identificator(data))
           end
 
           pdf.move_down(5)
         end
 
-        def cpf_vlue(cpf)
-          cpf ? 'CONSUMIDOR: ' + format_cpf(cpf) : 'CONSUMIDOR NAO IDENTIFICADO'
+        def identificator(data)
+          return 'CONSUMIDOR NAO IDENTIFICADO' unless data[:cpf] && data[:cnpj]
+          value = data[:cpf].nil? ? format_cpf(data[:cpf]) : format_cnpj(data[:cnpj])
+          'CONSUMIDOR: ' + value
         end
         private_class_method :cpf_vlue
 

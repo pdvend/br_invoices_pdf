@@ -23,6 +23,7 @@ module BrInvoicesPdf
         fisco_obs: FiscoObs,
         access_key: AccessKey,
         cpf: Cpf
+        cnpj: Cnpj
       }.freeze
 
       def parse(xml)
