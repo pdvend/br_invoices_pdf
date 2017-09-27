@@ -2,6 +2,8 @@
 
 ## CHANGELOG
 
+### Unreleased
+
 ### 0.2.4 [2017-09-27]
 - [Corrigido] Tabela de produtos na CFE.
 
@@ -10,8 +12,6 @@
 
 ### 0.2.2 [2017-08-31]
 - [Corrigido] Erro ao gerar documento CFE com empresa sem inscrição municipal
-
-### Unreleased
 
 ### 0.2.1 [2017-08-25]
 - [Corrigido] Erro ao gerar QR Code com tamanho decimal
