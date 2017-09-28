@@ -8,24 +8,32 @@ module BrInvoicesPdf
 
         # :reek:FeatureEnvy
         def execute(pdf, data)
-          cpf = cpf_vlue(data[:cpf])
-
           pdf_setup(pdf) do
-            add_header_config(pdf, data, cpf)
+            add_header_config(pdf, data, identificator(data))
           end
 
           pdf.move_down(5)
         end
 
-        def cpf_vlue(cpf)
-          cpf ? 'CONSUMIDOR: ' + format_cpf(cpf) : 'CONSUMIDOR NAO IDENTIFICADO'
+        def identificator(data)
+          cpf = data[:cpf]
+          cnpj = data[:cnpj]
+          if cpf.to_s.empty?
+            if cnpj.to_s.empty?
+              'CONSUMIDOR NAO IDENTIFICADO'
+            else
+              'CONSUMIDOR: ' + format_cnpj(cnpj)
+            end
+          else
+            'CONSUMIDOR: ' + format_cpf(cpf)
+          end
         end
-        private_class_method :cpf_vlue
+        private_class_method :identificator
 
-        def add_header_config(pdf, data, cpf)
+        def add_header_config(pdf, data, identificator)
           pdf.font('Helvetica', style: :bold)
           pdf.text("Extrato: #{data[:document_number]}", align: :center)
-          pdf.text(cpf, align: :center)
+          pdf.text(identificator, align: :center)
           pdf.text('CUPOM FISCAL ELETRONICO - SAT', align: :center)
           pdf.font('Helvetica', style: :normal, align: :center)
         end

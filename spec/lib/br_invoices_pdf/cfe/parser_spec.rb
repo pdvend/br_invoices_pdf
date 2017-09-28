@@ -14,6 +14,7 @@ module BrInvoicesPdf
         let(:fisco_obs_response) { double('fisco_obs') }
         let(:access_key_response) { double }
         let(:cpf_response) { '99999999999' }
+        let(:cnpj_response) { '13054202000168' }
         let(:expectation) do
           {
             sat_params: sat_response,
@@ -24,7 +25,8 @@ module BrInvoicesPdf
             company_attributes: company_attributes_response,
             fisco_obs: fisco_obs_response,
             access_key: access_key_response,
-            cpf: cpf_response
+            cpf: cpf_response,
+            cnpj: cnpj_response
           }
         end
         it do
@@ -37,6 +39,7 @@ module BrInvoicesPdf
           expect(Parser::FiscoObs).to receive(:execute).with(xml).and_return(fisco_obs_response)
           expect(Parser::AccessKey).to receive(:execute).with(xml).and_return(access_key_response)
           expect(Parser::Cpf).to receive(:execute).with(xml).and_return(cpf_response)
+          expect(Parser::Cnpj).to receive(:execute).with(xml).and_return(cnpj_response)
           expect(subject).to eq(expectation)
         end
       end
