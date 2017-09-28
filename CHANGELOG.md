@@ -3,6 +3,8 @@
 ## CHANGELOG
 
 ### Unreleased
+
+### 0.2.5 [2017-09-28]
 - [Corrigido] CNPJ na CFE.
 
 ### 0.2.4 [2017-09-27]
