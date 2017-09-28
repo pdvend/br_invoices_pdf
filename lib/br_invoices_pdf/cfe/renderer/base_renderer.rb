@@ -33,10 +33,11 @@ module BrInvoicesPdf
           end
         end
 
-        CNPJ_FORMAT = '%d.%d.%d/%d-%d'.freeze
+        CNPJ_FORMAT = '%02d.%03d.%03d/%04d-%02d'.freeze
         # :reek:FeatureEnvy
         def format_cnpj(cnpj)
-          format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
+          format(CNPJ_FORMAT, cnpj[0, 2].to_i, cnpj[2, 3].to_i, cnpj[5, 3].to_i,
+                 cnpj[8, 4].to_i, cnpj[12, 2].to_i)
         end
 
         CPF_FORMAT = '%d.%d.%d-%d'.freeze

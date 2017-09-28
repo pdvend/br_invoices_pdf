@@ -25,6 +25,16 @@ describe BrInvoicesPdf::Cfe::Renderer::Header do
         end
       end
 
+      context 'when cpf is present' do
+        let(:data) { { cpf: nil, cnpj: '48013766000137', document_number: document_number } }
+        let(:formated_cnpj) { '48.013.766/0001-37' }
+
+        it do
+          expect(pdf).to receive(:text).with('CONSUMIDOR: ' + formated_cnpj, align: :center)
+          subject
+        end
+      end
+
       context 'when cpf not is present' do
         let(:data) { { document_number: '999' } }
 
