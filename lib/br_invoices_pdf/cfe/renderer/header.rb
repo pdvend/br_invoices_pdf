@@ -16,9 +16,17 @@ module BrInvoicesPdf
         end
 
         def identificator(data)
-          return 'CONSUMIDOR NAO IDENTIFICADO' if data[:cpf].nil? && data[:cnpj].nil?
-          value = data[:cpf].nil? ? format_cnpj(data[:cnpj]) : format_cpf(data[:cpf])
-          'CONSUMIDOR: ' + value
+          cpf = data[:cpf]
+          cnpj = data[:cnpj]
+          if cpf.to_s.empty?
+            if cnpj.to_s.empty?
+              'CONSUMIDOR NAO IDENTIFICADO'
+            else
+              'CONSUMIDOR: ' + format_cnpj(cnpj)
+            end
+          else
+            'CONSUMIDOR: ' + format_cpf(cpf)
+          end
         end
         private_class_method :identificator
 
