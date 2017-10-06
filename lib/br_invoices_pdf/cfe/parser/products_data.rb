@@ -27,7 +27,7 @@ module BrInvoicesPdf
 
         def product_by(element)
           FIELDS
-            .map { |(key, field)| [key, node_locate(element, field)] }
+            .map { |(key, field)| [key, node_locate(element, field).force_encoding('UTF-8')] }
             .to_h
         end
         private_class_method :product_by
