@@ -47,13 +47,15 @@ module BrInvoicesPdf
         end
 
         # :reek:FeatureEnvy
-        def format_currency(num)
-          num.truncate.to_s.reverse.split(/.../).join('.').reverse + format(',%02d', (num.frac * 100).truncate)
+        def format_currency(number_string)
+          number = BigDecimal(number_string)
+          format('%.2f', number.round(2)).tr('.', ',')
         end
 
         # :reek:FeatureEnvy
-        def format_number(num, prec: 4)
-          num.truncate.to_s + (prec > 0 ? format(",%0#{prec}d", (num.frac * 10**prec).truncate) : '')
+        def format_number(number_string, prec: 4)
+          number = BigDecimal(number_string)
+          format("%.#{prec}f", number.round(prec)).tr('.', ',')
         end
 
         # :reek:FeatureEnvy

@@ -36,7 +36,8 @@ module BrInvoicesPdf
         PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
         def payments_table_data(data)
           payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
-            result + [[cur[:type], format_currency(BigDecimal(cur[:amount]))]]
+            require 'byebug'
+            result + [[cur[:type], format_currency(cur[:amount])]]
           end
 
           add_default_values(payments_data, data[:payment])
@@ -44,8 +45,8 @@ module BrInvoicesPdf
         private_class_method :payments_table_data
 
         def add_default_values(payments_data, data)
-          payments_data.push(['TROCO', format_currency(BigDecimal(data[:cashback]))])
-          payments_data.push(['TOTAL', format_currency(BigDecimal(data[:paid]))])
+          payments_data.push(['TROCO', format_currency(data[:cashback])])
+          payments_data.push(['TOTAL', format_currency(data[:paid])])
         end
         private_class_method :add_default_values
       end

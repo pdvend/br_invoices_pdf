@@ -21,9 +21,10 @@ module BrInvoicesPdf
         end
         private_class_method :date_values
 
+        # :reek:FeatureEnvy
         def tribute_values(pdf, payment)
           pdf.text("Tributos\n\n", style: :italic)
-          value = format_currency(BigDecimal(payment[:approximate_value_of_taxes]))
+          value = format_currency(payment[:approximate_value_of_taxes])
           text = "Informação dos tributos totais incidentes (Lei Federal 12.741/2012):\n R$ #{value}\n\n"
           pdf.text(text, align: :center)
         end
