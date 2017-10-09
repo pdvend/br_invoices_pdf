@@ -38,9 +38,9 @@ module BrInvoicesPdf
 
         def box_info(data_payment)
           [
-            ['Total bruto dos itens', format_currency(BigDecimal(data_payment[:total_price]))],
-            ['Desconto', format_currency(BigDecimal(data_payment[:discount]))],
-            ['Total', format_currency(BigDecimal(data_payment[:total]))]
+            ['Total bruto dos itens', format_currency(data_payment[:total_price])],
+            ['Desconto', format_currency(data_payment[:discount])],
+            ['Total', format_currency(data_payment[:total])]
           ]
         end
         private_class_method :box_info

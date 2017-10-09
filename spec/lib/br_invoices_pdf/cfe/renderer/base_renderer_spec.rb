@@ -76,14 +76,14 @@ describe BrInvoicesPdf::Cfe::Renderer::BaseRenderer do
 
   describe '.format_currency' do
     subject { described_class.format_currency(num) }
-    let(:num) { BigDecimal.new(99.99, 4) }
-    let(:formated_num) { '99,99' }
+    let(:num) { '99.99' }
+    let(:formated_number) { num.tr('.', ',') }
 
-    it { expect(subject).to eq(formated_num) }
+    it { expect(subject).to eq(formated_number) }
   end
 
   describe '.format_number' do
-    let(:num) { BigDecimal.new(99.99, 4) }
+    let(:num) { '99.9900' }
 
     context 'when default precision' do
       subject { described_class.format_number(num) }

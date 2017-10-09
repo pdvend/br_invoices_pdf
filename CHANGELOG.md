@@ -5,6 +5,9 @@
 ### Unreleased
 - [Corrigido] Encoding de produtos na CFE.
 
+### 0.2.6 [2017-10-06]
+- [Corrigido] Valores de CFE.
+
 ### 0.2.5 [2017-09-28]
 - [Corrigido] CNPJ na CFE.
 
