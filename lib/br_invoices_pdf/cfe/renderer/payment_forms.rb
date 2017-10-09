@@ -36,7 +36,6 @@ module BrInvoicesPdf
         PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
         def payments_table_data(data)
           payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
-            require 'byebug'
             result + [[cur[:type], format_currency(cur[:amount])]]
           end
 
