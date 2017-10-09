@@ -4,14 +4,14 @@ describe BrInvoicesPdf::Cfe::Parser::ProductsData do
 
     let(:xml) { double('Ox') }
     let(:element) { double('element') }
-    let(:code) { 99 }
+    let(:code) { '99' }
     let(:description) { 'Some Product' }
     let(:cfop) { '2121' }
-    let(:quantity) { 10.0 }
+    let(:quantity) { '10.0' }
     let(:unit_label) { 'some' }
-    let(:total_value) { 990.0 }
-    let(:unit_value) { 99.0 }
-    let(:item_value) { 990.0 }
+    let(:total_value) { '990.0' }
+    let(:unit_value) { '99.0' }
+    let(:item_value) { '990.0' }
     let(:locate_response) { [element] }
 
     def locate_element_mock(path, value)
