@@ -1,11 +1,14 @@
 require 'stringio'
 
 require 'ox'
-require 'barby'
-require 'barby/barcode/qr_code'
-require 'barby/outputter/prawn_outputter'
 require 'prawn'
 require 'prawn/table'
+require 'chunky_png'
+require 'rqrcode'
+require 'barby'
+require 'barby/barcode/code_128'
+require 'barby/outputter/png_outputter'
+require 'barby/outputter/prawn_outputter'
 
 require 'br_invoices_pdf/version'
 require 'br_invoices_pdf/generator'
@@ -15,6 +18,8 @@ module BrInvoicesPdf
   @generators = {}
 
   module_function
+
+  Ox.default_options = Ox.default_options.merge(encoding: 'windows-1252')
 
   def generate(type, xml, options = {})
     generator = @generators[type]

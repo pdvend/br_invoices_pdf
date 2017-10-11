@@ -69,7 +69,7 @@ describe BrInvoicesPdf do
       end
 
       it { is_expected.to_not be_empty }
-      it { is_expected.to eq(%i[foo bar]) }
+      it { is_expected.to eq(%i(foo bar)) }
     end
   end
 end

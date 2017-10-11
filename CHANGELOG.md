@@ -3,8 +3,30 @@
 ## CHANGELOG
 
 ### Unreleased
+
+### 0.2.6 [2017-10-06]
+- [Corrigido] Valores de CFE.
+- [Corrigido] Encoding de produtos na CFE.
+
+### 0.2.5 [2017-09-28]
+- [Corrigido] CNPJ na CFE.
+
+### 0.2.4 [2017-09-27]
+- [Corrigido] Tabela de produtos na CFE.
+
+### 0.2.3 [2017-09-6]
+- [Corrigido] Encoding errado ao gerar xml, alterando para encoding windows-1252.
+
+### 0.2.2 [2017-08-31]
+- [Corrigido] Erro ao gerar documento CFE com empresa sem inscrição municipal
+
+### 0.2.1 [2017-08-25]
+- [Corrigido] Erro ao gerar QR Code com tamanho decimal
+
+### 0.2.0 [2017-05-29]
 - [Modificado] Atualizando versões das dependências
 - [Adicionado] Estrutura de Generator/Parser/Renderer
+- [Adicionado] Gerador de Cfe
 - [Adicionado] Cobertura de testes
 
 ### 0.1.5 [2017-05-29]
