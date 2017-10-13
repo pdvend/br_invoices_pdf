@@ -28,12 +28,12 @@ module BrInvoicesPdf
       private
 
       def add_company_identification(pdf, data)
-        pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |box|
+        pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |_box|
           pdf.pad(10) do
             pdf.indent(50) do
               pdf.text(data[:company][:name])
-              pdf.text("CNPJ: " + format_cnpj(data[:company][:cnpj]))
-              pdf.text("Inscrição Estadual: " + data[:company][:state_number])
+              pdf.text('CNPJ: ' + format_cnpj(data[:company][:cnpj]))
+              pdf.text('Inscrição Estadual: ' + data[:company][:state_number])
               pdf.text(format_address(data[:company][:address]))
             end
           end
@@ -43,13 +43,13 @@ module BrInvoicesPdf
       end
 
       def add_header(pdf)
-        pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |box|
+        pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do |_box|
           pdf.pad(10) do
             pdf.indent(10, 10) do
-              pdf.font("Helvetica", style: :bold)
+              pdf.font('Helvetica', style: :bold)
               pdf.text("DANFE NFC-e - Documento Auxiliar da Nota Fiscal Eletrônica para Consumidor Final\n\n", align: :center)
-              pdf.font("Helvetica", style: :normal)
-              pdf.text("Não permite aproveitamento de crédito de ICMS", align: :center)
+              pdf.font('Helvetica', style: :normal)
+              pdf.text('Não permite aproveitamento de crédito de ICMS', align: :center)
             end
           end
 
@@ -57,7 +57,6 @@ module BrInvoicesPdf
         end
         pdf.move_down(5)
       end
-
 
       def add_product_table(pdf, data)
         width = page_content_width(pdf)
@@ -69,7 +68,7 @@ module BrInvoicesPdf
             table.row(0).align = :center
 
             table.columns(0..5).valign = :center
-            table.columns([2,4,5]).align = :right
+            table.columns([2, 4, 5]).align = :right
             table.column(3).align = :center
 
             table.column(0).width = table.width * 0.16
@@ -90,10 +89,10 @@ module BrInvoicesPdf
         totals = data[:totals]
 
         [
-          ["Item(ns)", format_number(totals[:items])],
-          ["Subtotal", format_currency(totals[:subtotal])],
-          ["Desconto", format_currency(totals[:discounts])],
-          ["Total", format_currency(totals[:total])]
+          ['Item(ns)', format_number(totals[:items])],
+          ['Subtotal', format_currency(totals[:subtotal])],
+          ['Desconto', format_currency(totals[:discounts])],
+          ['Total', format_currency(totals[:total])]
         ].each do |(title, value)|
           box(pdf, [xpos, ypos], third_width) do
             pdf.text(title, style: :italic)
@@ -112,7 +111,7 @@ module BrInvoicesPdf
 
         pdf.font_size(6) do
           pdf.table(table_data, width: width) do |table|
-            table.columns([0,1]).valign = :center
+            table.columns([0, 1]).valign = :center
             table.columns(1).align = :right
             table.row([0, table_data.size - 1]).font_style = :bold
           end
@@ -139,7 +138,7 @@ module BrInvoicesPdf
         box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
           number = emission_details[:number]
           serie = emission_details[:serie]
-          timestamp = emission_details[:emission_timestamp].strftime("%H:%M:%S %d/%m/%Y")
+          timestamp = emission_details[:emission_timestamp].strftime('%H:%M:%S %d/%m/%Y')
 
           pdf.text("Mensagem Fiscal\n\n", style: :italic)
           pdf.text("Número: #{number} - Série: #{serie}", align: :center)
@@ -155,11 +154,10 @@ module BrInvoicesPdf
         box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
           pdf.text("Consumidor\n\n", style: :italic)
 
-
           if customer[:identification_type]
             pdf.text("#{customer[:identification_type]}: #{customer[:identification]}", align: :center)
           else
-            pdf.text("CONSUMIDOR NÃO IDENTIFICADO", align: :center)
+            pdf.text('CONSUMIDOR NÃO IDENTIFICADO', align: :center)
           end
 
           pdf.text("Endereço: #{format_address(customer[:address])}", align: :center) if customer[:address]
@@ -174,7 +172,7 @@ module BrInvoicesPdf
         qrcode_size = page_width * 0.65
 
         box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-          pdf.text("Consulta via QRCode", style: :italic)
+          pdf.text('Consulta via QRCode', style: :italic)
 
           options = {
             at: [(page_width - qrcode_size) / 2, pdf.cursor],
@@ -195,7 +193,7 @@ module BrInvoicesPdf
         emission_details = data[:emission_details]
         box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
           text = "\nProtocolo de autorização: #{emission_details[:authorization_protocol]}"
-          timestamp = emission_details[:receival_timestamp].strftime("%H:%M:%S %d/%m/%Y")
+          timestamp = emission_details[:receival_timestamp].strftime('%H:%M:%S %d/%m/%Y')
           pdf.text(text, align: :center)
           pdf.text("Data: #{timestamp}\n\n", align: :center)
         end
@@ -216,11 +214,11 @@ module BrInvoicesPdf
       end
 
       PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
-      def payments_table_data(data, width)
+      def payments_table_data(data, _width)
         payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
           result + [[cur[:type], format_currency(cur[:amount])]]
         end
-        payments_data.push(["TROCO", format_currency(data[:totals][:cashback])])
+        payments_data.push(['TROCO', format_currency(data[:totals][:cashback])])
         payments_data
       end
 
@@ -236,22 +234,25 @@ module BrInvoicesPdf
         end
       end
 
-      CNPJ_FORMAT = "%d.%d.%d/%d-%d"
+      CNPJ_FORMAT = '%d.%d.%d/%d-%d'.freeze
       def format_cnpj(cnpj)
-        CNPJ_FORMAT % [cnpj[0,2], cnpj[2,3], cnpj[5,3], cnpj[8,4], cnpj[12,2]]
+        format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
       end
 
-      ADDRESS_FORMAT = "%s, %s, %s, %s/%s"
+      ADDRESS_FORMAT = '%s, %s, %s, %s/%s'.freeze
       def format_address(address)
-        ADDRESS_FORMAT % [:streetname, :number, :district, :city, :state].map(&address.method(:[]))
+        ADDRESS_FORMAT % %i(streetname number district city state).map(&address.method(:[]))
       end
 
-      def format_currency(num)
-        num.truncate.to_s.reverse.split(/.../).join('.').reverse + (',%02d' % (num.frac * 100).truncate)
+      def format_currency(number_string)
+        number = BigDecimal(number_string)
+        format('%.2f', number.truncate(2)).tr('.', ',')
       end
 
-      def format_number(num, prec: 4)
-        num.truncate.to_s + (prec > 0 ? (",%0#{prec}d" % (num.frac * 10 ** prec).truncate) : "")
+      # :reek:FeatureEnvy
+      def format_number(number_string, prec: 4)
+        number = BigDecimal(number_string)
+        format("%.#{prec}f", number.truncate(prec)).tr('.', ',')
       end
 
       def format_access_key(key)
