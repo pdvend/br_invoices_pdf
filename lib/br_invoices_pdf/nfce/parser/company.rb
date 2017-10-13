@@ -9,8 +9,6 @@ module BrInvoicesPdf
         ROOT_PATH = Util::XmlLocate::ROOT_PATH
 
         def execute(xml)
-          require 'byebug'
-          byebug
           {
             name: locate_element(xml, "#{ROOT_PATH}/emit/xNome"),
             cnpj: locate_element(xml, "#{ROOT_PATH}/emit/CNPJ"),
