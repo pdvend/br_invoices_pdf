@@ -1,7 +1,6 @@
 module BrInvoicesPdf
   module Nfce
     class Renderer
-
       AUTO_HEIGHT_MOCK = 2000
 
       def pdf(data, options)
