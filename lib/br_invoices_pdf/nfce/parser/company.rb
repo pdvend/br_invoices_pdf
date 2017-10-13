@@ -6,22 +6,26 @@ module BrInvoicesPdf
 
         module_function
 
+        ROOT_PATH = Util::XmlLocate::ROOT_PATH
+
         def execute(xml)
+          require 'byebug'
+          byebug
           {
-            name: locate_element(xml, 'infNFe/emit/xNome'),
-            cnpj: locate_element(xml, 'infNFe/emit/CNPJ'),
-            state_number: locate_element(xml, 'infNFe/emit/IE'),
+            name: locate_element(xml, "#{ROOT_PATH}/emit/xNome"),
+            cnpj: locate_element(xml, "#{ROOT_PATH}/emit/CNPJ"),
+            state_number: locate_element(xml, "#{ROOT_PATH}/emit/IE"),
             address: company_address_params(xml)
           }
         end
 
         def company_address_params(xml)
           {
-            streetname: locate_element(xml, 'infNFe/emit/enderEmit/xLgr'),
-            number: locate_element(xml, 'infNFe/emit/enderEmit/nro'),
-            district: locate_element(xml, 'infNFe/emit/enderEmit/xBairro'),
-            city: locate_element(xml, 'infNFe/emit/enderEmit/xMun'),
-            state: locate_element(xml, 'infNFe/emit/enderEmit/UF')
+            streetname: locate_element(xml, "#{ROOT_PATH}/emit/enderEmit/xLgr"),
+            number: locate_element(xml, "#{ROOT_PATH}/emit/enderEmit/nro"),
+            district: locate_element(xml, "#{ROOT_PATH}/emit/enderEmit/xBairro"),
+            city: locate_element(xml, "#{ROOT_PATH}/emit/enderEmit/xMun"),
+            state: locate_element(xml, "#{ROOT_PATH}/emit/enderEmit/UF")
           }
         end
         private_class_method :company_address_params
