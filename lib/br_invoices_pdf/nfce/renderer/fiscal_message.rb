@@ -19,12 +19,13 @@ module BrInvoicesPdf
         end
         private_class_method :consult_key
 
+        # :reek:FeatureEnvy
         def emission_date(pdf, data)
           details = data[:emission_details]
           text = "Emissão: #{format_date(details[:emission_timestamp])} - Via Consumidor\n\n"
           pdf.text(text, align: :center)
-          text = "Consulte pela chave de acesso em: #{details[:check_url]} \n\n"
-          pdf.text(text, align: :center)
+          key_text = "Consulte pela chave de acesso em: #{details[:check_url]} \n\n"
+          pdf.text(key_text, align: :center)
         end
         private_class_method :emission_date
 

@@ -23,7 +23,7 @@ module BrInvoicesPdf
         TaxesInfo,
         FiscalMessage,
         CustomerIdentification
-      ]
+      ].freeze
 
       # :reek:FeatureEnvy
       def pdf(data, options)

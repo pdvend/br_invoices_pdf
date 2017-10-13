@@ -15,7 +15,7 @@ module BrInvoicesPdf
           pdf.move_down(5)
         end
 
-        def add_header_config(pdf, data)
+        def add_header_config(pdf, _data)
           pdf.font('Helvetica', style: :bold)
           msg = 'DANFE NFC-e - Documento Auxiliar de Nota Fiscal Eletrônica para consumidor final'
           pdf.text(msg, align: :center)

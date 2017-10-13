@@ -44,7 +44,7 @@ module BrInvoicesPdf
         private_class_method :payments_table_data
 
         def add_default_values(payments_data, data)
-          paid = data[:payments].map { |p| p[:amount]  }.reduce(0, :+)
+          paid = data[:payments].map { |payment| payment[:amount] }.reduce(0, :+)
           payments_data.push(['TROCO', format_currency(data[:totals][:cashback])])
           payments_data.push(['TOTAL', format_currency(paid)])
         end
