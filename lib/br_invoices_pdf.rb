@@ -40,3 +40,4 @@ module BrInvoicesPdf
 end
 
 require 'br_invoices_pdf/cfe'
+require 'br_invoices_pdf/nfce'
