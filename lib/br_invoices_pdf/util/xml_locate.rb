@@ -3,6 +3,8 @@ module BrInvoicesPdf
     module XmlLocate
       module_function
 
+      ROOT_PATH = 'NFe/infNFe'.freeze
+
       def locate_element(xml, path)
         element = xml.locate(path).first
         element.text if element
