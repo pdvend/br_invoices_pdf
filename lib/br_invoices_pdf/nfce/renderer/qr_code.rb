@@ -6,14 +6,10 @@ module BrInvoicesPdf
 
         module_function
 
-        SAT_QRCODE_SEPARATOR = '|'.freeze
-        BARCODE_HEIGHT = 50
-
         def execute(pdf, data)
           render_box(pdf) do
-            options = pdf_options(page_paper_width(pdf.page.size), data)
+            options = pdf_options(page_paper_width(pdf.page.size))
 
-            generate_barcodes(pdf, options)
             generate_qr_code(pdf, data, options)
           end
         end
@@ -21,19 +17,16 @@ module BrInvoicesPdf
         # :reek:FeatureEnvy
         def render_box(pdf)
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-            pdf.text("Códigos de barra e QR Code\n\n", style: :italic)
+            pdf.text('QR Code', style: :italic)
             yield
-            pdf.move_down(10)
           end
         end
         private_class_method :render_box
 
-        def pdf_options(page_width, data)
+        def pdf_options(page_width)
           qrcode_size = page_width * 0.65
-          barcodes_size = page_width * 0.85
-          access_key = data[:emission_details][:access_key][4..48]
 
-          { access_key: access_key, barcodes_size: barcodes_size, qrcode_size: qrcode_size, page_width: page_width }
+          { qrcode_size: qrcode_size, page_width: page_width }
         end
         private_class_method :pdf_options
 
@@ -56,34 +49,11 @@ module BrInvoicesPdf
         end
         private_class_method :generate_qr_code_data
 
-        def generate_barcodes(pdf, pdf_options)
-          options = barcode_options(pdf, pdf_options[:page_width], pdf_options[:barcodes_size])
-          access_key = pdf_options[:access_key]
-          insert_image(pdf, generate_barcode(access_key[0..21]), options)
-          insert_image(pdf, generate_barcode(access_key[22..44]), options)
-        end
-        private_class_method :generate_barcodes
-
         def insert_image(pdf, image, options)
           pdf.image(image, options)
           pdf.move_down(options[:height])
         end
         private_class_method :insert_image
-
-        def generate_barcode(key)
-          blob = Barby::PngOutputter.new(Barby::Code128A.new(key)).to_png
-          StringIO.new(blob)
-        end
-        private_class_method :generate_barcode
-
-        def barcode_options(pdf, page_width, qrcode_size)
-          {
-            at: [(page_width - qrcode_size) / 2, pdf.cursor],
-            width: qrcode_size,
-            height: BARCODE_HEIGHT
-          }
-        end
-        private_class_method :barcode_options
       end
     end
   end
