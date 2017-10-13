@@ -6,15 +6,17 @@ module BrInvoicesPdf
 
         module_function
 
-        TOTAL_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/total".freeze
+        TOTAL_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/total/ICMSTot".freeze
 
         def execute(xml)
+          require 'byebug'
+          byebug
           {
             items: Products.execute(xml).count,
             subtotal: locate_element(xml, "#{TOTAL_ROOT_PATH}/vProd"),
             discounts: locate_element(xml, "#{TOTAL_ROOT_PATH}/vDesc"),
             total: locate_element(xml, "#{TOTAL_ROOT_PATH}/vNF"),
-            cashback: nil
+            cashback: '0.00'
           }
         end
       end
