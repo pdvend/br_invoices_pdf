@@ -6,6 +6,7 @@ require 'br_invoices_pdf/nfce/renderer/totals'
 require 'br_invoices_pdf/nfce/renderer/payment_forms'
 require 'br_invoices_pdf/nfce/renderer/taxes_info'
 require 'br_invoices_pdf/nfce/renderer/fiscal_message'
+require 'br_invoices_pdf/nfce/renderer/qr_code'
 
 module BrInvoicesPdf
   module Nfce
@@ -22,7 +23,8 @@ module BrInvoicesPdf
         PaymentForms,
         TaxesInfo,
         FiscalMessage,
-        CustomerIdentification
+        CustomerIdentification,
+        QrCode
       ].freeze
 
       # :reek:FeatureEnvy

@@ -39,14 +39,13 @@ module BrInvoicesPdf
 
         # :reek:FeatureEnvy
         def generate_qr_code(pdf, data, options)
-          qrcode_string = generate_qr_code_string(options[:access_key], data)
           qrcode_size = options[:qrcode_size]
           opts = {
             at: [(options[:page_width] - qrcode_size) / 2, pdf.cursor],
             width: qrcode_size,
             height: qrcode_size
           }
-          insert_image(pdf, generate_qr_code_data(qrcode_string, qrcode_size), opts)
+          insert_image(pdf, generate_qr_code_data(data[:emission_details][:qrcode_url], qrcode_size), opts)
         end
         private_class_method :generate_qr_code
 
@@ -56,17 +55,6 @@ module BrInvoicesPdf
           StringIO.new(blob)
         end
         private_class_method :generate_qr_code_data
-
-        # rubocop:disable Metrics/AbcSize
-        def generate_qr_code_string(access_key, data)
-          sat_params = data[:sat_params]
-          access_key + SAT_QRCODE_SEPARATOR + sat_params[:emission_date] +
-            SAT_QRCODE_SEPARATOR + sat_params[:emission_hour] +
-            SAT_QRCODE_SEPARATOR + data[:payment][:total].delete('.') + SAT_QRCODE_SEPARATOR +
-            data[:company_attributes][:cnpj] + SAT_QRCODE_SEPARATOR +
-            sat_params[:document_qr_code_signature]
-        end
-        private_class_method :generate_qr_code_string
 
         def generate_barcodes(pdf, pdf_options)
           options = barcode_options(pdf, pdf_options[:page_width], pdf_options[:barcodes_size])
