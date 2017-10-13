@@ -2,7 +2,7 @@ module BrInvoicesPdf
   module Cfe
     module Parser
       module CompanyAttributes
-        extend BaseParser
+        extend Util::XmlLocate
 
         module_function
 

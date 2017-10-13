@@ -2,7 +2,7 @@ module BrInvoicesPdf
   module Cfe
     module Parser
       module FiscoObs
-        extend BaseParser
+        extend Util::XmlLocate
 
         module_function
 

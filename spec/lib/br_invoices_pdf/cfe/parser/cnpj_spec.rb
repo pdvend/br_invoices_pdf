@@ -5,7 +5,7 @@ describe BrInvoicesPdf::Cfe::Parser::Cnpj do
     let(:xml) { Ox.dump(foo: 'bar') }
 
     before do
-      base_parser_module = BrInvoicesPdf::Cfe::Parser::BaseParser
+      base_parser_module = BrInvoicesPdf::Util::XmlLocate
       allow_any_instance_of(base_parser_module).to receive(:locate_element)
         .with(xml, 'infCFe/dest/CNPJ').and_return(cnpj)
     end

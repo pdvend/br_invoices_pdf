@@ -5,7 +5,7 @@ describe BrInvoicesPdf::Cfe::Parser::Sat do
     let(:xml) { Ox.dump(foo: 'bar') }
 
     def locate_element_mock(path, value)
-      base_parser_module = BrInvoicesPdf::Cfe::Parser::BaseParser
+      base_parser_module = BrInvoicesPdf::Util::XmlLocate
       allow_any_instance_of(base_parser_module).to receive(:locate_element)
         .with(xml, path).and_return(value)
     end

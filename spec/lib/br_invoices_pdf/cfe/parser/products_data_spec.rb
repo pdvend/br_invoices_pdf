@@ -15,7 +15,7 @@ describe BrInvoicesPdf::Cfe::Parser::ProductsData do
     let(:locate_response) { [element] }
 
     def locate_element_mock(path, value)
-      base_parser_module = BrInvoicesPdf::Cfe::Parser::BaseParser
+      base_parser_module = BrInvoicesPdf::Util::XmlLocate
       allow_any_instance_of(base_parser_module).to receive(:node_locate)
         .with(element, path).and_return(value)
     end

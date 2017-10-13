@@ -2,7 +2,7 @@ module BrInvoicesPdf
   module Cfe
     module Parser
       module Sat
-        extend BaseParser
+        extend Util::XmlLocate
 
         module_function
 
