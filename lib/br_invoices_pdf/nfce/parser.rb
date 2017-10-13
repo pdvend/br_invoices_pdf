@@ -20,8 +20,6 @@ module BrInvoicesPdf
       }.freeze
 
       def parse(xml)
-        require 'byebug'
-        byebug
         { company: Company.execute(xml),
           products: Products.execute(xml),
           payments: Payments.execute(xml),

@@ -21,7 +21,6 @@ module BrInvoicesPdf
         }
 
         def execute(xml)
-          require 'byebug'; byebug
           {
             type: EMISSION_TYPES[locate_element(xml, "#{TOTAL_ROOT_PATH}/tpEmis").to_sym],
             number: locate_element(xml, "#{TOTAL_ROOT_PATH}/nNF"),
