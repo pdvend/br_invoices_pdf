@@ -8,7 +8,7 @@ module BrInvoicesPdf
 
         module_function
 
-        def execute(xml)
+        def execute(_xml)
           # TODO: verificar como calcular esses valores e escrever o teste
           {
             amount: BigDecimal('2.88'),

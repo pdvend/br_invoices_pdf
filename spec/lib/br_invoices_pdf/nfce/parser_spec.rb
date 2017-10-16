@@ -21,7 +21,7 @@ module BrInvoicesPdf
             products: products_response,
             payments: payments_response,
             customer: customer_response,
-            totals:totals_response,
+            totals: totals_response,
             taxes: taxes_response,
             emission_details: emission_details_response
           }

@@ -5,7 +5,7 @@ module BrInvoicesPdf
     module XmlLocate
       module_function
 
-      ROOT_PATH = 'NFe/infNFe'.freeze
+      ROOT_PATH = 'NFe/infNFe'
 
       def locate_element(xml, path)
         element = xml.locate(path).first
