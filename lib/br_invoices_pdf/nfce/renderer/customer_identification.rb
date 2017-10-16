@@ -34,7 +34,7 @@ module BrInvoicesPdf
           address = data[:customer][:address]
           pdf.text("Consumidor\n\n", style: :italic)
           pdf.text(identificator, align: :center)
-          pdf.text(format_address(address), align: :center) if address.present?
+          pdf.text(format_address(address), align: :center) unless address[:streetname].nil?
         end
         private_class_method :add_customer_identification
       end
