@@ -17,7 +17,6 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         allow_any_instance_of(base_renderer).to receive(:page_content_width).and_return(100)
         allow(described_class).to receive(:pdf_setup).and_yield
         expect(pdf).to receive(:text).with("Consumidor\n\n", style: :italic)
-        expect(pdf).to receive(:move_down).with(5)
       end
 
       let(:address) { {streetname: nil} }

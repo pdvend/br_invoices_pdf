@@ -7,11 +7,9 @@ module BrInvoicesPdf
         module_function
 
         def execute(pdf, data)
-          pdf_setup(pdf) do
+          box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
             add_customer_identification(pdf, data, identificator(data[:customer]))
           end
-
-          pdf.move_down(5)
         end
 
         def identificator(data)
