@@ -29,7 +29,7 @@ module BrInvoicesPdf
             expect(Renderer::TaxesInfo).to receive(:execute)
             expect(Renderer::FiscalMessage).to receive(:execute)
             expect(Renderer::CustomerIdentification).to receive(:execute)
-            # expect(Renderer::QrCode).to receive(:execute)
+            expect(Renderer::QrCode).to receive(:execute)
             subject
           end
         end
