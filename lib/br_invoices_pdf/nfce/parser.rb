@@ -5,6 +5,7 @@ require 'br_invoices_pdf/nfce/parser/products'
 require 'br_invoices_pdf/nfce/parser/payments'
 require 'br_invoices_pdf/nfce/parser/customer'
 require 'br_invoices_pdf/nfce/parser/totals'
+require 'br_invoices_pdf/nfce/parser/taxes'
 require 'br_invoices_pdf/nfce/parser/emission_details'
 
 module BrInvoicesPdf
@@ -18,20 +19,14 @@ module BrInvoicesPdf
         payments: Payments,
         customer: Customer,
         totals: Totals,
+        taxes: Taxes,
         emission_details: EmissionDetails
       }.freeze
 
       def parse(xml)
-        { company: Company.execute(xml),
-          products: Products.execute(xml),
-          payments: Payments.execute(xml),
-          customer: Customer.execute(xml),
-          totals: Totals.execute(xml),
-          taxes: {
-            amount: BigDecimal('2.88'),
-            percent: '7,33%'
-          },
-          emission_details: EmissionDetails.execute(xml) }
+        PARSERERS.reduce({}) do |response, (param, parser)|
+          { **response, param => parser.execute(xml) }
+        end
       end
     end
   end
