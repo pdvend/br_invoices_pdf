@@ -19,7 +19,7 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         expect(pdf).to receive(:text).with("Consumidor\n\n", style: :italic)
       end
 
-      let(:address) { {streetname: nil} }
+      let(:address) { { streetname: nil } }
 
       context 'when cpf' do
         let(:identification_type) { 'CPF' }
