@@ -8,7 +8,7 @@ module BrInvoicesPdf
 
         module_function
 
-        EMISSION_ROOT_PATH = Util::XmlLocate::ROOT_PATH.freeze
+        EMISSION_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/ide"
 
         EMISSION_TYPES = {
           '1': 'Emissão normal',

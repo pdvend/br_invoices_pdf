@@ -11,8 +11,8 @@ module BrInvoicesPdf
         def execute(_xml)
           # TODO: verificar como calcular esses valores e escrever o teste
           {
-            amount: BigDecimal('2.88'),
-            percent: '7,33%'
+            amount: BigDecimal('0.00'),
+            percent: '0%'
           }
         end
       end
