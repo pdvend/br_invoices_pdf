@@ -20,6 +20,8 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
       locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/serie", serie)
       locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/dhEmi", emission_timestamp)
       locate_element_mock('protNFe/infProt/dhRecbto', receival_timestamp)
+      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/cUF", uf_code)
+      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/tpAmb", env_type)
       locate_element_mock('protNFe/infProt/chNFe', access_key)
       allow(xml).to receive(:locate).with('NFe/infNFeSupl/qrCode').and_return([qr_code_nodes])
       locate_element_mock('protNFe/infProt/nProt', authorization_protocol)
@@ -31,6 +33,8 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
     let(:serie) { 9 }
     let(:emission_timestamp) { Time.now.to_s }
     let(:receival_timestamp) { Time.now.to_s }
+    let(:uf_code) { '53' }
+    let(:env_type) { '2' }
     let(:access_key) { 'ACCESSKEY' }
     let(:qrcode_url) { 'QRCODE' }
     let(:authorization_protocol) { 'AUTHORIZATIONPROT' }
@@ -41,6 +45,7 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
       it { expect(subject[:serie]).to eq(serie) }
       it { expect(subject[:emission_timestamp]).to eq(Time.new(emission_timestamp).utc) }
       it { expect(subject[:receival_timestamp]).to eq(Time.new(receival_timestamp).utc) }
+      it { expect(subject[:check_url]).to eq('http://dec.fazenda.df.gov.br/NFCE/') }
       it { expect(subject[:access_key]).to eq(access_key) }
       it { expect(subject[:qrcode_url]).to eq(qrcode_url) }
       it { expect(subject[:authorization_protocol]).to eq(authorization_protocol) }
