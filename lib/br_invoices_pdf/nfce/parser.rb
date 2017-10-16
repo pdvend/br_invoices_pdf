@@ -13,7 +13,7 @@ module BrInvoicesPdf
     module Parser
       module_function
 
-      PARSERERS = {
+      PARSERS = {
         company: Company,
         products: Products,
         payments: Payments,
@@ -24,7 +24,7 @@ module BrInvoicesPdf
       }.freeze
 
       def parse(xml)
-        PARSERERS.reduce({}) do |response, (param, parser)|
+        PARSERS.reduce({}) do |response, (param, parser)|
           { **response, param => parser.execute(xml) }
         end
       end
