@@ -4,8 +4,10 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
     let(:pdf) { double('pdf', cursor: cursor) }
     let(:cursor) { 10 }
     let(:data) { { customer: customer } }
-    let(:customer) { { identification_type: identification_type, identification: identification,
-                     address: address } }
+    let(:customer) do
+      { identification_type: identification_type, identification: identification,
+        address: address }
+    end
 
     let(:base_renderer) { BrInvoicesPdf::Nfce::Renderer::BaseRenderer }
 
@@ -20,13 +22,12 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
 
       let(:address) { {} }
 
-
       context 'when cpf' do
         let(:identification_type) { 'CPF' }
         let(:identification) { '11111111111' }
 
         it do
-          expect(pdf).to receive(:text).with("CONSUMIDOR: 111.111.111-11", align: :center)
+          expect(pdf).to receive(:text).with('CONSUMIDOR: 111.111.111-11', align: :center)
           subject
         end
       end
@@ -36,7 +37,7 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         let(:identification) { '11185063000187' }
 
         it do
-          expect(pdf).to receive(:text).with("CONSUMIDOR: 11.185.063/0001-87", align: :center)
+          expect(pdf).to receive(:text).with('CONSUMIDOR: 11.185.063/0001-87', align: :center)
           subject
         end
       end
@@ -46,7 +47,7 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         let(:identification) { nil }
 
         it do
-          expect(pdf).to receive(:text).with("CONSUMIDOR NÃO IDENTIFICADO", align: :center)
+          expect(pdf).to receive(:text).with('CONSUMIDOR NÃO IDENTIFICADO', align: :center)
           subject
         end
       end
@@ -54,12 +55,14 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
       context 'with address' do
         let(:identification_type) { nil }
         let(:identification) { nil }
-        let(:address) { { streetname: 'Bel air', number: '412', district: 'Til Phiu',
-                        city: 'Los Angeles', state: 'CA' } }
+        let(:address) do
+          { streetname: 'Bel air', number: '412', district: 'Til Phiu',
+            city: 'Los Angeles', state: 'CA' }
+        end
 
         it do
-          expect(pdf).to receive(:text).with("CONSUMIDOR NÃO IDENTIFICADO", align: :center)
-          expect(pdf).to receive(:text).with("Bel air, 412, Til Phiu, Los Angeles/CA", align: :center)
+          expect(pdf).to receive(:text).with('CONSUMIDOR NÃO IDENTIFICADO', align: :center)
+          expect(pdf).to receive(:text).with('Bel air, 412, Til Phiu, Los Angeles/CA', align: :center)
           subject
         end
       end

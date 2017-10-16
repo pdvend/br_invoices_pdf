@@ -4,9 +4,11 @@ describe BrInvoicesPdf::Nfce::Renderer::FiscalMessage do
     let(:pdf) { double('pdf', cursor: cursor) }
     let(:cursor) { 10 }
     let(:data) { { emission_details: emission_details } }
-    let(:emission_details) { { serie: serie, number: number, access_key: access_key,
-                               emission_timestamp: emission_timestamp,
-                               check_url: check_url} }
+    let(:emission_details) do
+      { serie: serie, number: number, access_key: access_key,
+        emission_timestamp: emission_timestamp,
+        check_url: check_url }
+    end
 
     let(:serie) { 1 }
     let(:number) { 1 }
