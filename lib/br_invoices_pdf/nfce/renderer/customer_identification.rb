@@ -18,9 +18,11 @@ module BrInvoicesPdf
 
           case identification
           when 'CPF'
-            "CONSUMIDOR: #{format_cpf(number)}"
+            "CPF DO CONSUMIDOR: #{format_cpf(number)}"
           when 'CNPJ'
-            "CONSUMIDOR: #{format_cnpj(number)}"
+            "CNPJ DO CONSUMIDOR: #{format_cnpj(number)}"
+          when 'idEstrangeiro'
+            "ID. ESTRANGEIRO: #{number}"
           else
             'CONSUMIDOR NÃO IDENTIFICADO'
           end

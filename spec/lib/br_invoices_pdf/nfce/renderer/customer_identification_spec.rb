@@ -26,7 +26,7 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         let(:identification) { '11111111111' }
 
         it do
-          expect(pdf).to receive(:text).with('CONSUMIDOR: 111.111.111-11', align: :center)
+          expect(pdf).to receive(:text).with('CPF DO CONSUMIDOR: 111.111.111-11', align: :center)
           subject
         end
       end
@@ -36,12 +36,22 @@ describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
         let(:identification) { '11185063000187' }
 
         it do
-          expect(pdf).to receive(:text).with('CONSUMIDOR: 11.185.063/0001-87', align: :center)
+          expect(pdf).to receive(:text).with('CNPJ DO CONSUMIDOR: 11.185.063/0001-87', align: :center)
           subject
         end
       end
 
-      context 'when cnpj' do
+      context 'when id estrangeiro' do
+        let(:identification_type) { 'idEstrangeiro' }
+        let(:identification) { '666' }
+
+        it do
+          expect(pdf).to receive(:text).with('ID. ESTRANGEIRO: 666', align: :center)
+          subject
+        end
+      end
+
+      context 'when not identificated' do
         let(:identification_type) { nil }
         let(:identification) { nil }
 
