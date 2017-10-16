@@ -44,5 +44,6 @@ module BrInvoicesPdf
 end
 
 require 'br_invoices_pdf/util/xml_locate'
+require 'br_invoices_pdf/util/enum'
 require 'br_invoices_pdf/cfe'
 require 'br_invoices_pdf/nfce'
