@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Util
     module XmlLocate
@@ -7,12 +9,12 @@ module BrInvoicesPdf
 
       def locate_element(xml, path)
         element = xml.locate(path).first
-        element.text if element
+        element&.text
       end
 
       def node_locate(element, path)
         value = element.nodes.first.locate(path).first
-        value.text if value
+        value&.text
       end
     end
   end

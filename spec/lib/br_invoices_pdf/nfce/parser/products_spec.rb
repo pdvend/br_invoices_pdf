@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 describe BrInvoicesPdf::Nfce::Parser::Products do
   describe '.execute' do
     subject { described_class.execute(xml) }

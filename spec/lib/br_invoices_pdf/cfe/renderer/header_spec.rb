@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Cfe::Renderer::Header do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }

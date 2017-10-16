@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'br_invoices_pdf/cfe/renderer/company_identification'
 require 'br_invoices_pdf/cfe/renderer/fisco_info'
 require 'br_invoices_pdf/cfe/renderer/header'

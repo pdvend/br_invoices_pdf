@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Util::XmlLocate do
   let(:xml) { Ox.parse(xml_string) }
   let(:path) { 'middle/bottom' }

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Nfce
     module Parser
@@ -6,7 +8,7 @@ module BrInvoicesPdf
 
         module_function
 
-        DEST_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/dest".freeze
+        DEST_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/dest"
 
         def execute(xml)
           identification_type = identification_type_by(xml)

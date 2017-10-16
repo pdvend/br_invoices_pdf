@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Nfce
     class Renderer
@@ -233,12 +235,12 @@ module BrInvoicesPdf
         end
       end
 
-      CNPJ_FORMAT = '%d.%d.%d/%d-%d'.freeze
+      CNPJ_FORMAT = '%d.%d.%d/%d-%d'
       def format_cnpj(cnpj)
         format(CNPJ_FORMAT, cnpj[0, 2], cnpj[2, 3], cnpj[5, 3], cnpj[8, 4], cnpj[12, 2])
       end
 
-      ADDRESS_FORMAT = '%s, %s, %s, %s/%s'.freeze
+      ADDRESS_FORMAT = '%s, %s, %s, %s/%s'
       def format_address(address)
         ADDRESS_FORMAT % %i(streetname number district city state).map(&address.method(:[]))
       end

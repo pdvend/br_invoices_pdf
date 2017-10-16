@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Nfce
     module Parser
@@ -6,7 +8,7 @@ module BrInvoicesPdf
 
         module_function
 
-        TOTAL_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/total/ICMSTot".freeze
+        TOTAL_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/total/ICMSTot"
 
         def execute(xml)
           {

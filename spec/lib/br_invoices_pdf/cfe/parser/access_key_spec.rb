@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Cfe::Parser::AccessKey do
   describe '.execute' do
     let(:xml) { Ox.parse(xml_string) }

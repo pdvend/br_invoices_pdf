@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Nfce
     module Parser
@@ -27,7 +29,7 @@ module BrInvoicesPdf
 
         def product_by(element)
           FIELDS
-            .map { |(key, field)| [key, node_locate(element, field).force_encoding('UTF-8'.freeze)] }
+            .map { |(key, field)| [key, node_locate(element, field).force_encoding('UTF-8')] }
             .to_h
         end
         private_class_method :product_by

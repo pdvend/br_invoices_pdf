@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'br_invoices_pdf/nfce/parser/company'
 require 'br_invoices_pdf/nfce/parser/products'
 require 'br_invoices_pdf/nfce/parser/payments'
