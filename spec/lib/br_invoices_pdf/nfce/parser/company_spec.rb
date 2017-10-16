@@ -1,3 +1,5 @@
+# frozen_string_literal: false
+
 describe BrInvoicesPdf::Nfce::Parser::Company do
   describe '.execute' do
     subject { described_class.execute(xml) }
@@ -11,14 +13,14 @@ describe BrInvoicesPdf::Nfce::Parser::Company do
     end
 
     before do
-      locate_element_mock('infNFe/emit/xNome', name)
-      locate_element_mock('infNFe/emit/CNPJ', cnpj)
-      locate_element_mock('infNFe/emit/IE', state_number)
-      locate_element_mock('infNFe/emit/enderEmit/xLgr', streetname)
-      locate_element_mock('infNFe/emit/enderEmit/nro', number)
-      locate_element_mock('infNFe/emit/enderEmit/xBairro', district)
-      locate_element_mock('infNFe/emit/enderEmit/xMun', city)
-      locate_element_mock('infNFe/emit/enderEmit/UF', state)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/xNome", name)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/CNPJ", cnpj)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/IE", state_number)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xLgr", streetname)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/nro", number)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xBairro", district)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xMun", city)
+      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/UF", state)
     end
 
     let(:name) { 'Nome' }
