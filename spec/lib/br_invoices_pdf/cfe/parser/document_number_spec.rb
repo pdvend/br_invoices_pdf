@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Cfe::Parser::DocumentNumber do
   describe '.execute' do
     subject { described_class.execute(xml) }
@@ -5,7 +7,7 @@ describe BrInvoicesPdf::Cfe::Parser::DocumentNumber do
     let(:xml) { Ox.dump(foo: 'bar') }
 
     before do
-      allow_any_instance_of(BrInvoicesPdf::Cfe::Parser::BaseParser).to receive(:locate_element)
+      allow_any_instance_of(BrInvoicesPdf::Util::XmlLocate).to receive(:locate_element)
         .with(xml, 'infCFe/ide/nCFe').and_return(document_number)
     end
 

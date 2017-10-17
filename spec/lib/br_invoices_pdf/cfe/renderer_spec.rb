@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     describe Renderer do

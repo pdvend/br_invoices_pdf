@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Errors::InvalidDocumentType do
   describe '#initialize' do
     subject { described_class.new(type) }
