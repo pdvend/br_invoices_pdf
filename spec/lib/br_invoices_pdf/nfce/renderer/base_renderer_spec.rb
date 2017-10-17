@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Nfce::Renderer::BaseRenderer do
   describe '.format_address' do
     subject { described_class.format_address(address) }

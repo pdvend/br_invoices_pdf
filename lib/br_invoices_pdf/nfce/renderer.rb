@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'br_invoices_pdf/nfce/renderer/company_identification'
 require 'br_invoices_pdf/nfce/renderer/customer_identification'
 require 'br_invoices_pdf/nfce/renderer/header'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Nfce::Renderer::CustomerIdentification do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }

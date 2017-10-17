@@ -8,7 +8,7 @@ describe BrInvoicesPdf::Nfce::Parser::Payments do
     let(:node_payments) { double('nodes') }
     let(:type) { '03' }
     let(:amount) { 99.9 }
-    let(:cashback) { 1.00 } 
+    let(:cashback) { 1.00 }
 
     def locate_element_mock(path, value)
       base_parser_module = BrInvoicesPdf::Util::XmlLocate

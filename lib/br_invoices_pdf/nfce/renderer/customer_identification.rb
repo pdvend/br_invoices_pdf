@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Nfce
     module Renderer
@@ -8,15 +10,16 @@ module BrInvoicesPdf
 
         def execute(pdf, data)
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-            add_customer_identification(pdf, data, identificator(data[:customer]))
+            customer = data[:customer]
+            add_customer_identification(pdf, data, identificator(customer[:identification_type],
+                                                                 customer[:identification]))
           end
         end
 
-        def identificator(data)
-          identification = data[:identification_type]
-          number = data[:identification]
+        def identificator(identification, number)
+          id = identification
 
-          case identification
+          case id
           when 'CPF'
             "CPF DO CONSUMIDOR: #{format_cpf(number)}"
           when 'CNPJ'

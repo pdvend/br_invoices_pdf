@@ -1,9 +1,11 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Nfce::Renderer::TaxesInfo do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', cursor: cursor) }
     let(:cursor) { 10 }
-    let(:data) { { additional_info: "Texto das Taxas" } }
+    let(:data) { { additional_info: 'Texto das Taxas' } }
     let(:base_renderer) { BrInvoicesPdf::Nfce::Renderer::BaseRenderer }
 
     context 'expect texts' do
