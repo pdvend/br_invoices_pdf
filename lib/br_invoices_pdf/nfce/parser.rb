@@ -5,7 +5,7 @@ require 'br_invoices_pdf/nfce/parser/products'
 require 'br_invoices_pdf/nfce/parser/payments'
 require 'br_invoices_pdf/nfce/parser/customer'
 require 'br_invoices_pdf/nfce/parser/totals'
-require 'br_invoices_pdf/nfce/parser/taxes'
+require 'br_invoices_pdf/nfce/parser/additional_info'
 require 'br_invoices_pdf/nfce/parser/emission_details'
 
 module BrInvoicesPdf
@@ -19,7 +19,7 @@ module BrInvoicesPdf
         payments: Payments,
         customer: Customer,
         totals: Totals,
-        taxes: Taxes,
+        additional_info: AdditionalInfo,
         emission_details: EmissionDetails
       }.freeze
 

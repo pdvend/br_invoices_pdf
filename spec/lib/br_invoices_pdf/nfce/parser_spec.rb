@@ -12,7 +12,7 @@ module BrInvoicesPdf
         let(:payments_response) { double('payments_response') }
         let(:customer_response) { double('customer_response') }
         let(:totals_response) { double('totals_response') }
-        let(:taxes_response) { double('texes_response') }
+        let(:additional_info_response) { double('additional_info_response') }
         let(:emission_details_response) { double('emission_details_response') }
 
         let(:expectation) do
@@ -22,7 +22,7 @@ module BrInvoicesPdf
             payments: payments_response,
             customer: customer_response,
             totals: totals_response,
-            taxes: taxes_response,
+            additional_info: additional_info_response,
             emission_details: emission_details_response
           }
         end
@@ -33,7 +33,7 @@ module BrInvoicesPdf
           expect(Parser::Payments).to receive(:execute).with(xml).and_return(payments_response)
           expect(Parser::Customer).to receive(:execute).with(xml).and_return(customer_response)
           expect(Parser::Totals).to receive(:execute).with(xml).and_return(totals_response)
-          expect(Parser::Taxes).to receive(:execute).with(xml).and_return(taxes_response)
+          expect(Parser::AdditionalInfo).to receive(:execute).with(xml).and_return(additional_info_response)
           expect(Parser::EmissionDetails).to receive(:execute).with(xml).and_return(emission_details_response)
           expect(subject).to eq(expectation)
         end
