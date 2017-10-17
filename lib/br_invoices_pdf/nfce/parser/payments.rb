@@ -19,7 +19,8 @@ module BrInvoicesPdf
         def payment_by(element)
           {
             type: Util::Enum::PAYMENT_TYPES[locate_element(element, 'tPag')],
-            amount: locate_element(element, 'vPag')
+            amount: locate_element(element, 'vPag'),
+            cashback: locate_element(element, 'vTroco')
           }
         end
         private_class_method :payment_by
