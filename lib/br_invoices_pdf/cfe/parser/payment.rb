@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Parser
       module Payment
-        extend BaseParser
+        extend Util::XmlLocate
 
         module_function
 

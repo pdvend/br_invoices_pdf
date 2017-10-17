@@ -1,0 +1,160 @@
+<nfeProc versao="3.10" xmlns="http://www.portalfiscal.inf.br/nfe">
+	<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+	  <infNFe Id="NFe53171022769530000131654000000000601171025449" versao="3.10">
+	  	  <ide>
+	  	  	<cUF>53</cUF>
+	  	  	<cNF>17102544</cNF>
+	  	  	<natOp>Venda</natOp>
+	  	  	<indPag>0</indPag>
+	  	  	<mod>65</mod>
+	  	  	<serie>400</serie>
+	  	  	<nNF>60</nNF>
+	  	  	<dhEmi>2017-10-04T16:56:24-03:00</dhEmi>
+	  	  	<tpNF>1</tpNF>
+	  	  	<idDest>1</idDest>
+	  	  	<cMunFG>5300108</cMunFG>
+	  	  	<tpImp>4</tpImp>
+	  	  	<tpEmis>1</tpEmis>
+	  	  	<cDV>9</cDV>
+	  	  	<tpAmb>2</tpAmb>
+	  	  	<finNFe>1</finNFe>
+	  	  	<indFinal>1</indFinal>
+	  	  	<indPres>1</indPres>
+	  	  	<procEmi>0</procEmi>
+	  	  	<verProc>1.0</verProc>
+	  	  </ide>
+	  	  <emit>
+	  	  	<CNPJ>22769530000131</CNPJ>
+	  	  	<xNome>PDVEND</xNome>
+	  	  	<enderEmit>
+	  	  		<xLgr>Avenida</xLgr>
+	  	  		<nro>LT 06</nro>
+	  	  		<xBairro>NORTE (AGUAS CLARAS)</xBairro>
+	  	  		<cMun>5300108</cMun>
+	  	  		<xMun>brasilia</xMun>
+	  	  		<UF>DF</UF>
+	  	  		<CEP>71916500</CEP>
+	  	  	</enderEmit>
+	  	  	<IE>0772733700120</IE>
+	  	  	<CRT>1</CRT>
+	  	  </emit>
+	  	  <dest>
+	  	  	<CNPJ>25504949000150</CNPJ>
+	  	  	<xNome>NF-E EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xNome>
+	  	  	<indIEDest>9</indIEDest>
+	  	  </dest>
+	  	  <det nItem="1">
+	  	  	<prod>
+	  	  		<cProd>LATA9308</cProd>
+	  	  		<cEAN></cEAN>
+	  	  		<xProd>NOTA FISCAL EMITIDA EM AMBIENTE DE HOMOLOGACAO - SEM VALOR FISCAL</xProd>
+	  	  		<NCM>01061200</NCM>
+	  	  		<CFOP>5102</CFOP>
+	  	  		<uCom>UN</uCom>
+	  	  		<qCom>1</qCom>
+	  	  		<vUnCom>0.91</vUnCom>
+	  	  		<vProd>0.91</vProd>
+	  	  		<cEANTrib></cEANTrib>
+	  	  		<uTrib>UN</uTrib>
+	  	  		<qTrib>1</qTrib>
+	  	  		<vUnTrib>0.91</vUnTrib>
+	  	  		<indTot>1</indTot>
+	  	  	</prod>
+	  	  	<imposto>
+	  	  		<ICMS>
+	  	  			<ICMSSN102>
+	  	  				<orig>0</orig>
+	  	  				<CSOSN>102</CSOSN>
+	  	  			</ICMSSN102>
+	  	  		</ICMS>
+	  	  	</imposto>
+	  	  </det>
+	  	  <det nItem="2">
+	  	  	<prod>
+	  	  		<cProd>BUG4933</cProd>
+	  	  		<cEAN></cEAN>
+	  	  		<xProd>Bugnnn</xProd>
+	  	  		<NCM>01061200</NCM>
+	  	  		<CFOP>5102</CFOP>
+	  	  		<uCom>UN</uCom>
+	  	  		<qCom>1</qCom>
+	  	  		<vUnCom>4.90</vUnCom>
+	  	  		<vProd>4.90</vProd>
+	  	  		<cEANTrib></cEANTrib>
+	  	  		<uTrib>UN</uTrib>
+	  	  		<qTrib>1</qTrib>
+	  	  		<vUnTrib>4.90</vUnTrib>
+	  	  		<indTot>1</indTot>
+	  	  	</prod>
+	  	  	<imposto>
+	  	  		<ICMS>
+	  	  			<ICMSSN102>
+	  	  				<orig>0</orig>
+	  	  				<CSOSN>102</CSOSN>
+	  	  			</ICMSSN102>
+	  	  		</ICMS>
+	  	  	</imposto>
+	  	  </det>
+	  	  <total>
+	  	  	<ICMSTot>
+	  	  		<vBC>0.00</vBC>
+	  	  		<vICMS>0.00</vICMS>
+	  	  		<vICMSDeson>0.00</vICMSDeson>
+	  	  		<vBCST>0.00</vBCST>
+	  	  		<vST>0.00</vST>
+	  	  		<vProd>5.81</vProd>
+	  	  		<vFrete>0.00</vFrete>
+	  	  		<vSeg>0.00</vSeg>
+	  	  		<vDesc>0.00</vDesc>
+	  	  		<vII>0.00</vII>
+	  	  		<vIPI>0.00</vIPI>
+	  	  		<vPIS>0.00</vPIS>
+	  	  		<vCOFINS>0.00</vCOFINS>
+	  	  		<vOutro>0.00</vOutro>
+	  	  		<vNF>5.81</vNF>
+	  	  	</ICMSTot>
+	  	  </total>
+	  	  <transp>
+	  	  	<modFrete>9</modFrete>
+	  	  </transp>
+	  	  <pag>
+	  	  	<tPag>01</tPag>
+	  	  	<vPag>5.81</vPag>
+	  	  	<vTroco>0.19</vTroco>
+	  	  </pag>
+	  </infNFe>
+	  <infAdic>
+	  	<infCpl>
+	  		Tributos aproximados: (Lei Federal 12.741/2012): R$ 0,00 (0%)
+	  	</infCpl>
+	  </infAdic>
+	  <infNFeSupl>
+	  		<qrCode><![CDATA[http://dec.fazenda.df.gov.br/ConsultarNFCe.aspx?chNFe=53171022769530000131654000000000601171025449&nVersao=100&tpAmb=2&cDest=25504949000150&dhEmi=323031372d31302d30345431363a35363a32342d30333a3030&vNF=5.81&vICMS=0.00&digVal=6d3658314668464774314435487850794d677a557276412b646c733d&cIdToken=000001&cHashQRCode=62F1D30A95E4E08FC5A29D506FF935FD37C8614E]]></qrCode>
+	  </infNFeSupl>
+	  <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+	  	<SignedInfo>
+	  		<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+	  		<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+	  		<Reference URI="#NFe53171022769530000131654000000000601171025449">
+	  			<Transforms>
+	  				<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature" />
+	  				<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315" />
+	  			</Transforms>
+	  			<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+	  			<DigestValue>m6X1FhFGt1D5HxPyMgzUrvA+dls=</DigestValue>
+	  		</Reference>
+	  	</SignedInfo>
+	  	<SignatureValue>ERawIQpTAZxMjiD0s9CJRKNOwv7RjONCMBT+XMDscTLzgRd9a6My8fau29D9tGJwOKGVJ12aRTqr34B+ECnSwyJ9qTE+l1C9pVRY2ypLUhJW5Q3FCg+Zke3MDmDqmJVv44jA5O2s8UIhuw2hVQgz32Gr38ZRkytEU5Xcd5sEOoinClNNtrGduUDVdfeEsIuTfL4TIbkmf5dnqje+P6ZNmSFuwDeb2TH2MG8R/EBSazPM+PR7nGId5cCMj1edfMeSsR6MXMnju7t/8N5qUGpKwmwPC/jQtmFVse18f2joIO4HfeGz9tIP92TNUVnrjTTWmMBrHVWqiT8ogxgXX/SFfQ==</SignatureValue><KeyInfo><X509Data><X509Certificate>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</X509Certificate></X509Data></KeyInfo></Signature></NFe>
+	  	  	<protNFe versao="3.10">
+	  	  		<infProt>
+	  	  			<tpAmb>2</tpAmb>
+	  	  			<verAplic>SVRSnfce201707171030</verAplic>
+	  	  			<chNFe>53171022769530000131654000000000601171025449</chNFe>
+	  	  			<dhRecbto>2017-10-04T16:56:26-03:00</dhRecbto>
+	  	  			<nProt>353170000106963</nProt>
+	  	  			<digVal>m6X1FhFGt1D5HxPyMgzUrvA+dls=</digVal>
+	  	  			<cStat>100</cStat>
+	  	  			<xMotivo>Autorizado o uso da NF-e</xMotivo>
+	  	  		</infProt>
+	  	  	</protNFe>
+	  	  </nfeProc>

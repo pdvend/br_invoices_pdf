@@ -3,6 +3,7 @@
 ## CHANGELOG
 
 ### Unreleased
+- [Addionado] Parser para NFC-e
 
 ### 0.2.6 [2017-10-06]
 - [Corrigido] Valores de CFE.

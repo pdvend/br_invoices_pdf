@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
@@ -6,7 +8,7 @@ module BrInvoicesPdf
 
         module_function
 
-        SAT_QRCODE_SEPARATOR = '|'.freeze
+        SAT_QRCODE_SEPARATOR = '|'
         BARCODE_HEIGHT = 50
 
         def execute(pdf, data)

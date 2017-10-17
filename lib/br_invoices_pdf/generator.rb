@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   class Generator
     PDF_OPTIONS = { page_size: 'A4', margin: [40, 75] }.freeze

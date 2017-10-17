@@ -1,10 +1,12 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       module BaseRenderer
         module_function
 
-        ADDRESS_FORMAT = '%s, %s, %s, %s, %s/%s'.freeze
+        ADDRESS_FORMAT = '%s, %s, %s, %s, %s/%s'
         def format_address(address)
           ADDRESS_FORMAT % %i(public_place number complement neighborhood city state).map(&address.method(:[]))
         end
@@ -33,14 +35,14 @@ module BrInvoicesPdf
           end
         end
 
-        CNPJ_FORMAT = '%02d.%03d.%03d/%04d-%02d'.freeze
+        CNPJ_FORMAT = '%02d.%03d.%03d/%04d-%02d'
         # :reek:FeatureEnvy
         def format_cnpj(cnpj)
           format(CNPJ_FORMAT, cnpj[0, 2].to_i, cnpj[2, 3].to_i, cnpj[5, 3].to_i,
                  cnpj[8, 4].to_i, cnpj[12, 2].to_i)
         end
 
-        CPF_FORMAT = '%d.%d.%d-%d'.freeze
+        CPF_FORMAT = '%d.%d.%d-%d'
         # :reek:FeatureEnvy
         def format_cpf(cpf)
           format(CPF_FORMAT, cpf[0, 3], cpf[3, 3], cpf[6, 3], cpf[9, 2])

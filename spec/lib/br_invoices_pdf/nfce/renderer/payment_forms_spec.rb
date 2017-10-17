@@ -5,11 +5,10 @@ describe BrInvoicesPdf::Nfce::Renderer::PaymentForms do
     let(:table) { double('table', columns: columns, row: row) }
     let(:row) { double('row', 'font_style=' => 1) }
     let(:columns) { double('column', 'valign=' => 1, 'align=' => 1) }
-    let(:data) { { payments: [{ type: type, amount: amount }], totals: totals } }
-    let(:totals) { { cashback: cashback, total: total } }
+    let(:data) { { payments: [{ type: type, amount: amount, cashback: nil }], totals: totals } }
+    let(:totals) { { total: total } }
     let(:type) { 'SOME' }
     let(:amount) { '12,00' }
-    let(:cashback) { '1,00' }
     let(:total) { '13,00' }
     let(:width) { 100 }
     let(:base_renderer) { BrInvoicesPdf::Nfce::Renderer::BaseRenderer }
@@ -19,13 +18,29 @@ describe BrInvoicesPdf::Nfce::Renderer::PaymentForms do
       allow(pdf).to receive(:move_down)
     end
 
-    context 'correct infos' do
+    context 'correct infos without casback' do
       context 'when cpf is present' do
         let(:payments) do
           [['FORMA DE PAGAMENTO', 'VALOR'],
            [type, amount],
-           ['TROCO', cashback],
            ['TOTAL', total]]
+        end
+        it do
+          expect(pdf).to receive(:table).with(payments, width: width).and_yield(table)
+          subject
+        end
+      end
+    end
+
+    context 'correct infos with casback' do
+      let(:data) { { payments: [{ type: type, amount: amount, cashback: cashback }], totals: totals } }
+      let(:cashback) { 1 }
+
+      context 'when cpf is present' do
+        let(:payments) do
+          [['FORMA DE PAGAMENTO', 'VALOR', 'TROCO'],
+           [type, amount, cashback],
+           ['TOTAL', total, nil]]
         end
         it do
           expect(pdf).to receive(:table).with(payments, width: width).and_yield(table)
