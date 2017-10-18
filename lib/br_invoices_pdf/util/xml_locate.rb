@@ -9,12 +9,12 @@ module BrInvoicesPdf
 
       def locate_element(xml, path)
         element = xml.locate(path).first
-        element&.text
+        element.text if element.present?
       end
 
       def node_locate(element, path)
         value = element.nodes.first.locate(path).first
-        value&.text
+        value.text if value.present?
       end
     end
   end
