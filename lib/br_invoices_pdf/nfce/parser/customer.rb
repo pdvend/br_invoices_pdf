@@ -11,7 +11,7 @@ module BrInvoicesPdf
 
         DEST_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/dest"
 
-        CUSTOMER_ADDRESS_PARAMS =  {
+        ADDRESS_PARAMS =  {
             streetname: "#{DEST_ROOT_PATH}/enderDest/xLgr",
             number: "#{DEST_ROOT_PATH}/enderDest/nro",
             district: "#{DEST_ROOT_PATH}/enderDest/xBairro",
@@ -24,7 +24,7 @@ module BrInvoicesPdf
           {
             identification_type: identification_type,
             identification: locate_element(xml, "#{DEST_ROOT_PATH}/#{identification_type}"),
-            address: mount(xml, CUSTOMER_ADDRESS_PARAMS)
+            address: mount(xml, ADDRESS_PARAMS)
           }
         end
 
