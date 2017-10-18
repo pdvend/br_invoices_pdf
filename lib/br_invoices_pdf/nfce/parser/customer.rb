@@ -5,17 +5,26 @@ module BrInvoicesPdf
     module Parser
       module Customer
         extend Util::XmlLocate
+        extend Util::MountParams
 
         module_function
 
         DEST_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/dest"
+
+        ADDRESS_PARAMS =  {
+            streetname: "#{DEST_ROOT_PATH}/enderDest/xLgr",
+            number: "#{DEST_ROOT_PATH}/enderDest/nro",
+            district: "#{DEST_ROOT_PATH}/enderDest/xBairro",
+            city: "#{DEST_ROOT_PATH}/enderDest/xMun",
+            state: "#{DEST_ROOT_PATH}/enderDest/UF"
+          }.freeze
 
         def execute(xml)
           identification_type = identification_type_by(xml)
           {
             identification_type: identification_type,
             identification: locate_element(xml, "#{DEST_ROOT_PATH}/#{identification_type}"),
-            address: address_params(xml)
+            address: mount(xml, ADDRESS_PARAMS)
           }
         end
 
@@ -25,17 +34,6 @@ module BrInvoicesPdf
           return 'idEstrangeiro' if locate_element(xml, "#{DEST_ROOT_PATH}/idEstrangeiro")
         end
         private_class_method :identification_type_by
-
-        def address_params(xml)
-          {
-            streetname: locate_element(xml, "#{DEST_ROOT_PATH}/enderDest/xLgr"),
-            number: locate_element(xml, "#{DEST_ROOT_PATH}/enderDest/nro"),
-            district: locate_element(xml, "#{DEST_ROOT_PATH}/enderDest/xBairro"),
-            city: locate_element(xml, "#{DEST_ROOT_PATH}/enderDest/xMun"),
-            state: locate_element(xml, "#{DEST_ROOT_PATH}/enderDest/UF")
-          }
-        end
-        private_class_method :address_params
       end
     end
   end
