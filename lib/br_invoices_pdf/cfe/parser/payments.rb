@@ -11,7 +11,7 @@ module BrInvoicesPdf
         def execute(xml)
           node_payments = xml.locate('infCFe/pgto')
 
-          payments_by_nodes(node_payments) if node_payments.try(:any?)
+          payments_by_nodes(node_payments) if node_payments && node_payments.any?
         end
 
         def payments_by_nodes(node_payments)
