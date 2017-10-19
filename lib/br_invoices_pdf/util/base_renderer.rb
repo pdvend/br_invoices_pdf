@@ -17,6 +17,30 @@ module BrInvoicesPdf
         end
       end
 
+      def insert_box_info(pdf, data, xpos = 0)
+        third_width = page_content_width(pdf) * 0.333333333
+        ypos = pdf.cursor
+        box_info(data[:totals]).each do |(title, value)|
+          insert_box(pdf, title: title, value: value, xpos: xpos, ypos: ypos, third_width: third_width)
+          xpos += third_width
+        end
+      end
+      private_class_method :insert_box_info
+
+      # :reek:FeatureEnvy
+      def insert_box(pdf, params)
+        box(pdf, [params[:xpos], params[:ypos]], params[:third_width]) do
+          insert_texts(pdf, params[:title], params[:value])
+        end
+      end
+      private_class_method :insert_box
+
+      def insert_texts(pdf, title, value)
+        pdf.text(title, style: :italic)
+        pdf.text(value, align: :right)
+      end
+      private_class_method :insert_texts
+
       # :reek:FeatureEnvy
       def pdf_setup(pdf)
         pdf.bounding_box([0, pdf.cursor], width: page_content_width(pdf)) do

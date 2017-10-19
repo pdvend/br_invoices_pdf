@@ -65,7 +65,7 @@ module BrInvoicesPdf
           sat_params = data[:sat_params]
           access_key + SAT_QRCODE_SEPARATOR + sat_params[:emission_date] +
             SAT_QRCODE_SEPARATOR + sat_params[:emission_hour] +
-            SAT_QRCODE_SEPARATOR + data[:payment][:total].delete('.') + SAT_QRCODE_SEPARATOR +
+            SAT_QRCODE_SEPARATOR + data[:totals][:total].delete('.') + SAT_QRCODE_SEPARATOR +
             data[:company_attributes][:cnpj] + SAT_QRCODE_SEPARATOR +
             sat_params[:document_qr_code_signature]
         end

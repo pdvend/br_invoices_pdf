@@ -19,7 +19,7 @@ module BrInvoicesPdf
       PARSERS = {
         sat_params: Sat,
         document_number: DocumentNumber,
-        payment: Payment,
+        totals: Payment,
         payments: Payments,
         products: ProductsData,
         company_attributes: CompanyAttributes,

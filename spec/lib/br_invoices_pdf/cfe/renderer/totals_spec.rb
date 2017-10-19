@@ -4,7 +4,7 @@ describe BrInvoicesPdf::Cfe::Renderer::Totals do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', cursor: double('cursor'), move_down: nil, bounding_box: nil) }
-    let(:data) { { payment: params } }
+    let(:data) { { totals: params } }
     let(:params) do
       {
         total_price: total_price,

@@ -42,7 +42,7 @@ module BrInvoicesPdf
             result + [[cur[:type], format_currency(cur[:amount])]]
           end
 
-          add_default_values(payments_data, data[:payment])
+          add_default_values(payments_data, data[:totals])
         end
         private_class_method :payments_table_data
 

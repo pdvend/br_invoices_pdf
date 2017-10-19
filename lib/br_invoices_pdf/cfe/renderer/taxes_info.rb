@@ -11,7 +11,7 @@ module BrInvoicesPdf
 
         def execute(pdf, data)
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-            tribute_values(pdf, data[:payment])
+            tribute_values(pdf, data[:totals])
             sat_params = data[:sat_params]
             sat_number(pdf, sat_params[:sat_number])
             date_values(pdf, sat_params)

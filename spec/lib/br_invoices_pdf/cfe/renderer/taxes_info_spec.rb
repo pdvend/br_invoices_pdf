@@ -4,7 +4,7 @@ describe BrInvoicesPdf::Cfe::Renderer::TaxesInfo do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
     let(:pdf) { double('pdf', cursor: double('cursor'), move_down: nil, bounding_box: nil) }
-    let(:data) { { payment: { approximate_value_of_taxes: 12 }, sat_params: sat_params } }
+    let(:data) { { totals: { approximate_value_of_taxes: 12 }, sat_params: sat_params } }
     let(:sat_params) do
       {
         sat_number: sat_number,

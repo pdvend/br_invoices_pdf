@@ -13,7 +13,7 @@ describe BrInvoicesPdf::Cfe::Renderer::QrCode do
     let(:qr_code_size) { (page_width * 0.65).to_i }
     let(:page) { double(margins: { left: 1, right: 1 }, size_with: 1, size: 'A4') }
     let(:data) do
-      { access_key: access_key, sat_params: sat_params, payment: payment,
+      { access_key: access_key, sat_params: sat_params, totals: payment,
         company_attributes: company_attributes }
     end
     let(:sat_params) do
