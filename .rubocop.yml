@@ -19,7 +19,6 @@ Layout/IndentHash:
 AllCops:
   Exclude:
     - 'spec/factories/*.rb'
-  TargetRubyVersion: 2.4
 
 Lint/AmbiguousBlockAssociation:
   Exclude:
