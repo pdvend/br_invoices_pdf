@@ -7,13 +7,14 @@ module BrInvoicesPdf
         subject { described_class.pdf(data, options) }
         let(:data) { double('data') }
         let(:options) { { page_size: 'A1' } }
+        let(:pdf_renderer) { BrInvoicesPdf::Util::PdfRenderer }
 
         context 'create a Prawn document' do
-          let(:prawn_params) { options.merge(page_size: [width, described_class::AUTO_HEIGHT_MOCK]) }
+          let(:prawn_params) { options.merge(page_size: [width, pdf_renderer::AUTO_HEIGHT_MOCK]) }
           before do
             allow(Renderer::BaseRenderer).to receive(:page_paper_width).and_return(width)
           end
-          let(:width) { 100 }
+          let(:width) { 1683.78 }
 
           it do
             expect(Prawn::Document).to receive(:new).with(prawn_params)

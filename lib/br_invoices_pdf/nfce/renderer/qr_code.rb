@@ -4,6 +4,7 @@ module BrInvoicesPdf
   module Nfce
     module Renderer
       module QrCode
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function

@@ -4,6 +4,7 @@ module BrInvoicesPdf
   module Cfe
     module Renderer
       module ProductTable
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function

@@ -5,6 +5,7 @@ module BrInvoicesPdf
     module Renderer
       # :reek:DataClump
       module CompanyIdentification
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function

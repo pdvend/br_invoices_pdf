@@ -4,6 +4,7 @@ module BrInvoicesPdf
   module Nfce
     module Renderer
       module PaymentForms
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function
