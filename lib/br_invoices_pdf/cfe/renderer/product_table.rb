@@ -50,22 +50,6 @@ module BrInvoicesPdf
           table.column([4, 5]).width = width * 0.135
         end
         private_class_method :table_widths
-
-        PRODUCT_TABLE_BASE_DATA = [['CÓD.', 'DESCRIÇÃO', 'QTD.', 'UND.', 'V.UNIT', 'V.TOT']].freeze
-        # :reek:FeatureEnvy
-        def product_table_data(data)
-          data[:products].reduce(PRODUCT_TABLE_BASE_DATA) do |result, cur|
-            result + [[
-              cur[:code],
-              cur[:description],
-              format_number(cur[:quantity]),
-              cur[:unit_label],
-              format_currency(cur[:unit_value]),
-              format_currency(cur[:total_value])
-            ]]
-          end
-        end
-        private_class_method :product_table_data
       end
     end
   end
