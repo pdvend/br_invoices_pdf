@@ -53,6 +53,15 @@ module BrInvoicesPdf
         end
       end
 
+      PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
+      # :reek:FeatureEnvy
+      def mount_payment_data(data)
+        data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
+          result + [[cur[:type], format_currency(cur[:amount])]]
+        end
+      end
+      private_class_method :mount_payment_data
+
       def generate_qr_code_data(qr_code_string, qrcode_size)
         qrcode = RQRCode::QRCode.new(qr_code_string)
         blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob

@@ -30,11 +30,8 @@ module BrInvoicesPdf
         end
         private_class_method :format_table
 
-        PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
         def payments_table_data(data)
-          payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
-            result + [[cur[:type], format_currency(cur[:amount])]]
-          end
+          payments_data = mount_payment_data(data)
 
           add_default_values(payments_data, data[:totals])
         end
