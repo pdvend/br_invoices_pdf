@@ -11,7 +11,7 @@ engines:
       - ruby:
 ratings:
   paths:
-  - lib/**
+  - lib/**/*
 exclude_paths:
 - spec/**/*
 - lib/br_invoices_pdf/nfce/parser/emission_details.rb
