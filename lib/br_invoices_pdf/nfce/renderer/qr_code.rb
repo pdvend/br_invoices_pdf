@@ -45,13 +45,6 @@ module BrInvoicesPdf
         end
         private_class_method :generate_qr_code
 
-        def generate_qr_code_data(qr_code_string, qrcode_size)
-          qrcode = RQRCode::QRCode.new(qr_code_string)
-          blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob
-          StringIO.new(blob)
-        end
-        private_class_method :generate_qr_code_data
-
         def insert_image(pdf, image, options)
           pdf.image(image, options)
           pdf.move_down(options[:height])

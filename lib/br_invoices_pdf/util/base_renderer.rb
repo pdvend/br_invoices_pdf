@@ -53,6 +53,24 @@ module BrInvoicesPdf
         end
       end
 
+      def generate_qr_code_data(qr_code_string, qrcode_size)
+        qrcode = RQRCode::QRCode.new(qr_code_string)
+        blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob
+        StringIO.new(blob)
+      end
+      private_class_method :generate_qr_code_data
+
+      def execute_payment_form(pdf, date_from_table)
+        pdf.font_size(6) do
+          width = page_content_width(pdf)
+          table_data = date_from_table
+          render_table(pdf, table_data, width)
+        end
+
+        pdf.move_down(5)
+      end
+      private_class_method :execute_payment_form
+
       CNPJ_FORMAT = '%02d.%03d.%03d/%04d-%02d'
       # :reek:FeatureEnvy
       def format_cnpj(cnpj)

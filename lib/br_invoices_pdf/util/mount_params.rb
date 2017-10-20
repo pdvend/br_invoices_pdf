@@ -10,6 +10,17 @@ module BrInvoicesPdf
           { **response, param => locate_element(xml, path) }
         end
       end
+
+      def address_params(root_path, local)
+        {
+          streetname: "#{root_path}/ender#{local}/xLgr",
+          number: "#{root_path}/ender#{local}/nro",
+          district: "#{root_path}/ender#{local}/xBairro",
+          city: "#{root_path}/ender#{local}/xMun",
+          state: "#{root_path}/ender#{local}/UF"
+        }.freeze
+      end
+      private_class_method :address_params
     end
   end
 end
