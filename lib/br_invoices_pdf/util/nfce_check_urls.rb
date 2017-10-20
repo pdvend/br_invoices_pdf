@@ -3,8 +3,6 @@
 module BrInvoicesPdf
   module Util
     module NfceCheckUrls
-      module_function
-
       URLS = {
        '12': {
                '1': 'http://www.sefaznet.ac.gov.br/nfce/consulta',
