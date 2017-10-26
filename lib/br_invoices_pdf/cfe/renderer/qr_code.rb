@@ -1,12 +1,15 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       module QrCode
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function
 
-        SAT_QRCODE_SEPARATOR = '|'.freeze
+        SAT_QRCODE_SEPARATOR = '|'
         BARCODE_HEIGHT = 50
 
         def execute(pdf, data)
@@ -50,19 +53,12 @@ module BrInvoicesPdf
         end
         private_class_method :generate_qr_code
 
-        def generate_qr_code_data(qr_code_string, qrcode_size)
-          qrcode = RQRCode::QRCode.new(qr_code_string)
-          blob = qrcode.as_png(size: qrcode_size.to_i, border_modules: 0).to_blob
-          StringIO.new(blob)
-        end
-        private_class_method :generate_qr_code_data
-
         # rubocop:disable Metrics/AbcSize
         def generate_qr_code_string(access_key, data)
           sat_params = data[:sat_params]
           access_key + SAT_QRCODE_SEPARATOR + sat_params[:emission_date] +
             SAT_QRCODE_SEPARATOR + sat_params[:emission_hour] +
-            SAT_QRCODE_SEPARATOR + data[:payment][:total].delete('.') + SAT_QRCODE_SEPARATOR +
+            SAT_QRCODE_SEPARATOR + data[:totals][:total].delete('.') + SAT_QRCODE_SEPARATOR +
             data[:company_attributes][:cnpj] + SAT_QRCODE_SEPARATOR +
             sat_params[:document_qr_code_signature]
         end

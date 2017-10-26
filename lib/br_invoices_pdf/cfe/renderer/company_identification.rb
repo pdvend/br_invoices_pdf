@@ -1,8 +1,11 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       # :reek:DataClump
       module CompanyIdentification
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function

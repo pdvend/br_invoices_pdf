@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'br_invoices_pdf/cfe/parser/access_key'
 require 'br_invoices_pdf/cfe/parser/company_attributes'
 require 'br_invoices_pdf/cfe/parser/cpf'
@@ -14,10 +16,10 @@ module BrInvoicesPdf
     module Parser
       module_function
 
-      PARSERERS = {
+      PARSERS = {
         sat_params: Sat,
         document_number: DocumentNumber,
-        payment: Payment,
+        totals: Payment,
         payments: Payments,
         products: ProductsData,
         company_attributes: CompanyAttributes,
@@ -28,7 +30,7 @@ module BrInvoicesPdf
       }.freeze
 
       def parse(xml)
-        PARSERERS.reduce({}) do |response, (param, parser)|
+        PARSERS.reduce({}) do |response, (param, parser)|
           { **response, param => parser.execute(xml) }
         end
       end

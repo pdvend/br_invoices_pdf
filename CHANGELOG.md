@@ -3,6 +3,7 @@
 ## CHANGELOG
 
 ### Unreleased
+- [Add] PDF generator to NFC-e
 
 ### 0.2.6 [2017-10-06]
 - [Corrigido] Valores de CFE.

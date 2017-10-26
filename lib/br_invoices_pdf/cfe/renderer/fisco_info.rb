@@ -1,7 +1,10 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       module FiscoInfo
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function

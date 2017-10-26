@@ -1,3 +1,7 @@
+# frozen_string_literal: true
+
+require 'stringio'
+
 require 'ox'
 require 'prawn'
 require 'prawn/table'
@@ -39,4 +43,12 @@ module BrInvoicesPdf
   end
 end
 
+require 'br_invoices_pdf/util/xml_locate'
+require 'br_invoices_pdf/util/nfce_check_urls'
+require 'br_invoices_pdf/util/mount_params'
+require 'br_invoices_pdf/util/enum'
+require 'br_invoices_pdf/util/base_renderer'
+require 'br_invoices_pdf/util/pdf_renderer'
+require 'br_invoices_pdf/util/product_table'
 require 'br_invoices_pdf/cfe'
+require 'br_invoices_pdf/nfce'

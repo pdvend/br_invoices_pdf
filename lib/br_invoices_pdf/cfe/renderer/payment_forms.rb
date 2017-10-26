@@ -1,19 +1,16 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       module PaymentForms
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function
 
         def execute(pdf, data)
-          pdf.font_size(6) do
-            width = page_content_width(pdf)
-            table_data = payments_table_data(data)
-            render_table(pdf, table_data, width)
-          end
-
-          pdf.move_down(5)
+          execute_payment_form(pdf, payments_table_data(data))
         end
 
         def render_table(pdf, table_data, width)
@@ -33,13 +30,10 @@ module BrInvoicesPdf
         end
         private_class_method :format_table
 
-        PAYMENTS_TABLE_BASE_DATA = [['FORMA DE PAGAMENTO', 'VALOR']].freeze
         def payments_table_data(data)
-          payments_data = data[:payments].reduce(PAYMENTS_TABLE_BASE_DATA) do |result, cur|
-            result + [[cur[:type], format_currency(cur[:amount])]]
-          end
+          payments_data = mount_payment_data(data)
 
-          add_default_values(payments_data, data[:payment])
+          add_default_values(payments_data, data[:totals])
         end
         private_class_method :payments_table_data
 

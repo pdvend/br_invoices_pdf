@@ -1,14 +1,17 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     module Renderer
       module TaxesInfo
+        extend Util::BaseRenderer
         extend BaseRenderer
 
         module_function
 
         def execute(pdf, data)
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-            tribute_values(pdf, data[:payment])
+            tribute_values(pdf, data[:totals])
             sat_params = data[:sat_params]
             sat_number(pdf, sat_params[:sat_number])
             date_values(pdf, sat_params)
@@ -17,7 +20,7 @@ module BrInvoicesPdf
 
         def date_values(pdf, data)
           time = data[:emission_date] + data[:emission_hour]
-          pdf.text(DateTime.parse(time).strftime('%d/%m/%Y %H:%M:%S'), align: :center)
+          pdf.text(Date.parse(time).strftime('%d/%m/%Y %H:%M:%S'), align: :center)
         end
         private_class_method :date_values
 

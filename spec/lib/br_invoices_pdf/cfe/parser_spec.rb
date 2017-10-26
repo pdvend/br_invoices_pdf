@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BrInvoicesPdf
   module Cfe
     describe Parser do
@@ -19,7 +21,7 @@ module BrInvoicesPdf
           {
             sat_params: sat_response,
             document_number: document_number_response,
-            payment: payment_response,
+            totals: payment_response,
             payments: payments_response,
             products: products_data_response,
             company_attributes: company_attributes_response,

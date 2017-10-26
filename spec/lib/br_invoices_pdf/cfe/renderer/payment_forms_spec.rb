@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
   describe '.execute' do
     subject { described_class.execute(pdf, data) }
@@ -5,7 +7,7 @@ describe BrInvoicesPdf::Cfe::Renderer::PaymentForms do
     let(:table) { double('table', columns: columns, row: row) }
     let(:row) { double('row', 'font_style=' => 1) }
     let(:columns) { double('column', 'valign=' => 1, 'align=' => 1) }
-    let(:data) { { payments: [{ type: type, amount: amount }], payment: payment } }
+    let(:data) { { payments: [{ type: type, amount: amount }], totals: payment } }
     let(:payment) { { cashback: cashback, paid: paid } }
     let(:type) { 'SOME' }
     let(:amount) { '12,00' }

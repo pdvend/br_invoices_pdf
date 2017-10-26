@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 describe BrInvoicesPdf::Generator do
   let(:renderer) { double('renderer') }
   let(:parser) { double('parser') }
