@@ -3,6 +3,8 @@
 ## CHANGELOG
 
 ### Unreleased
+
+### 0.2.7 [2017-10-06]
 - [Add] PDF generator to NFC-e
 
 ### 0.2.6 [2017-10-06]
