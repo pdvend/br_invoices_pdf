@@ -5,7 +5,7 @@ require 'br_invoices_pdf/nfce/renderer/base_renderer'
 require 'br_invoices_pdf/nfce/renderer'
 
 module BrInvoicesPdf
-  module Cfe
+  module Nfce
     BrInvoicesPdf.register(:nfce, Nfce::Renderer, Nfce::Parser)
   end
 end
