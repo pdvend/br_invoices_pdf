@@ -15,17 +15,21 @@ module BrInvoicesPdf
 
         def execute(xml)
           identification_type = identification_type_by(xml)
+          root_path = dest_root_path(xml)
+
           {
             identification_type: identification_type,
-            identification: locate_element(xml, "#{dest_root_path(xml)}/#{identification_type}"),
-            address: mount(xml, address_params(xml, dest_root_path(xml), 'Dest'))
+            identification: locate_element(xml, "#{root_path}/#{identification_type}"),
+            address: mount(xml, address_params(xml, root_path, 'Dest'))
           }
         end
 
         def identification_type_by(xml)
-          return 'CNPJ' if locate_element(xml, "#{dest_root_path(xml)}/CNPJ")
-          return 'CPF' if locate_element(xml, "#{dest_root_path(xml)}/CPF")
-          return 'idEstrangeiro' if locate_element(xml, "#{dest_root_path(xml)}/idEstrangeiro")
+          root_path = dest_root_path(xml)
+
+          return 'CNPJ' if locate_element(xml, "#{root_path}/CNPJ")
+          return 'CPF' if locate_element(xml, "#{root_path}/CPF")
+          return 'idEstrangeiro' if locate_element(xml, "#{root_path}/idEstrangeiro")
         end
         private_class_method :identification_type_by
       end

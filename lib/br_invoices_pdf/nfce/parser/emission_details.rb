@@ -29,32 +29,36 @@ module BrInvoicesPdf
 
         def normal_params(xml)
           {
-            type: EMISSION_TYPES[locate_element(xml, "#{emission_root_path(xml)}/tpEmis").to_sym],
-            number: locate_element(xml, "#{emission_root_path(xml)}/nNF"),
-            serie: locate_element(xml, "#{emission_root_path(xml)}/serie"),
-            emission_timestamp: locate_element_to_date(xml, "#{emission_root_path(xml)}/dhEmi"),
-            receival_timestamp: locate_element_to_date(xml, 'protNFe/infProt/dhRecbto'),
-            check_url: check_url(xml),
-            access_key: locate_element(xml, 'protNFe/infProt/chNFe'),
+            **contingency_params(xml),
             qrcode_url: xml.locate('NFe/infNFeSupl/qrCode').first.nodes.first.value,
+            receival_timestamp: locate_element_to_date(xml, 'protNFe/infProt/dhRecbto'),
+            access_key: locate_element(xml, 'protNFe/infProt/chNFe'),
             authorization_protocol: locate_element(xml, 'protNFe/infProt/nProt')
           }
         end
 
         def contingency_params(xml)
-          {
-            type: EMISSION_TYPES[locate_element(xml, "#{emission_root_path(xml)}/tpEmis").to_sym],
-            number: locate_element(xml, "#{emission_root_path(xml)}/nNF"),
-            serie: locate_element(xml, "#{emission_root_path(xml)}/serie"),
-            emission_timestamp: locate_element_to_date(xml, "#{emission_root_path(xml)}/dhEmi"),
-            check_url: check_url(xml),
-            qrcode_url: xml.locate('infNFeSupl/qrCode').first.nodes.first.value
+          emission_path = emission_root_path(xml)
+
+          hash = {
+            type: EMISSION_TYPES[locate_element(xml, "#{emission_path}/tpEmis").to_sym],
+            number: locate_element(xml, "#{emission_path}/nNF"),
+            serie: locate_element(xml, "#{emission_path}/serie"),
+            emission_timestamp: locate_element_to_date(xml, "#{emission_path}/dhEmi"),
+            check_url: check_url(xml)
           }
+
+          node = xml.locate('infNFeSupl/qrCode').first
+
+          hash[:qrcode_url] = node.nodes.first.value if node
+          hash
         end
 
         def check_url(xml)
-          check_urls = Util::NfceCheckUrls::URLS[locate_element(xml, "#{emission_root_path(xml)}/cUF").to_sym]
-          check_urls[locate_element(xml, "#{emission_root_path(xml)}/tpAmb").to_sym]
+          emission_path = emission_root_path(xml)
+
+          check_urls = Util::NfceCheckUrls::URLS[locate_element(xml, "#{emission_path}/cUF").to_sym]
+          check_urls[locate_element(xml, "#{emission_path}/tpAmb").to_sym]
         end
         private_class_method :check_url
 

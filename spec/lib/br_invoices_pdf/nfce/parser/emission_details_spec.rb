@@ -25,6 +25,7 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
       locate_element_mock("#{described_class.emission_root_path(xml)}/tpAmb", env_type)
       locate_element_mock('protNFe/infProt/chNFe', access_key)
       allow(xml).to receive(:locate).with('NFe/infNFeSupl/qrCode').and_return([qr_code_nodes])
+      allow(xml).to receive(:locate).with('infNFeSupl/qrCode').and_return([])
       locate_element_mock('protNFe/infProt/nProt', authorization_protocol)
     end
 

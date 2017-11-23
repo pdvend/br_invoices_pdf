@@ -13,11 +13,13 @@ module BrInvoicesPdf
         end
 
         def execute(xml)
+          root_path = total_root_path(xml)
+
           {
             items: Products.execute(xml).count,
-            subtotal: locate_element(xml, "#{total_root_path(xml)}/vProd"),
-            discounts: locate_element(xml, "#{total_root_path(xml)}/vDesc"),
-            total: locate_element(xml, "#{total_root_path(xml)}/vNF"),
+            subtotal: locate_element(xml, "#{root_path}/vProd"),
+            discounts: locate_element(xml, "#{root_path}/vDesc"),
+            total: locate_element(xml, "#{root_path}/vNF"),
             cashback: '0.00'
           }
         end

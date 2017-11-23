@@ -14,11 +14,12 @@ module BrInvoicesPdf
         end
 
         def execute(xml)
+          path = emit_root_path(xml)
           {
-            name: locate_element(xml, "#{emit_root_path(xml)}/xNome"),
-            cnpj: locate_element(xml, "#{emit_root_path(xml)}/CNPJ"),
-            state_number: locate_element(xml, "#{emit_root_path(xml)}/IE"),
-            address: mount(xml, address_params(xml, emit_root_path(xml), 'Emit'))
+            name: locate_element(xml, "#{path}/xNome"),
+            cnpj: locate_element(xml, "#{path}/CNPJ"),
+            state_number: locate_element(xml, "#{path}/IE"),
+            address: mount(xml, address_params(xml, path, 'Emit'))
           }
         end
       end
