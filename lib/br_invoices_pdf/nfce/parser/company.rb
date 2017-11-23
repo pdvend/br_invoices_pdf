@@ -9,14 +9,16 @@ module BrInvoicesPdf
 
         module_function
 
-        EMIT_ROOT_PATH = "#{Util::XmlLocate::ROOT_PATH}/emit"
+        def emit_root_path(xml)
+          "#{root_path(xml)}/emit"
+        end
 
         def execute(xml)
           {
-            name: locate_element(xml, "#{EMIT_ROOT_PATH}/xNome"),
-            cnpj: locate_element(xml, "#{EMIT_ROOT_PATH}/CNPJ"),
-            state_number: locate_element(xml, "#{EMIT_ROOT_PATH}/IE"),
-            address: mount(xml, address_params(EMIT_ROOT_PATH, 'Emit'))
+            name: locate_element(xml, "#{emit_root_path(xml)}/xNome"),
+            cnpj: locate_element(xml, "#{emit_root_path(xml)}/CNPJ"),
+            state_number: locate_element(xml, "#{emit_root_path(xml)}/IE"),
+            address: mount(xml, address_params(xml, emit_root_path(xml), 'Emit'))
           }
         end
       end

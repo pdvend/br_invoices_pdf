@@ -8,10 +8,8 @@ module BrInvoicesPdf
 
         module_function
 
-        ROOT_PATH = Util::XmlLocate::ROOT_PATH
-
         def execute(xml)
-          node_payments = xml.locate("#{ROOT_PATH}/pag")
+          node_payments = xml.locate("#{root_path(xml)}/pag")
 
           node_payments.map(&method(:payment_by))
         end

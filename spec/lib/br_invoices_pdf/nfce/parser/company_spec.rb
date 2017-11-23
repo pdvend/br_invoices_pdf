@@ -13,14 +13,16 @@ describe BrInvoicesPdf::Nfce::Parser::Company do
     end
 
     before do
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/xNome", name)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/CNPJ", cnpj)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/IE", state_number)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xLgr", streetname)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/nro", number)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xBairro", district)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/xMun", city)
-      locate_element_mock("#{described_class::EMIT_ROOT_PATH}/enderEmit/UF", state)
+      allow(xml).to receive(:name).and_return('NFe')
+
+      locate_element_mock("#{described_class.emit_root_path(xml)}/xNome", name)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/CNPJ", cnpj)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/IE", state_number)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/enderEmit/xLgr", streetname)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/enderEmit/nro", number)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/enderEmit/xBairro", district)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/enderEmit/xMun", city)
+      locate_element_mock("#{described_class.emit_root_path(xml)}/enderEmit/UF", state)
     end
 
     let(:name) { 'Nome' }

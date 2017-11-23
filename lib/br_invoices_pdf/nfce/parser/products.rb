@@ -8,8 +8,6 @@ module BrInvoicesPdf
 
         module_function
 
-        ROOT_PATH = Util::XmlLocate::ROOT_PATH
-
         FIELDS = { code: 'cProd',
                    description: 'xProd',
                    quantity: 'qCom',
@@ -18,7 +16,7 @@ module BrInvoicesPdf
                    total_value: 'vProd' }.freeze
 
         def execute(xml)
-          node_products = xml.locate("#{ROOT_PATH}/det")
+          node_products = xml.locate("#{root_path(xml)}/det")
           products_params(node_products) if node_products
         end
 

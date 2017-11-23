@@ -5,11 +5,13 @@ module BrInvoicesPdf
     module XmlLocate
       module_function
 
-      ROOT_PATH = 'NFe/infNFe'
-
       def locate_element(xml, path)
         element = xml.locate(path).first
         element.text if element.is_a?(Ox::Element)
+      end
+
+      def root_path(xml)
+        xml.name == 'NFe' ? 'infNFe' : 'NFe/infNFe'
       end
 
       def node_locate(element, path)

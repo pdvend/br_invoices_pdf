@@ -11,7 +11,7 @@ module BrInvoicesPdf
         end
       end
 
-      def address_params(root_path, local)
+      def address_params(_xml, root_path, local)
         {
           streetname: "#{root_path}/ender#{local}/xLgr",
           number: "#{root_path}/ender#{local}/nro",
