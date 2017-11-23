@@ -14,9 +14,10 @@ describe BrInvoicesPdf::Nfce::Parser::Totals do
 
     before do
       allow(BrInvoicesPdf::Nfce::Parser::Products).to receive(:execute).and_return(items)
-      locate_element_mock("#{described_class::TOTAL_ROOT_PATH}/vProd", subtotal)
-      locate_element_mock("#{described_class::TOTAL_ROOT_PATH}/vDesc", discounts)
-      locate_element_mock("#{described_class::TOTAL_ROOT_PATH}/vNF", total)
+      allow(xml).to receive(:name).and_return('protNFe')
+      locate_element_mock("#{described_class.total_root_path(xml)}/vProd", subtotal)
+      locate_element_mock("#{described_class.total_root_path(xml)}/vDesc", discounts)
+      locate_element_mock("#{described_class.total_root_path(xml)}/vNF", total)
     end
 
     let(:items) { %w[item_1 Item_2] }

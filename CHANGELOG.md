@@ -3,6 +3,7 @@
 ## CHANGELOG
 
 ### Unreleased
+- [Corrigindo] NFC-e em contingência
 
 ### 0.2.7 [2017-10-06]
 - [Add] PDF generator to NFC-e

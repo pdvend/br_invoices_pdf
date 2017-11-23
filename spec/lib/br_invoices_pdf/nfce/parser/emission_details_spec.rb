@@ -15,15 +15,17 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
     end
 
     before do
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/tpEmis", type_code)
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/nNF", number)
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/serie", serie)
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/dhEmi", emission_timestamp)
+      allow(xml).to receive(:name).and_return('protNFe')
+      locate_element_mock("#{described_class.emission_root_path(xml)}/tpEmis", type_code)
+      locate_element_mock("#{described_class.emission_root_path(xml)}/nNF", number)
+      locate_element_mock("#{described_class.emission_root_path(xml)}/serie", serie)
+      locate_element_mock("#{described_class.emission_root_path(xml)}/dhEmi", emission_timestamp)
       locate_element_mock('protNFe/infProt/dhRecbto', receival_timestamp)
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/cUF", uf_code)
-      locate_element_mock("#{described_class::EMISSION_ROOT_PATH}/tpAmb", env_type)
+      locate_element_mock("#{described_class.emission_root_path(xml)}/cUF", uf_code)
+      locate_element_mock("#{described_class.emission_root_path(xml)}/tpAmb", env_type)
       locate_element_mock('protNFe/infProt/chNFe', access_key)
       allow(xml).to receive(:locate).with('NFe/infNFeSupl/qrCode').and_return([qr_code_nodes])
+      allow(xml).to receive(:locate).with('infNFeSupl/qrCode').and_return([])
       locate_element_mock('protNFe/infProt/nProt', authorization_protocol)
     end
 
@@ -43,8 +45,8 @@ describe BrInvoicesPdf::Nfce::Parser::EmissionDetails do
       it { expect(subject[:type]).to eq(type) }
       it { expect(subject[:number]).to eq(number) }
       it { expect(subject[:serie]).to eq(serie) }
-      it { expect(subject[:emission_timestamp]).to eq(Time.new(emission_timestamp).utc) }
-      it { expect(subject[:receival_timestamp]).to eq(Time.new(receival_timestamp).utc) }
+      it { expect(subject[:emission_timestamp]).to eq(Time.parse(emission_timestamp).utc) }
+      it { expect(subject[:receival_timestamp]).to eq(Time.parse(receival_timestamp).utc) }
       it { expect(subject[:check_url]).to eq('http://dec.fazenda.df.gov.br/NFCE/') }
       it { expect(subject[:access_key]).to eq(access_key) }
       it { expect(subject[:qrcode_url]).to eq(qrcode_url) }

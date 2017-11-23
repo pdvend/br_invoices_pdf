@@ -22,6 +22,7 @@ describe BrInvoicesPdf::Nfce::Parser::Products do
 
     before do
       allow(xml).to receive(:locate).and_return(locate_response)
+      allow(xml).to receive(:name).and_return('protNFe')
 
       locate_element_mock('cProd', code)
       locate_element_mock('xProd', description)

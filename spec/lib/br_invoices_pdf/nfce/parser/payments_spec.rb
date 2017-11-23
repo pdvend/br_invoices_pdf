@@ -18,6 +18,8 @@ describe BrInvoicesPdf::Nfce::Parser::Payments do
 
     before do
       allow(xml).to receive(:locate).and_return([node_payments])
+      allow(xml).to receive(:name).and_return('protNFe')
+
       locate_element_mock('tPag', type)
       locate_element_mock('vPag', amount)
       locate_element_mock('vTroco', cashback)

@@ -13,12 +13,13 @@ describe BrInvoicesPdf::Nfce::Parser::Customer do
     end
 
     before do
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/CNPJ", cnpj)
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/enderDest/xLgr", streetname)
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/enderDest/nro", number)
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/enderDest/xBairro", district)
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/enderDest/xMun", city)
-      locate_element_mock("#{described_class::DEST_ROOT_PATH}/enderDest/UF", state)
+      allow(xml).to receive(:name).and_return('NFe')
+      locate_element_mock("#{described_class.dest_root_path(xml)}/CNPJ", cnpj)
+      locate_element_mock("#{described_class.dest_root_path(xml)}/enderDest/xLgr", streetname)
+      locate_element_mock("#{described_class.dest_root_path(xml)}/enderDest/nro", number)
+      locate_element_mock("#{described_class.dest_root_path(xml)}/enderDest/xBairro", district)
+      locate_element_mock("#{described_class.dest_root_path(xml)}/enderDest/xMun", city)
+      locate_element_mock("#{described_class.dest_root_path(xml)}/enderDest/UF", state)
     end
 
     let(:cnpj) { '99.999.999/9999-99' }
@@ -44,8 +45,8 @@ describe BrInvoicesPdf::Nfce::Parser::Customer do
 
     context 'when CPF' do
       before do
-        locate_element_mock("#{described_class::DEST_ROOT_PATH}/CNPJ", nil)
-        locate_element_mock("#{described_class::DEST_ROOT_PATH}/CPF", cpf)
+        locate_element_mock("#{described_class.dest_root_path(xml)}/CNPJ", nil)
+        locate_element_mock("#{described_class.dest_root_path(xml)}/CPF", cpf)
       end
       let(:cpf) { '11111111111' }
 
@@ -55,9 +56,9 @@ describe BrInvoicesPdf::Nfce::Parser::Customer do
 
     context 'when idEstrangeiro' do
       before do
-        locate_element_mock("#{described_class::DEST_ROOT_PATH}/CNPJ", nil)
-        locate_element_mock("#{described_class::DEST_ROOT_PATH}/CPF", nil)
-        locate_element_mock("#{described_class::DEST_ROOT_PATH}/idEstrangeiro", idEstrangeiro)
+        locate_element_mock("#{described_class.dest_root_path(xml)}/CNPJ", nil)
+        locate_element_mock("#{described_class.dest_root_path(xml)}/CPF", nil)
+        locate_element_mock("#{described_class.dest_root_path(xml)}/idEstrangeiro", idEstrangeiro)
       end
 
       let(:idEstrangeiro) { '11111111111' }
