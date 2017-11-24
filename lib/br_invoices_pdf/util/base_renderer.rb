@@ -87,10 +87,10 @@ module BrInvoicesPdf
                cnpj[8, 4].to_i, cnpj[12, 2].to_i)
       end
 
-      CPF_FORMAT = '%d.%d.%d-%d'
+      CPF_FORMAT = '%03d.%03d.%03d-%02d'
       # :reek:FeatureEnvy
       def format_cpf(cpf)
-        format(CPF_FORMAT, cpf[0, 3], cpf[3, 3], cpf[6, 3], cpf[9, 2])
+        format(CPF_FORMAT, cpf[0, 3].to_i, cpf[3, 3].to_i, cpf[6, 3].to_i, cpf[9, 2].to_i)
       end
 
       # :reek:FeatureEnvy
