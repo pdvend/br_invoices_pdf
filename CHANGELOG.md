@@ -2,7 +2,10 @@
 
 ## CHANGELOG
 
-### Unreleased
+### 0.2.9
+- [Corrigindo] Format do CPF
+
+### 0.2.8
 - [Corrigindo] NFC-e em contingência
 
 ### 0.2.7 [2017-10-06]
