@@ -1,4 +1,3 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 lib = File.expand_path('../lib', __FILE__)
@@ -24,19 +23,20 @@ Gem::Specification.new do |spec|
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'prawn', '~> 2.2.2'
-  spec.add_dependency 'prawn-table', '~> 0.2.1'
-  spec.add_dependency 'ox', '~> 2.5.0'
   spec.add_dependency 'barby', '~> 0.5.1'
   spec.add_dependency 'chunky_png', '~> 1.3.8'
+  spec.add_dependency 'ox', '~> 2.8.2'
+  spec.add_dependency 'prawn', '~> 2.2.2'
+  spec.add_dependency 'prawn-table', '~> 0.2.1'
   spec.add_dependency 'rqrcode', '~> 0.10.1'
 
   spec.add_development_dependency 'bundler', '~> 1.13'
-  spec.add_development_dependency 'rake', '~> 12.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'simplecov', '~> 0.14'
-  spec.add_development_dependency 'coveralls'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'reek'
   spec.add_development_dependency 'byebug'
+  spec.add_development_dependency 'coveralls'
+  spec.add_development_dependency 'rake', '~> 12.0'
+  spec.add_development_dependency 'reek'
+  spec.add_development_dependency 'rspec', '~> 3.0'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'simplecov', '~> 0.14'
 end
+# rubocop:enable Metrics/BlockLength

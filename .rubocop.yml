@@ -31,4 +31,8 @@ Metrics/BlockLength:
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
-    '%i': '()'
+   '%i': '()'
+
+# TODO: Check when this bug is solved: https://github.com/bbatsov/rubocop/issues/5223
+Style/FormatStringToken:
+  Enabled: false

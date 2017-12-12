@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+### 0.2.10 [2017-12-12]
+- [Corrigindo] Versão da gem Ox
+
 ### 0.2.9 [2017-11-24]
 - [Corrigindo] Format do CPF
 
