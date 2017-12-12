@@ -63,6 +63,7 @@ module BrInvoicesPdf
             sat_params[:document_qr_code_signature]
         end
         private_class_method :generate_qr_code_string
+        # rubocop:enable Metrics/AbcSize
 
         def generate_barcodes(pdf, pdf_options)
           options = barcode_options(pdf, pdf_options[:page_width], pdf_options[:barcodes_size])

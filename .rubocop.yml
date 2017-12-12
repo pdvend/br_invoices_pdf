@@ -31,4 +31,4 @@ Metrics/BlockLength:
 
 Style/PercentLiteralDelimiters:
   PreferredDelimiters:
-    '%i': '()'
+   '%i': '()'
