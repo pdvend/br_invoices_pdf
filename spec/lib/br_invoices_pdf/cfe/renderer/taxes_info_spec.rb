@@ -17,7 +17,7 @@ describe BrInvoicesPdf::Cfe::Renderer::TaxesInfo do
     let(:emission_hour) { '131313' }
     let(:base_renderer) { BrInvoicesPdf::Cfe::Renderer::BaseRenderer }
     let(:width) { 100 }
-    let(:formated_time) { Date.parse(emission_date + emission_hour).strftime('%d/%m/%Y %H:%M:%S') }
+    let(:formated_time) { DateTime.parse(emission_date + emission_hour).strftime('%d/%m/%Y %H:%M:%S') }
     let(:taxes_info) { "Informação dos tributos totais incidentes (Lei Federal 12.741/2012):\n R$ 12,00\n\n" }
     before do
       allow_any_instance_of(base_renderer).to receive(:box).and_yield

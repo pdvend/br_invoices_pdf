@@ -20,7 +20,7 @@ module BrInvoicesPdf
 
         def date_values(pdf, data)
           time = data[:emission_date] + data[:emission_hour]
-          pdf.text(Date.parse(time).strftime('%d/%m/%Y %H:%M:%S'), align: :center)
+          pdf.text(DateTime.parse(time).strftime('%d/%m/%Y %H:%M:%S'), align: :center)
         end
         private_class_method :date_values
 
