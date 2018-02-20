@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+### 0.2.12 [2018-02-20]
+- [Corrigido] Encode dos produtos
+
 ### 0.2.10 [2017-12-12]
 - [Corrigindo] Versão da gem Ox
 
