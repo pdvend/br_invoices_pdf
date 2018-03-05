@@ -25,7 +25,7 @@ Gem::Specification.new do |spec|
 
   spec.add_dependency 'barby', '~> 0.5.1'
   spec.add_dependency 'chunky_png', '~> 1.3.8'
-  spec.add_dependency 'ox', '~> 2.8.2'
+  spec.add_dependency 'ox', '~> 2.8.4'
   spec.add_dependency 'prawn', '~> 2.2.2'
   spec.add_dependency 'prawn-table', '~> 0.2.1'
   spec.add_dependency 'rqrcode', '~> 0.10.1'
