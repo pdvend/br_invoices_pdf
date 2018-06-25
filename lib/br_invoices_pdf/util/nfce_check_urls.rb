@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+# rubocop:disable Metrics/ModuleLength
 module BrInvoicesPdf
   module Util
     module NfceCheckUrls
@@ -95,8 +96,17 @@ module BrInvoicesPdf
        '17': {
               '1': 'http://apps.sefaz.to.gov.br/portal-nfce/consultarNFCe.jsf',
               '2': 'http://apps.sefaz.to.gov.br/portal-nfce-homologacao/consultarNFCe.jsf'
+             },
+       '52': {
+              '1': 'http://www.nfce.go.gov.br/post/ver/214278/consumid',
+              '2': 'http://www.nfce.go.gov.br/post/ver/214413/consulta-nfc-e-homologacao'
+             },
+       '26': {
+              '1': 'http://nfce.sefaz.pe.gov.br/nfce-web/consultarNFCe',
+              '2': 'http://nfcehomolog.sefaz.pe.gov.br/nfce-web/consultarNFCe'
              }
       }.freeze
     end
   end
 end
+# rubocop:enable Metrics/ModuleLength

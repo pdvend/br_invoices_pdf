@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+### 0.2.14 [2018-06-25]
+- [Corrigido] Adicionando novas urls da sefaz para uf
+
 ### 0.2.13 [2018-03-05]
 - [Corrigido] Atualizando gem Ox
 
