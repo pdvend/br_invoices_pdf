@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.15 [2018-07-10]
+- [Corrigido] Tributos na NFCE
+
 ### 0.2.14 [2018-06-25]
 - [Corrigido] Adicionando novas urls da sefaz para uf
 

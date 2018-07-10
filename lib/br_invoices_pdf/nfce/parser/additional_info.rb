@@ -9,7 +9,8 @@ module BrInvoicesPdf
         module_function
 
         def execute(xml)
-          locate_element(xml, 'NFe/infAdic/infCpl')
+          tribute = locate_element(xml ,"#{root_path(xml)}/det/imposto/vTotTrib")
+          tribute ? tribute : 0
         end
       end
     end
