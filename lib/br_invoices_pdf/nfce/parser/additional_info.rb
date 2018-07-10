@@ -9,8 +9,8 @@ module BrInvoicesPdf
         module_function
 
         def execute(xml)
-          tribute = locate_element(xml ,"#{root_path(xml)}/det/imposto/vTotTrib")
-          tribute ? tribute : 0
+          tribute = locate_element(xml, "#{root_path(xml)}/det/imposto/vTotTrib")
+          tribute || 0
         end
       end
     end
