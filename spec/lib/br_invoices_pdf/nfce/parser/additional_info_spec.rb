@@ -13,7 +13,9 @@ describe BrInvoicesPdf::Nfce::Parser::AdditionalInfo do
     end
 
     before do
-      locate_element_mock('NFe/infAdic/infCpl', text)
+      allow_any_instance_of(BrInvoicesPdf::Util::XmlLocate).to receive(:root_path)
+        .and_return('infNFe')
+      locate_element_mock('infNFe/det/imposto/vTotTrib', text)
     end
 
     let(:text) { 'Some string' }
