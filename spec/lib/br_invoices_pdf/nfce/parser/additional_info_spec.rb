@@ -10,10 +10,12 @@ describe BrInvoicesPdf::Nfce::Parser::AdditionalInfo do
       base_parser_module = BrInvoicesPdf::Util::XmlLocate
       allow_any_instance_of(base_parser_module).to receive(:locate_element)
         .with(xml, path).and_return(value)
+      allow_any_instance_of(base_parser_module).to receive(:root_path)
+        .and_return('infNFe')
     end
 
     before do
-      locate_element_mock('NFe/infAdic/infCpl', text)
+      locate_element_mock('infNFe/det/imposto/vTotTrib', text)
     end
 
     let(:text) { 'Some string' }
