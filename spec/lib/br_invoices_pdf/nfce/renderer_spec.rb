@@ -5,7 +5,7 @@ module BrInvoicesPdf
     describe Renderer do
       describe '.parse' do
         subject { described_class.pdf(data, options) }
-        let(:data) { double('data') }
+        let(:data) { {} }
         let(:options) { { page_size: 'A1' } }
         let(:pdf_renderer) { BrInvoicesPdf::Util::PdfRenderer }
 
@@ -30,6 +30,7 @@ module BrInvoicesPdf
             expect(Renderer::Totals).to receive(:execute)
             expect(Renderer::PaymentForms).to receive(:execute)
             expect(Renderer::TaxesInfo).to receive(:execute)
+            expect(Renderer::ProconInfo).to receive(:execute)
             expect(Renderer::FiscalMessage).to receive(:execute)
             expect(Renderer::CustomerIdentification).to receive(:execute)
             expect(Renderer::QrCode).to receive(:execute)

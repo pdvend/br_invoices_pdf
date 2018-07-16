@@ -7,6 +7,7 @@ require 'br_invoices_pdf/nfce/renderer/product_table'
 require 'br_invoices_pdf/nfce/renderer/totals'
 require 'br_invoices_pdf/nfce/renderer/payment_forms'
 require 'br_invoices_pdf/nfce/renderer/taxes_info'
+require 'br_invoices_pdf/nfce/renderer/procon_info'
 require 'br_invoices_pdf/nfce/renderer/fiscal_message'
 require 'br_invoices_pdf/nfce/renderer/qr_code'
 
@@ -24,6 +25,7 @@ module BrInvoicesPdf
         Totals,
         PaymentForms,
         TaxesInfo,
+        ProconInfo,
         FiscalMessage,
         CustomerIdentification,
         QrCode
