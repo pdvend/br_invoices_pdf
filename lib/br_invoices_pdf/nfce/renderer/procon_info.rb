@@ -10,12 +10,13 @@ module BrInvoicesPdf
         module_function
 
         def execute(pdf, data)
-          procon_message =  data[:additional_variables][:procon_message]
+          procon_message = data[:additional_variables][:procon_message]
 
-          unless ['', nil].include? procon_message
-            box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
-              procon_message(pdf, procon_message)
-            end
+          puts "procon: #{procon_message}"
+
+          return if ['', nil].include? procon_message
+          box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
+            procon_message(pdf, procon_message)
           end
         end
 
