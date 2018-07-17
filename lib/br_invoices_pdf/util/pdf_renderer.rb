@@ -13,6 +13,8 @@ module BrInvoicesPdf
       def generate_pdf(data, options, renderers)
         page_width = Util::BaseRenderer.page_paper_width(options[:page_size])
 
+        data[:additional_variables] = options[:additional_variables] || {}
+
         Prawn::Document.new(options.merge(page_size: [page_width, AUTO_HEIGHT_MOCK])) do |pdf|
           pdf_content(pdf, data, page_width: page_width, renderers: renderers)
         end

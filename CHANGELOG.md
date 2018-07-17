@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.16 [2018-07-16]
+- [Adicionado] Mensagem do procon
+
 ## 0.2.15 [2018-07-10]
 - [Corrigido] Tributos na NFCE
 
