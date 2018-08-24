@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.17 [2018-08-24]
+- [Corrigido] casos de caracteres especiais em documentos fiscais
+
 ## 0.2.16 [2018-07-16]
 - [Adicionado] Mensagem do procon
 
