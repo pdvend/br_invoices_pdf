@@ -41,7 +41,7 @@ module BrInvoicesPdf
           emission_path = emission_root_path(xml)
 
           hash = {
-            type: EMISSION_TYPES[locate_element(xml, "#{emission_path}/tpEmis").to_sym],
+            type: EMISSION_TYPES[(locate_element(xml, "#{emission_path}/tpEmis") || '1').to_sym],
             number: locate_element(xml, "#{emission_path}/nNF"),
             serie: locate_element(xml, "#{emission_path}/serie"),
             emission_timestamp: locate_element_to_date(xml, "#{emission_path}/dhEmi"),
