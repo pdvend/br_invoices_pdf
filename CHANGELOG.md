@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.18 [2018-08-30]
+- [Corrigido] tipo de emissão não encontrado no xml
+
 ## 0.2.17 [2018-08-24]
 - [Corrigido] casos de caracteres especiais em documentos fiscais
 
