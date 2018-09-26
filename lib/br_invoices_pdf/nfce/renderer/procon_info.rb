@@ -13,6 +13,7 @@ module BrInvoicesPdf
           procon_message = data[:additional_variables][:procon_message]
 
           return if ['', nil].include? procon_message
+
           box(pdf, [0, pdf.cursor], page_content_width(pdf)) do
             procon_message(pdf, procon_message)
           end
