@@ -9,9 +9,9 @@ module BrInvoicesPdf
         module_function
 
         def execute(xml)
-          xml_version = xml.locate("#{root_path(xml)}")[0].attributes[:versao]
+          xml_version = xml.locate(root_path(xml).to_s)[0].attributes[:versao]
 
-          return payments_new_version(xml) if xml_version[0] == "4"
+          return payments_new_version(xml) if xml_version[0] == '4'
 
           payments_old_version(xml)
         end
