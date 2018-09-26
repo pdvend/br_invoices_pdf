@@ -13,7 +13,6 @@ module BrInvoicesPdf
             node = element.nodes.first
             field = element.attributes[:xCampo]
             next unless node && field
-
             {
               text: node.text,
               field: field

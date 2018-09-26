@@ -26,13 +26,11 @@ module BrInvoicesPdf
   def generate(type, xml, options = {})
     generator = @generators[type]
     raise(Errors::InvalidDocumentType, type) unless generator
-
     generator.generate(xml, options)
   end
 
   def register(type, renderer, parser)
     raise(ArgumentError, "Expected Symbol or String to type. Received #{type.class}") unless valid_type?(type)
-
     @generators[type.to_sym] = Generator.new(renderer, parser)
   end
 

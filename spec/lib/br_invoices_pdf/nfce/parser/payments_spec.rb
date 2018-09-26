@@ -9,7 +9,6 @@ describe BrInvoicesPdf::Nfce::Parser::Payments do
     let(:type) { '03' }
     let(:amount) { 99.9 }
     let(:cashback) { 1.00 }
-    let(:version) { [double('xml', attributes: { versao: ['3'] })] }
 
     def locate_element_mock(path, value)
       base_parser_module = BrInvoicesPdf::Util::XmlLocate
@@ -18,9 +17,7 @@ describe BrInvoicesPdf::Nfce::Parser::Payments do
     end
 
     before do
-      allow(xml).to receive(:locate).with('NFe/infNFe')
-                                    .and_return(version)
-      allow(xml).to receive(:locate).with('NFe/infNFe/pag').and_return([node_payments])
+      allow(xml).to receive(:locate).and_return([node_payments])
       allow(xml).to receive(:name).and_return('protNFe')
 
       locate_element_mock('tPag', type)
@@ -36,7 +33,7 @@ describe BrInvoicesPdf::Nfce::Parser::Payments do
 
     context 'when node_payments is empty' do
       before do
-        allow(xml).to receive(:locate).with('NFe/infNFe/pag').and_return([])
+        allow(xml).to receive(:locate).and_return([])
       end
       it { expect(subject).to be_empty }
     end
