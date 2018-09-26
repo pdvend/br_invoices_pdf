@@ -12,7 +12,6 @@ module BrInvoicesPdf
           node_payments = xml.locate('infCFe/pgto')
 
           return unless node_payments
-
           payments_by_nodes(node_payments) if node_payments.any?
         end
 
