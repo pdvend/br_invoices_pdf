@@ -13,9 +13,9 @@ describe BrInvoicesPdf::Cfe::Renderer::ProductTable do
         code: code,
         description: description,
         quantity: quantity,
-        unit_label:  unit_label,
-        unit_value:  unit_value,
-        total_value:  total_value
+        unit_label: unit_label,
+        unit_value: unit_value,
+        total_value: total_value
       }
     end
 
