@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.21 [2018-11-15]
+- [Atualizando] versão da gem ox
+
 ## 0.2.18 [2018-08-30]
 - [Corrigido] tipo de emissão não encontrado no xml
 
