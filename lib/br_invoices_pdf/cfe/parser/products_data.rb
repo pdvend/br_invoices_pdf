@@ -8,14 +8,9 @@ module BrInvoicesPdf
 
         module_function
 
-        FIELDS = { code: 'cProd',
-                   description: 'xProd',
-                   cfop: 'CFOP',
-                   quantity: 'qCom',
-                   unit_label: 'uCom',
-                   total_value: 'vProd',
-                   unit_value: 'vUnCom',
-                   item_value: 'vItem' }.freeze
+        FIELDS = { code: 'cProd', description: 'xProd', cfop: 'CFOP',
+                   quantity: 'qCom', unit_label: 'uCom', total_value: 'vProd',
+                   unit_value: 'vUnCom', item_value: 'vItem' }.freeze
 
         def execute(xml)
           node_products = xml.locate('infCFe/det')
@@ -29,9 +24,11 @@ module BrInvoicesPdf
 
         def product_by(element)
           FIELDS
-            .map { |(key, field)| [key, node_locate(element, field).force_encoding("windows-1252")
-                                                                   .force_encoding('UTF-8')
-                                                                   .encode('UTF-8')] }
+            .map do |(key, field)|
+            [key, node_locate(element, field).force_encoding('windows-1252')
+                                             .force_encoding('UTF-8')
+                                             .encode('UTF-8')]
+          end
             .to_h
         end
         private_class_method :product_by
