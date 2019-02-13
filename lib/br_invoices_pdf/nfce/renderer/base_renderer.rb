@@ -16,7 +16,7 @@ module BrInvoicesPdf
         end
 
         def format_date(date)
-          Timezone['America/Sao_Paulo'].utc_to_local(date).strftime('%H:%M:%S %d/%m/%Y')
+          Timezone[ENV['INVOICE_TIMEZONE'] || 'America/Sao_Paulo'].utc_to_local(date).strftime('%H:%M:%S %d/%m/%Y')
         end
       end
     end
