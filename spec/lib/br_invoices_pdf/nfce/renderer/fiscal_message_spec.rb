@@ -16,8 +16,9 @@ describe BrInvoicesPdf::Nfce::Renderer::FiscalMessage do
     let(:number) { 1 }
     let(:access_key) { '12345678' }
     let(:emission_timestamp) { Time.new(2017, 10, 13) }
+    let(:parsed_date) { Timezone['America/Sao_Paulo'].utc_to_local(emission_timestamp).strftime('%H:%M:%S %d/%m/%Y') }
     let(:check_url) { 'www.pdvend.com.br' }
-    let(:emission_text) { "Emissão: 00:00:00 13/10/2017 - Via Consumidor\n\n" }
+    let(:emission_text) { "Emissão: #{parsed_date} - Via Consumidor\n\n" }
     let(:check_text) { "Consulte pela chave de acesso em: #{check_url} \n\n" }
 
     let(:base_renderer) { BrInvoicesPdf::Nfce::Renderer::BaseRenderer }

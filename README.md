@@ -24,7 +24,9 @@ bundle
 
 ## Utilização
 
-\# TODO
+- xml = File.binread('file.xml') # String do XML
+- pdf = BrInvoicesPdf.generate(:nfce, xml, page_size: 'A7', margin: 1) # Gera o PDF
+- File.binwrite('pdf_name.pdf', pdf) # Salva um arquivo
 
 ## Desenvolvendo
 
