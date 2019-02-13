@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'timezone'
+
 module BrInvoicesPdf
   module Nfce
     module Renderer
@@ -14,7 +16,7 @@ module BrInvoicesPdf
         end
 
         def format_date(date)
-          date.strftime('%H:%M:%S %d/%m/%Y')
+          Timezone['America/Sao_Paulo'].utc_to_local(date).strftime('%H:%M:%S %d/%m/%Y')
         end
       end
     end
