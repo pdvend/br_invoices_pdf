@@ -63,9 +63,11 @@ module BrInvoicesPdf
         private_class_method :check_url
 
         def locate_element_to_date(xml, path)
-          Time.parse(locate_element(xml, path)).utc
+          element = locate_element(xml, path)
+
+          Time.parse(element).utc
         rescue StandardError => _e
-          Time.parse("#{locate_element(xml, path)[0..18]}-03:00").utc
+          Time.parse("#{element[0..18]}-03:00").utc
         end
         private_class_method :locate_element_to_date
       end
