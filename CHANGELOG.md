@@ -2,6 +2,9 @@
 
 ## CHANGELOG
 
+## 0.2.24 [2019-03-07]
+- [Corrigido] Data bugada no XML
+
 ## 0.2.21 [2018-11-15]
 - [Atualizando] versão da gem ox
 
